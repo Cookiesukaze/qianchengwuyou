@@ -4,18 +4,15 @@
       <img :src="resources.logo" alt="Logo" />
     </div>
     <div class="links">
-      <a :class="{ 'active': activeLink === '' }" href="#/" >求职</a>
-      <a :class="{ 'active': activeLink === 'job' }" href="/#/resume" >简历</a>
+      <a :class="{ 'active': activeLink === '' }" href="#/">求职</a>
+      <a :class="{ 'active': activeLink === 'resume' }" href="#/resume">简历</a>
     </div>
-<!--    <a-avatar :size="32" style="margin-right: 9rem;">-->
-<!--      <template #icon><UserOutlined /></template>-->
-<!--    </a-avatar>-->
-    <a-button class="btn" :style="{ marginRight: '9rem', borderColor: resources.themeColor,color: resources.themeColor,background:'rgba(0, 0, 0, 0)'}">登录 / 注册</a-button>  </div>
+    <a-button class="btn" :style="{ borderColor: resources.themeColor, color: resources.themeColor }">登录 / 注册</a-button>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-// import { UserOutlined } from '@ant-design/icons-vue'
 import resources from '@/assets/resources'
 
 const isSticky = ref(false)
@@ -31,6 +28,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 公共样式 */
 .navbar {
   position: fixed;
   top: 0;
@@ -38,45 +36,79 @@ onMounted(() => {
   right: 0;
   display: flex;
   align-items: center;
-  height: 3.125rem;
+  height: 50px;  /* 使用固定值 */
   background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(10px);
   z-index: 999;
   transition: background-color 0.3s;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 16px; /* 添加内边距 */
 }
-
-.navbar.sticky {
-  background-color: rgba(255, 255, 255, 1);
-}
-
 .logo img {
-  margin-top:-0.2rem;
-  height: 2.6rem;
-  margin-left: 8rem;
+  height: 42px;
+  margin-right: 1rem; /* 调整间距 */
 }
-
 .links {
-  flex: 1;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
-  margin-right: 20rem;
+}
+.links a {
+  margin: 0 0.75rem;
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
 }
 
-.links a {
-  margin: 0 1.2rem;
-  //margin-top:0.5rem;
-  color: #333;
-  font-size: 1rem;
-  text-decoration: none;
+/* 小屏幕/移动设备 */
+@media (max-width: 768px) {
+  .logo img {
+    height: 36px; /* 缩小 Logo */
+  }
+  .links {
+    display: none; /* 隐藏链接，你可能需要一个汉堡菜单 */
+  }
+  .navbar.sticky {
+    padding: 0 8px; /* 减小内边距 */
+  }
+}
+
+/* 中等屏幕/平板设备 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .links {
+    display: flex; /* 如果在平板上需要显示链接 */
+    margin-right: auto; /* 自动调整间距 */
+  }
+}
+
+/* 大屏幕/桌面设备 */
+@media (min-width: 1024px) {
+  .logo img {
+    margin-left: 2rem; /* 调整间距以适应更宽的屏幕 */
+  }
+  .links a {
+    margin: 0 1.5rem; /* 增加链接间距 */
+  }
+  .btn {
+    margin-right: 6rem; /* 调整登陆/注册按钮间距 */
+  }
+}
+
+/* 按钮调整 */
+.btn {
+  margin-left: auto; /* 把按钮推到最右边 */
+  border-color: var(--themeColor);
+  color: var(--themeColor);
+  background: rgba(0, 0, 0, 0);
+}
+
+.btn:hover {
+  background-color: var(--themeColor01) !important;
 }
 .links a.active {
   color: var(--themeColor); /* 链接变色样式 */
 }
 .links a:hover {
   color: var(--themeColor); /* 鼠标划过链接变色样式 */
-}
-.btn:hover{
-  background-color: var(--themeColor01) !important;
 }
 </style>

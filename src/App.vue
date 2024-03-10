@@ -62,12 +62,13 @@ export default defineComponent({
   bottom: 0;
   left: 0;
   right: 0;
-  height: 10rem;
-  background: radial-gradient(ellipse at center bottom, var(--subThemeColor02), var(--subThemeColor01) 50%, #fff);
+  height: 20rem;
+  background: radial-gradient(ellipse at center bottom, var(--subThemeColor02), var(--subThemeColor02) 50%, #fff);
   opacity: .1;
   z-index: -1;
 }
 body{
   background-color: #ffffff;
 }
+
 </style>

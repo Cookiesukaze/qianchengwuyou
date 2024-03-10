@@ -10,8 +10,7 @@
 <!--    <a-avatar :size="32" style="margin-right: 9rem;">-->
 <!--      <template #icon><UserOutlined /></template>-->
 <!--    </a-avatar>-->
-    <a-button style="margin-right: 9rem;">登录 / 注册</a-button>
-  </div>
+    <a-button :style="{ marginRight: '9rem', borderColor: resources.themeColor,color: resources.themeColor}">登录 / 注册</a-button>  </div>
 </template>
 
 <script setup>

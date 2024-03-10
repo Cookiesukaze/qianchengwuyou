@@ -1,14 +1,17 @@
 <template>
   <div>
-    hello
+    <SeekerNavBar></SeekerNavBar>
+    <div style="margin-top:100px">
+      hello
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'MainPage',
-  props: {
+<script setup>
 
-  }
-}
+import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 </script>
+
+<style scoped>
+
+</style>

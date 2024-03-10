@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
 
 <style>
 #app {
-   font-family: "opposans",serif;
+   font-family: "pingfangm",serif;
  }
 
 </style>

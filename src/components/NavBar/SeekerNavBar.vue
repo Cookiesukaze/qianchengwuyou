@@ -10,7 +10,7 @@
 <!--    <a-avatar :size="32" style="margin-right: 9rem;">-->
 <!--      <template #icon><UserOutlined /></template>-->
 <!--    </a-avatar>-->
-    <a-button :style="{ marginRight: '9rem', borderColor: resources.themeColor,color: resources.themeColor}">登录 / 注册</a-button>  </div>
+    <a-button class="btn" :style="{ marginRight: '9rem', borderColor: resources.themeColor,color: resources.themeColor,background:'rgba(0, 0, 0, 0)'}">登录 / 注册</a-button>  </div>
 </template>
 
 <script setup>
@@ -39,7 +39,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   height: 3.125rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(0.625rem);
   z-index: 999;
   transition: background-color 0.3s;
@@ -71,9 +71,12 @@ onMounted(() => {
   text-decoration: none;
 }
 .links a.active {
-  color: #05b986; /* 链接变色样式 */
+  color: var(--themeColor); /* 链接变色样式 */
 }
 .links a:hover {
-  color: #05b986; /* 鼠标划过链接变色样式 */
+  color: var(--themeColor); /* 鼠标划过链接变色样式 */
+}
+.btn:hover{
+  background-color: var(--themeColor01) !important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:100px">
       hello

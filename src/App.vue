@@ -39,6 +39,8 @@ export default defineComponent({
   --subThemeColor05: rgba(252, 206, 48, 0.5);
   --subThemeColor02: rgba(252, 206, 48, 0.2);
   --subThemeColor01: rgba(252, 206, 48, 0.1);
+  --greyFontColor:#666666;
+  --blackFontColor:#222222;
 }
 .bg:before{
   content: " ";

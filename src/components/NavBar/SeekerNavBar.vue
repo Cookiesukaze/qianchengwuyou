@@ -36,7 +36,7 @@ onMounted(() => {
   right: 0;
   display: flex;
   align-items: center;
-  height: 50px;  /* 使用固定值 */
+  height: 3.125rem;  /* 使用固定值 */
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   z-index: 999;

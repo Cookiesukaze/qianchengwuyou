@@ -30,6 +30,21 @@
         </div>
       </div>
       <!--      第二栏（搜索框）-->
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+        <a-input
+          v-model:value="currentSearch"
+          placeholder="搜索职位/公司"
+          size="large"
+        />
+      </div>
+<!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
+      <div style="display: flex;flex-direction: row;margin-left:3rem;margin-top:1rem">
+<!--        1.城市选择器-->
+        <div style="width: 12.5rem"><CitySelector
+          :modelValue="currentCity"
+          @update:city="handleCityUpdate"
+        ></CitySelector></div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +54,7 @@
 import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 import { ref } from 'vue'
 import { MenuOutlined, AppstoreOutlined, DeploymentUnitOutlined } from '@ant-design/icons-vue'
+import CitySelector from '@/components/Tools/CitySelector.vue'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref(['reco'])
@@ -71,6 +87,14 @@ const handleChangeCV = value => {
 }
 // 选择视图
 const currentView = ref('详细')
+// 搜索框内容
+const currentSearch = ref('')
+// 城市选择和变化
+const currentCity = ref([])
+const handleCityUpdate = (value) => {
+  currentCity.value = value
+  console.log('MainPage:city updated:' + value)
+}
 </script>
 
 <style scoped>
@@ -80,7 +104,7 @@ const currentView = ref('详细')
 :deep .ant-select-selector {
   border: none !important;
   box-shadow: none !important;
-  font-size:1.15rem !important;
+  font-size:1.15rem ;
   color:var(--greyFontColor);
 }
 :deep .ant-radio-button-wrapper{
@@ -93,10 +117,19 @@ const currentView = ref('详细')
 :deep .ant-radio-button-wrapper:not(:first-child)::before{
   background: rgba(255, 255, 255, 0) !important;
 }
+:deep .ant-input{
+  border-color:var(--themeColor05);
+  border-width: 0.08rem;
+  box-shadow: 0 2px 4px var(--themeColor01);
+}
+:deep .ant-input:hover{
+  box-shadow: 0 2px 4px var(--themeColor02);
+}
 .frame-style{
   background:rgba(255,255,255,90);
   border-radius:1rem;
   height: 2.875rem;
   margin-left:1rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 </style>

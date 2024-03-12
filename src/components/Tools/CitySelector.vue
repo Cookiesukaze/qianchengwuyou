@@ -1,20 +1,27 @@
 <template>
-  <div class="frame-style">
+  <div class="small-frame-style">
     <a-cascader
+      class="citySelector"
       v-model:value="selectedValue"
       :options="options"
       showSearch
+      :changeOnSelect="true"
       placeholder="选择城市"
       style="width: 12.5rem;"
-    ></a-cascader>
+    >
+      <template v-slot:displayRender="{ labels }">
+        {{ labels[labels.length - 1] }}
+      </template>
+    </a-cascader>
   </div>
 </template>
 
 <script setup>
+
 import { Cascader as ACascader } from 'ant-design-vue'
-import areas from './areas.json'
-import cities from './cities.json'
-import provinces from './provinces.json'
+import areas from './json/areas.json'
+import cities from './json/cities.json'
+import provinces from './json/provinces.json'
 import { ref, watch, defineEmits } from 'vue'
 
 const selectedValue = ref([])
@@ -61,19 +68,16 @@ const options = typedProvinces.map((province) => ({
 </script>
 
 <style scoped>
-:deep(.ant-select-selector) {
-  font-size: 0.95rem !important;
+.citySelector :deep(.ant-select-selector) {
   background: rgba(255, 255, 255, 0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--greyFontColor);
 }
-:deep(.ant-select-selection-item) {
-  font-size: 0.95rem !important;
-}
-.frame-style{
-  background:rgba(255,255,255,90);
+.small-frame-style{
   border-radius:1rem;
-  width: 12.5rem;
   height: 2rem !important;
-  //margin-left:1rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 60);
 }
 </style>

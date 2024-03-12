@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
 <!--      第一栏-->
@@ -9,15 +9,8 @@
                 class="frame-style" :style="{fontSize:'1.2rem',color:'var(--greyFontColor)'}"
                 />
 <!--        cvselector 选择简历-->
-        <a-space class="frame-style">
-          <a-select
-            ref="select"
-            v-model:value="currentCVSelector"
-            style="width: 8rem"
-            :options="CVSelectorItems"
-            @change="handleChangeCV"
-          ></a-select>
-        </a-space>
+        <CVSelector :modelValue="currentCV" @update:city="handleCVUpdate"
+        ></CVSelector>
 <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style">
           <a-radio-button value="详细"><MenuOutlined style="margin-top:0.9rem"/></a-radio-button>
@@ -38,23 +31,36 @@
         />
       </div>
 <!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
-      <div style="display: flex;flex-direction: row;margin-left:3rem;margin-top:1rem">
-<!--        1.城市选择器-->
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+<!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
           :modelValue="currentCity"
           @update:city="handleCityUpdate"
         ></CitySelector></div>
+<!--        2.求职类型选择器-->
+        <SearchJobTypeSelector :modelValue="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
+        ></SearchJobTypeSelector>
+<!--        3.工作经验选择器-->
+        <WorkExperienceSelector :modelValue="currentWorkExperience" @update:workExperience="handleWorkExperienceUpdate"
+        ></WorkExperienceSelector>
+<!--        4.学历选择器-->
+        <EducationSelector :modelValue="currentEducation" @update:workExperience="handleEducationUpdate"
+        ></EducationSelector>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-
+import '@/assets/global.css'
 import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 import { ref } from 'vue'
 import { MenuOutlined, AppstoreOutlined, DeploymentUnitOutlined } from '@ant-design/icons-vue'
 import CitySelector from '@/components/Tools/CitySelector.vue'
+import CVSelector from '@/components/Tools/CVSelector.vue'
+import SearchJobTypeSelector from '@/components/Tools/SearchJobTypeSelector.vue'
+import WorkExperienceSelector from '@/components/Tools/WorkExperienceSelector.vue'
+import EducationSelector from '@/components/Tools/educationSelector.vue'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref(['reco'])
@@ -71,19 +77,10 @@ const checkJobTypeItems = ref([
   }
 ])
 // cvselector 选择简历
-const currentCVSelector = ref('我的简历1')
-const CVSelectorItems = ref([
-  {
-    value: '我的简历1',
-    label: '我的简历1'
-  },
-  {
-    value: '我的简历2',
-    label: '我的简历2'
-  }
-])
-const handleChangeCV = value => {
-  // console.log(`selected ${value}`)
+const currentCV = ref([])
+const handleCVUpdate = (value) => {
+  currentCV.value = value
+  console.log('MainPage:CV updated:' + value)
 }
 // 选择视图
 const currentView = ref('详细')
@@ -95,18 +92,31 @@ const handleCityUpdate = (value) => {
   currentCity.value = value
   console.log('MainPage:city updated:' + value)
 }
+// 求职类型选择
+const currentSearchJobType = ref([])
+const handleSearchJobTypeUpdate = (value) => {
+  currentSearchJobType.value = value
+  console.log('MainPage:searchJobType updated:' + value)
+}
+// 工作经验选择
+const currentWorkExperience = ref([])
+const handleWorkExperienceUpdate = (value) => {
+  currentWorkExperience.value = value
+  console.log('MainPage:workExperience updated:' + value)
+}
+// 学历选择
+const currentEducation = ref([])
+const handleEducationUpdate = (value) => {
+  currentEducation.value = value
+  console.log('MainPage:education updated:' + value)
+}
 </script>
 
 <style scoped>
 :deep .ant-menu-item-selected {
   font-weight: bold !important;
 }
-:deep .ant-select-selector {
-  border: none !important;
-  box-shadow: none !important;
-  font-size:1.15rem ;
-  color:var(--greyFontColor);
-}
+
 :deep .ant-radio-button-wrapper{
   border: none !important;
   box-shadow: none !important;
@@ -126,10 +136,11 @@ const handleCityUpdate = (value) => {
   box-shadow: 0 2px 4px var(--themeColor02);
 }
 .frame-style{
-  background:rgba(255,255,255,90);
+  background:rgba(255,255,255,60);
   border-radius:1rem;
   height: 2.875rem;
   margin-left:1rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
+
 </style>

@@ -50,6 +50,7 @@ const job = ref({
 }
 .job-card:hover{
   box-shadow: 3px 8px 15px 8px rgba(153, 153, 153, 0.15);
+  border-top: 3px solid var(--themeColor01) !important;
   border-left: 6px solid var(--themeColor02) !important;
   border-bottom: 4px solid var(--themeColor02) !important;
   //border:1px var(--themeColor05) solid;

@@ -46,6 +46,19 @@
 <!--        4.学历选择器-->
         <EducationSelector :modelValue="currentEducation" @update:workExperience="handleEducationUpdate"
         ></EducationSelector>
+<!--        5.职位类型选择器-->
+        <JobTypeSelector></JobTypeSelector>
+      </div>
+<!--      下方：职位卡片们-->
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+<!--        左边：卡片-->
+        <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem">
+          <JobCard v-for="x in [1,2,3]" :key="x" style="margin-bottom:1.3rem;"></JobCard>
+        </div>
+<!--        右边：详细内容-->
+        <div>
+          哈哈
+        </div>
       </div>
     </div>
   </div>
@@ -61,6 +74,8 @@ import CVSelector from '@/components/Tools/CVSelector.vue'
 import SearchJobTypeSelector from '@/components/Tools/SearchJobTypeSelector.vue'
 import WorkExperienceSelector from '@/components/Tools/WorkExperienceSelector.vue'
 import EducationSelector from '@/components/Tools/educationSelector.vue'
+import JobTypeSelector from '@/components/Tools/JobTypeSelector.vue'
+import JobCard from '@/components/Tools/JobCard.vue'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref(['reco'])

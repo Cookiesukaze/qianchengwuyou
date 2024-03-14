@@ -31,15 +31,26 @@ export default defineComponent({
   font-family: "pingfangm",serif;
 }
 :root {
+  --themeColor150: #1b8969;
+  --themeColor125: #21ab84;
   --themeColor: #10bc8b;
   --themeColor05: rgba(16, 188, 139, 0.5);
   --themeColor02: rgba(16, 188, 139, 0.2);
   --themeColor01: rgba(16, 188, 139, 0.1);
+  --themeColor005: rgba(16, 188, 139, 0.05);
+  --themeColor001: rgba(16, 188, 139, 0.01);
+  --backgroundThemeColor: #f6ffed;
   --subThemeColor: #fcce30;
   --subThemeColor05: rgba(252, 206, 48, 0.5);
   --subThemeColor02: rgba(252, 206, 48, 0.2);
   --subThemeColor01: rgba(252, 206, 48, 0.1);
+  --subThemeColor005: rgba(252, 206, 48, 0.05);
+  --subThemeColor001: rgba(252, 206, 48, 0.01);
+  --sararyColor125: #e3424a;
+  --sararyColor: #ff636c;
+  --sararyColor08: #fa747b;
   --greyFontColor:#666666;
+  --greyFontColor125:#444444;
   --blackFontColor:#222222;
 }
 .bg:before{
@@ -50,7 +61,7 @@ export default defineComponent({
   right: 0;
   height: 35rem;
   //background: radial-gradient(ellipse at center top, var(--themeColor), var(--themeColor02) 50%, #fff);
-  background: linear-gradient(180deg, var(--themeColor), var(--themeColor02) 50%, #fff );
+  background: linear-gradient(180deg, var(--themeColor), var(--themeColor05) 50%, #fff );
   opacity: .1;
   z-index: -1;
 }
@@ -65,7 +76,7 @@ export default defineComponent({
   left: 0;
   right: 0;
   height: 20rem;
-  background: radial-gradient(ellipse at center bottom, var(--subThemeColor02), var(--subThemeColor02) 50%, #fff);
+  background: radial-gradient(ellipse at center bottom, var(--subThemeColor05), var(--subThemeColor02) 50%, #fff);
   opacity: .1;
   z-index: -1;
 }

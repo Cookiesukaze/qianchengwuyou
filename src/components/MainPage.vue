@@ -3,7 +3,7 @@
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
 <!--      第一栏-->
-      <div style="display: flex;flex-direction: row;margin-left:3rem;margin-top:4rem">
+      <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem">
 <!--        checkjobtype 推荐职位或全部职位-->
         <a-menu v-model:selectedKeys="currentCheckJobType" mode="horizontal" :items="checkJobTypeItems"
                 class="frame-style" :style="{fontSize:'1.2rem',color:'var(--greyFontColor)'}"
@@ -12,18 +12,18 @@
         <CVSelector :modelValue="currentCV" @update:city="handleCVUpdate"
         ></CVSelector>
 <!--        视图选择-->
-        <a-radio-group v-model:value="currentView" class="frame-style">
+        <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
           <a-radio-button value="详细"><MenuOutlined style="margin-top:0.9rem"/></a-radio-button>
           <a-radio-button value="平铺"><AppstoreOutlined /></a-radio-button>
           <a-radio-button value="图谱"><DeploymentUnitOutlined /></a-radio-button>
         </a-radio-group>
 <!--        筛选折叠按钮-->
-        <div class="frame-style">
+        <div class="frame-style" style="">
           <a-radio-button value="详细" style="margin-top:0.4rem">筛选</a-radio-button>
         </div>
       </div>
       <!--      第二栏（搜索框）-->
-      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
         <a-input
           v-model:value="currentSearch"
           placeholder="搜索职位/公司"
@@ -31,7 +31,7 @@
         />
       </div>
 <!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
-      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
 <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
           :modelValue="currentCity"
@@ -50,14 +50,14 @@
         <JobTypeSelector></JobTypeSelector>
       </div>
 <!--      下方：职位卡片们-->
-      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:1rem">
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem">
 <!--        左边：卡片-->
         <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem">
           <JobCard v-for="x in [1,2,3]" :key="x" style="margin-bottom:1.3rem;"></JobCard>
         </div>
 <!--        右边：详细内容-->
-        <div>
-          哈哈
+        <div style="margin-left:2rem;margin-top:1rem;">
+          <JobCardDetail></JobCardDetail>
         </div>
       </div>
     </div>
@@ -73,9 +73,10 @@ import CitySelector from '@/components/Tools/CitySelector.vue'
 import CVSelector from '@/components/Tools/CVSelector.vue'
 import SearchJobTypeSelector from '@/components/Tools/SearchJobTypeSelector.vue'
 import WorkExperienceSelector from '@/components/Tools/WorkExperienceSelector.vue'
-import EducationSelector from '@/components/Tools/educationSelector.vue'
+import EducationSelector from '@/components/Tools/EducationSelector.vue'
 import JobTypeSelector from '@/components/Tools/JobTypeSelector.vue'
 import JobCard from '@/components/Tools/JobCard.vue'
+import JobCardDetail from '@/components/Tools/JobCardDetail.vue'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref(['reco'])

@@ -34,6 +34,7 @@ export default defineComponent({
   --themeColor150: #1b8969;
   --themeColor125: #21ab84;
   --themeColor: #10bc8b;
+  --themeColor075: rgba(16, 188, 139, 0.75);
   --themeColor05: rgba(16, 188, 139, 0.5);
   --themeColor02: rgba(16, 188, 139, 0.2);
   --themeColor01: rgba(16, 188, 139, 0.1);
@@ -49,6 +50,7 @@ export default defineComponent({
   --sararyColor125: #e3424a;
   --sararyColor: #ff636c;
   --sararyColor08: #fa747b;
+  --sararyColor001: rgba(250, 116, 123, 0.1);
   --greyFontColor:#666666;
   --greyFontColor125:#444444;
   --blackFontColor:#222222;
@@ -59,9 +61,9 @@ export default defineComponent({
   top: 0;
   left: 0;
   right: 0;
-  height: 35rem;
+  height: 100vh;
   //background: radial-gradient(ellipse at center top, var(--themeColor), var(--themeColor02) 50%, #fff);
-  background: linear-gradient(180deg, var(--themeColor), var(--themeColor05) 50%, #fff );
+  background: linear-gradient(180deg, var(--themeColor150)10%, var(--themeColor02) );
   opacity: .1;
   z-index: -1;
 }
@@ -75,8 +77,8 @@ export default defineComponent({
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20rem;
-  background: radial-gradient(ellipse at center bottom, var(--subThemeColor05), var(--subThemeColor02) 50%, #fff);
+  //height: 20rem;
+  //background: radial-gradient(ellipse at center bottom, var(--subThemeColor05), var(--themeColor02));
   opacity: .1;
   z-index: -1;
 }

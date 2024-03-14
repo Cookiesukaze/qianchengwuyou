@@ -5,7 +5,7 @@
       <span class="job-salary">{{ job.salary }}</span>
     </div>
     <div class="job-tags">
-      <a-tag v-for="tag in job.tags" :key="tag">{{ tag }}</a-tag>
+      <a-tag :bordered="false" v-for="tag in job.tags" :key="tag">{{ tag }}</a-tag>
     </div>
     <div class="job-footer">
       <a-avatar size="small" :src="job.companyLogo" style="margin-right: 0.3rem;margin-top:0.3rem"/>
@@ -35,19 +35,24 @@ const job = ref({
 
 <style scoped>
 .job-card {
-  box-shadow: 3px 2px 3px 2px rgba(153, 153, 153, 0.1);
+  box-shadow: 3px 2px 3px 0.1px rgba(153, 153, 153, 0.1);
   display: flex;
   flex-direction: column;
   width: 26rem; /* Adjust the width as needed */
   padding: 1rem 1rem 0.3rem 1rem;
   border-radius: 0.7rem;
-  border:1px var(--themeColor) solid;
-  //background: linear-gradient(190deg, rgb(255, 255, 252,0.9) 60%, var(--themeColor005));
+  //border:1px var(--themeColor) solid;
+  border-top: 0.01rem solid var(--themeColor05) !important;
+  border-left: 3px solid var(--themeColor05) !important;
+  border-bottom: 2px solid var(--themeColor05) !important;
+//background: linear-gradient(190deg, rgb(255, 255, 252,0.9) 60%, var(--themeColor005));
   background: linear-gradient(0deg, var(--themeColor001) 0 28%, rgba(252,252,252) 10% 90%);
 }
 .job-card:hover{
   box-shadow: 3px 8px 15px 8px rgba(153, 153, 153, 0.15);
-  border:1px var(--themeColor05) solid;
+  border-left: 6px solid var(--themeColor02) !important;
+  border-bottom: 4px solid var(--themeColor02) !important;
+  //border:1px var(--themeColor05) solid;
   .job-title{
     color: var(--themeColor);
   }
@@ -78,17 +83,11 @@ const job = ref({
   margin-bottom: 0.5rem;
 }
 
-:deep(.ant-tag){
-  border-color: var(--themeColor) !important;
-  color: var(--themeColor) !important;
-  background: rgb(246, 250, 250,0.9);
-}
-
 .job-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top:1.5rem;
+  margin-top:1rem;
 }
 
 .company-name {

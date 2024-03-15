@@ -35,7 +35,7 @@ const job = ref({
 
 <style scoped>
 .job-card {
-  box-shadow: 3px 5px 3px 3px rgba(162, 161, 161, 0.2);
+  box-shadow: 3px 3px 3px 3px rgba(162, 161, 161, 0.2);
   display: flex;
   flex-direction: column;
   width: 26rem; /* Adjust the width as needed */

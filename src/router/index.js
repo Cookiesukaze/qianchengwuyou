@@ -1,11 +1,16 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import MainPage from '@/components/MainPage.vue'
+import CV from '@/components/CV.vue'
 
 const routes = [
   {
     path: '/',
     name: 'mainpage',
     component: MainPage
+  }, {
+    path: '/cv',
+    name: 'cv',
+    component: CV
   },
   {
     path: '/about',

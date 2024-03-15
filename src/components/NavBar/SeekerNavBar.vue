@@ -5,7 +5,7 @@
     </div>
     <div class="links">
       <a :class="{ 'active': activeLink === '' }" href="#/">求职</a>
-      <a :class="{ 'active': activeLink === 'resume' }" href="#/resume">简历</a>
+      <a :class="{ 'active': activeLink === 'cv' }" href="#/cv">简历</a>
     </div>
     <a-button class="btn" :style="{ borderColor: resources.themeColor, color: resources.themeColor }">登录 / 注册</a-button>
   </div>

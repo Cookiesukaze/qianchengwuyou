@@ -1,5 +1,6 @@
 <template>
   <div class="job-card">
+    <a-checkbox v-model:checked="checked" class="job-checkbox"></a-checkbox>
     <div class="job-header">
       <div class="job-title">{{ job.title }}</div>
       <span class="job-salary">{{ job.salary }}</span>
@@ -31,10 +32,14 @@ const job = ref({
   companyLogo: 'https://via.placeholder.com/32',
   matchScore: '92'
 })
+
+const checked = ref(false)
+
 </script>
 
 <style scoped>
 .job-card {
+  position: relative;
   box-shadow: 3px 3px 3px 3px rgba(162, 161, 161, 0.2);
   display: flex;
   flex-direction: column;
@@ -62,6 +67,17 @@ const job = ref({
     color: var(--sararyColor08);
   }
 }
+.job-checkbox {
+  border-color: var(--themeColor)!important;
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%); /* 用于垂直居中 */
+  margin-left: -1.5rem; /* 根据需要调整 */
+  z-index: 10; /* 确保 checkbox 在卡片内容上方显示 */
+}
+
 .job-header {
   display: flex;
   justify-content: space-between;

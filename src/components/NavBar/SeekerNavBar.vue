@@ -4,8 +4,8 @@
       <img :src="resources.logo" alt="Logo" />
     </div>
     <div class="links">
-      <a :class="{ 'active': activeLink === '' }" href="#/">求职</a>
-      <a :class="{ 'active': activeLink === 'cv' }" href="#/cv">简历</a>
+      <router-link class="nav-link" :to="{ name: 'mainpage' }" active-class="active">求职</router-link>
+      <router-link class="nav-link" :to="{ name: 'cv' }" active-class="active">简历</router-link>
     </div>
     <a-button class="btn" :style="{ borderColor: resources.themeColor, color: resources.themeColor }">登录 / 注册</a-button>
   </div>
@@ -16,7 +16,6 @@ import { ref, onMounted } from 'vue'
 import resources from '@/assets/resources'
 
 const isSticky = ref(false)
-const activeLink = ref('')
 
 const handleScroll = () => {
   isSticky.value = window.pageYOffset > 0
@@ -110,5 +109,21 @@ onMounted(() => {
 }
 .links a:hover {
   color: var(--themeColor); /* 鼠标划过链接变色样式 */
+}
+/* 活动状态的路由链接 */
+.active {
+  color: var(--themeColor);
+}
+
+/* 路由链接的普通样式 */
+.nav-link {
+  margin: 0 0.75rem;
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--themeColor);
 }
 </style>

@@ -88,10 +88,11 @@ const job = ref({
   padding: 1.25rem;
   border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 3px 2px 3px 1px rgba(153, 153, 153, 0.1);
-  border-left: 3px solid var(--themeColor02) !important;
-  border-top: 2px solid var(--themeColor02) !important;
-  border-bottom: 2px solid var(--themeColor02) !important;
+  box-shadow: 3px 5px 5px 3px rgba(162, 161, 161, 0.2);
+//box-shadow: 3px 2px 3px 1px rgba(153, 153, 153, 0.1);
+  border-left: 2px solid var(--themeColor02) !important;
+  border-top: 1px solid var(--themeColor02) !important;
+  //border-bottom: 2px solid var(--themeColor02) !important;
   background: linear-gradient(170deg, var(--themeColor005) 0 15%, rgba(251,251,251) 30% 80%);
 
 }

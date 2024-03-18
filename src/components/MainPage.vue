@@ -54,16 +54,17 @@
 <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
 <!--        左边：卡片-->
+        <div style="margin-left:2rem;margin-top:1rem;">
+          <JobCardDetail></JobCardDetail>
+        </div>
+<!--        右边：详细内容-->
         <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;">
           <div v-for="x in [1,2,3,4,5,6]" :key="x" style="">
             <JobCard  style="margin-bottom:1.3rem;"></JobCard>
           </div>
 
         </div>
-<!--        右边：详细内容-->
-        <div style="margin-left:2rem;margin-top:1rem;">
-          <JobCardDetail></JobCardDetail>
-        </div>
+
       </div>
     </div>
   </div>

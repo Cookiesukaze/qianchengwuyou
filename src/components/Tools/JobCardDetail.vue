@@ -88,12 +88,15 @@ const job = ref({
   padding: 1.25rem;
   border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 3px 5px 5px 3px rgba(162, 161, 161, 0.2);
+//box-shadow: 3px 5px 5px 3px rgba(162, 161, 161, 0.2);
 //box-shadow: 3px 2px 3px 1px rgba(153, 153, 153, 0.1);
-  border-left: 2px solid var(--themeColor02) !important;
-  border-top: 1px solid var(--themeColor02) !important;
-  //border-bottom: 2px solid var(--themeColor02) !important;
-  background: linear-gradient(170deg, var(--themeColor005) 0 15%, rgba(251,251,251) 30% 80%);
+//border-left: 2px solid var(--themeColor02) !important;
+//border-top: 1px solid var(--themeColor02) !important;
+//border-bottom: 2px solid var(--themeColor02) !important;
+//background: url("@/assets/ui/bg1.png");
+//background-position: 0 0;
+  background: white;
+  //background: linear-gradient(170deg, var(--themeColor005) 0 15%, rgba(251,251,251) 30% 80%);
 
 }
 
@@ -126,10 +129,11 @@ const job = ref({
   margin-top: 5px;
 }
 .job-match-detail {
+  width: 27%;
   box-sizing:border-box;
-  background-color: var(--themeColor01);
+  background-color: var(--themeColor005);
   padding: 0.5rem 1.25rem;
-  border-left: 6px var(--themeColor) solid;
+  border-left: 4px var(--themeColor) solid;
   margin-top: 1rem;
   margin-bottom: 5px;
   color: var(--themeColor125);

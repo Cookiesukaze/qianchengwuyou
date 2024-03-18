@@ -40,7 +40,7 @@ const checked = ref(false)
 <style scoped>
 .job-card {
   position: relative;
-  box-shadow: 3px 3px 3px 3px rgba(162, 161, 161, 0.2);
+  box-shadow: 0 3px 3px rgba(162, 161, 161, 0.2);
   display: flex;
   flex-direction: column;
   width: 26rem; /* Adjust the width as needed */
@@ -51,14 +51,16 @@ const checked = ref(false)
   //border-left: 3px solid var(--themeColor05) !important;
   //border-bottom: 2px solid var(--themeColor05) !important;
 //background: linear-gradient(190deg, rgb(255, 255, 252,0.9) 60%, var(--themeColor005));
-  background: linear-gradient(0deg, var(--themeColor001) 0 28%, rgba(252,252,252) 10% 90%);
+  background: white;
 }
 .job-card:hover{
-  box-shadow: 3px 8px 8px 8px rgba(153, 153, 153, 0.15);
-  border-top: 3px solid var(--themeColor01) !important;
-  border-right: 2px solid var(--themeColor02) !important;
-  border-left: 6px solid var(--themeColor02) !important;
-  border-bottom: 4px solid var(--themeColor02) !important;
+  background: url("@/assets/ui/bg1.png");
+  background-size:cover;
+  box-shadow: 5px 5px 5px 5px rgba(153, 153, 153, 0.15);
+  //border-top: 3px solid var(--themeColor01) !important;
+  //border-right: 2px solid var(--themeColor02) !important;
+  //border-left: 6px solid var(--themeColor02) !important;
+  //border-bottom: 4px solid var(--themeColor02) !important;
   //border:1px var(--themeColor05) solid;
   .job-title{
     color: var(--themeColor);

@@ -68,9 +68,9 @@ watch(currentWorkExperience, (newValue) => {
   color: var(--greyFontColor);
 }
 .small-frame-style{
-  border-radius:1rem;
+  border-radius:0.5rem;
   height: 2rem !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 60);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255);
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="navbar" :class="{ 'sticky': isSticky }">
     <div class="logo">
+<!--      <img :src="resources.logo" alt="Logo" />-->
       <img :src="resources.logo" alt="Logo" />
     </div>
     <div class="links">
@@ -35,8 +36,10 @@ onMounted(() => {
   right: 0;
   display: flex;
   align-items: center;
-  height: 3.125rem;  /* 使用固定值 */
-  background-color: rgba(255, 255, 255, 0.6);
+  height: 2.75rem;  /* 使用固定值 */
+  //background-color: rgba(255, 255, 255, 0.6);
+  background: url("@/assets/ui/bar1.png");
+  background-size:cover;
   backdrop-filter: blur(10px);
   z-index: 999;
   transition: background-color 0.3s;
@@ -54,7 +57,7 @@ onMounted(() => {
 }
 .links a {
   margin: 0 0.75rem;
-  color: #333;
+  color: #ffffff;
   font-size: 16px;
   text-decoration: none;
 }
@@ -96,13 +99,15 @@ onMounted(() => {
 /* 按钮调整 */
 .btn {
   margin-left: auto; /* 把按钮推到最右边 */
-  border-color: var(--themeColor);
-  color: var(--themeColor);
+  border-color: #ffffff !important;
+  color: #ffffff !important;
   background: rgba(0, 0, 0, 0);
 }
 
 .btn:hover {
-  background-color: var(--themeColor01) !important;
+  border-color: var(--themeColor) !important;
+  color: var(--themeColor) !important;
+  background-color: var(--themeColor02) !important;
 }
 .links a.active {
   color: var(--themeColor); /* 链接变色样式 */
@@ -118,7 +123,7 @@ onMounted(() => {
 /* 路由链接的普通样式 */
 .nav-link {
   margin: 0 0.75rem;
-  color: #333;
+  color: #ffffff;
   font-size: 16px;
   text-decoration: none;
 }

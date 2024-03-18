@@ -37,7 +37,7 @@ const handleChangeCV = value => {
 
 <style scoped>
 .CVSelector :deep(.ant-select-selector) {
-  font-size: 1.15rem !important;
+  font-size: 1.08rem !important;
   background: rgba(255, 255, 255, 0) !important;
   border: none !important;
   box-shadow: none !important;
@@ -46,7 +46,7 @@ const handleChangeCV = value => {
 .frame-style{
   background:rgba(255,255,255,60);
   border-radius:1rem;
-  height: 2.875rem;
+  height: 2.6rem;
   margin-left:1rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }

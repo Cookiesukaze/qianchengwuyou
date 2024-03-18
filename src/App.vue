@@ -63,7 +63,8 @@ export default defineComponent({
   right: 0;
   height: 100vh;
   //background: radial-gradient(ellipse at center top, var(--themeColor), var(--themeColor02) 50%, #fff);
-  background: linear-gradient(180deg, var(--themeColor150)10%, var(--themeColor02) );
+  //background: linear-gradient(180deg, var(--themeColor150)10%, var(--themeColor02) );
+  //background: linear-gradient(180deg, var(--themeColor150)10%, var(--themeColor02) );
   opacity: .1;
   z-index: -1;
 }
@@ -83,7 +84,7 @@ export default defineComponent({
   z-index: -1;
 }
 body{
-  background-color: #ffffff;
+  background-color: #f1f3f6;
 }
 
 </style>

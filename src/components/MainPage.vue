@@ -5,21 +5,23 @@
 <!--      第一栏-->
       <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem">
 <!--        checkjobtype 推荐职位或全部职位-->
-        <a-menu v-model:selectedKeys="currentCheckJobType" mode="horizontal" :items="checkJobTypeItems"
-                class="frame-style" :style="{fontSize:'1.2rem',color:'var(--greyFontColor)'}"
-                />
+        <div class="frame-style">
+          <a-menu v-model:selectedKeys="currentCheckJobType" mode="horizontal" :items="checkJobTypeItems"
+                  :style="{fontSize:'1.08rem',color:'var(--greyFontColor)',marginTop:'-0.1rem',background:'rgba(255,255,255,0)'}"
+          />
+        </div>
 <!--        cvselector 选择简历-->
         <CVSelector :modelValue="currentCV" @update:city="handleCVUpdate"
         ></CVSelector>
 <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
-          <a-radio-button value="详细"><MenuOutlined style="margin-top:0.9rem"/></a-radio-button>
+          <a-radio-button value="详细"><MenuOutlined style="margin-top:0.7rem"/></a-radio-button>
           <a-radio-button value="平铺"><AppstoreOutlined /></a-radio-button>
           <a-radio-button value="图谱"><DeploymentUnitOutlined /></a-radio-button>
         </a-radio-group>
 <!--        筛选折叠按钮-->
         <div class="frame-style" style="">
-          <a-radio-button value="详细" style="margin-top:0.4rem">筛选</a-radio-button>
+          <a-radio-button value="详细" style="margin-top:0.3rem">筛选</a-radio-button>
         </div>
       </div>
       <!--      第二栏（搜索框）-->
@@ -147,17 +149,18 @@ const handleEducationUpdate = (value) => {
   background: rgba(255, 255, 255, 0) !important;
 }
 :deep .ant-input{
-  border-color:var(--themeColor05);
+  border-color: white;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255);
   border-width: 0.08rem;
-  box-shadow: 0 2px 4px var(--themeColor01);
 }
 :deep .ant-input:hover{
-  box-shadow: 0 2px 4px var(--themeColor02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .frame-style{
   background:rgba(255,255,255,60);
   border-radius:1rem;
-  height: 2.875rem;
+  height: 2.6rem;
   margin-left:1rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }

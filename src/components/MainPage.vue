@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
 <!--      第一栏-->
@@ -52,7 +52,7 @@
         <JobTypeSelector></JobTypeSelector>
       </div>
 <!--      下方：职位卡片们-->
-      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem">
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
 <!--        左边：卡片-->
         <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;">
           <div v-for="x in [1,2,3,4,5,6]" :key="x" style="">

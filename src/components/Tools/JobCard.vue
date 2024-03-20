@@ -99,13 +99,13 @@ const checked = ref(false)
 
 .company-name {
   //color: var(--greyFontColor);
-  color: var(--themeColor);
+  color: var(--greyFontColor125);
   font-size: 0.75rem;
   margin-top:0.3rem;
 }
 .job-location {
   //color: var(--greyFontColor);
-  color: var(--themeColor);
+  color: var(--greyFontColor125);
   font-size: 0.75rem;
   margin-top:0.3rem;
   margin-right: auto;
@@ -116,13 +116,13 @@ const checked = ref(false)
 }
 .job-match {
   //color: var(--greyFontColor);
-  color: var(--themeColor);
+  color: var(--greyFontColor125);
   font-size: 0.7rem;
   margin-top:0.3rem;
   margin-left: -2rem;
 }
 .job-match-score {
-  color: var(--themeColor);
+  color: var(--greyFontColor125);
   margin-left: 0.2rem;
   font-size: 1.15rem;
   margin-right: 0.2rem;

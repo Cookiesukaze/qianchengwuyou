@@ -179,7 +179,7 @@ const job = ref({
 }
 
 .job-company-and-location {
-  color: var(--greyFontColor);
+  color: var(--greyFontColor125);
   margin-top:0.1rem;
   font-size: 0.9rem;
 }

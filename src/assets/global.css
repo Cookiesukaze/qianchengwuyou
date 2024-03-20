@@ -1,5 +1,6 @@
 .bg1 {
-    background-image: url('https://s21.ax1x.com/2024/03/20/pFWHEyd.png'); /* 替换为您的图片路径 */
+    /*background-image: url('https://s21.ax1x.com/2024/03/20/pFWHEyd.png'); !* 替换为您的图片路径 *!*/
+    background-image: url('https://s21.ax1x.com/2024/03/20/pFfpKzt.png'); /* 替换为您的图片路径 */
     background-repeat: no-repeat;
     background-position: top center;
     background-size: contain;
@@ -9,6 +10,7 @@
     width: 100%;
     height: 100%;
     z-index: -1;
+    opacity: .7;
 }
 .card-style{
     background: rgba(255, 255, 255, .9);
@@ -43,9 +45,10 @@
 }
 .bg2 {
     /*background-image: url("https://s21.ax1x.com/2024/03/20/pFWjQf0.png");*/
-    background-image: url("https://ice.frostsky.com/2024/03/20/35650c6bbf249e05cff8d158bf528e05.png");
+    /*background-image: url("https://ice.frostsky.com/2024/03/20/35650c6bbf249e05cff8d158bf528e05.png");*/
     /*background-image: url("https://ice.frostsky.com/2024/03/20/6a1572303595652d4299fdf4054ef9ff.png");*/
     /*background-image: url("https://ice.frostsky.com/2024/03/20/d6bc7dc948541abe2bf13badb6e82af9.png");*/
+    background-image: url("https://s21.ax1x.com/2024/03/20/pFfSMbF.png");
 }
 .bg3 {
     /*background-image: url("https://s21.ax1x.com/2024/03/20/pFWjKkn.png");*/
@@ -53,7 +56,8 @@
     /*background-image: url("https://s21.ax1x.com/2024/03/20/pFWjWtI.png");*/
     /*background-image: url("https://ice.frostsky.com/2024/03/20/f33bac6c842575f18f69b3c33a60b403.png");*/
     /*background-image: url("https://ice.frostsky.com/2024/03/20/c5bb0a086c512fa7b357df54bd57e5a5.png");*/
-    background-image: url("https://ice.frostsky.com/2024/03/20/c3b29b72d17f627718621e3687ee772f.png");
+    /*background-image: url("https://ice.frostsky.com/2024/03/20/c3b29b72d17f627718621e3687ee772f.png");*/
     /*background-image: url("https://ice.frostsky.com/2024/03/20/13ea2f9cab1e09694fbd8e5cf8a7e6ab.png");*/
+    background-image: url("https://s21.ax1x.com/2024/03/20/pFWzbHe.png");
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="job-card">
+  <div class="job-card card-style bg2">
     <a-checkbox v-model:checked="checked" class="job-checkbox"></a-checkbox>
     <div class="job-header">
       <div class="job-title">{{ job.title }}</div>
@@ -22,6 +22,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import '@/assets/global.css'
 
 const job = ref({
   title: '前端开发工程师',
@@ -40,28 +41,15 @@ const checked = ref(false)
 <style scoped>
 .job-card {
   position: relative;
-  box-shadow: 0 3px 3px rgba(162, 161, 161, 0.2);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* Adjust the width as needed */
+  width: 26rem;
+  height: 7.75rem;
   padding: 1rem 1rem 0.3rem 1rem;
   border-radius: 0.7rem;
-  //border:1px var(--themeColor) solid;
-  //border-top: 0.01rem solid var(--themeColor05) !important;
-  //border-left: 3px solid var(--themeColor05) !important;
-  //border-bottom: 2px solid var(--themeColor05) !important;
-//background: linear-gradient(190deg, rgb(255, 255, 252,0.9) 60%, var(--themeColor005));
-  background: white;
 }
 .job-card:hover{
-  background: url("@/assets/ui/bg1.png");
-  background-size:cover;
-  box-shadow: 5px 5px 5px 5px rgba(153, 153, 153, 0.15);
-  //border-top: 3px solid var(--themeColor01) !important;
-  //border-right: 2px solid var(--themeColor02) !important;
-  //border-left: 6px solid var(--themeColor02) !important;
-  //border-bottom: 4px solid var(--themeColor02) !important;
-  //border:1px var(--themeColor05) solid;
+  background-image: url("https://s21.ax1x.com/2024/03/20/pFWjQf0.png");
   .job-title{
     color: var(--themeColor);
   }
@@ -71,13 +59,12 @@ const checked = ref(false)
 }
 .job-checkbox {
   border-color: var(--themeColor)!important;
-
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateY(-50%); /* 用于垂直居中 */
-  margin-left: -1.5rem; /* 根据需要调整 */
-  z-index: 10; /* 确保 checkbox 在卡片内容上方显示 */
+  transform: translateY(-50%);
+  margin-left: -1.5rem;
+  z-index: 10;
 }
 
 .job-header {
@@ -111,12 +98,14 @@ const checked = ref(false)
 }
 
 .company-name {
-  color: var(--greyFontColor);
+  //color: var(--greyFontColor);
+  color: var(--themeColor);
   font-size: 0.75rem;
   margin-top:0.3rem;
 }
 .job-location {
-  color: var(--greyFontColor);
+  //color: var(--greyFontColor);
+  color: var(--themeColor);
   font-size: 0.75rem;
   margin-top:0.3rem;
   margin-right: auto;
@@ -126,12 +115,14 @@ const checked = ref(false)
   align-items: center;
 }
 .job-match {
-  color: var(--greyFontColor);
+  //color: var(--greyFontColor);
+  color: var(--themeColor);
   font-size: 0.7rem;
   margin-top:0.3rem;
   margin-left: -2rem;
 }
 .job-match-score {
+  color: var(--themeColor);
   margin-left: 0.2rem;
   font-size: 1.15rem;
   margin-right: 0.2rem;

@@ -1,5 +1,6 @@
 <template>
-  <div >
+  <div style="position: relative;">
+    <div class="bg1"></div>
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
 <!--      第一栏-->
@@ -54,15 +55,15 @@
 <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
 <!--        左边：卡片-->
-        <div style="margin-left:2rem;margin-top:1rem;">
-          <JobCardDetail></JobCardDetail>
-        </div>
-<!--        右边：详细内容-->
         <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;">
           <div v-for="x in [1,2,3,4,5,6]" :key="x" style="">
             <JobCard  style="margin-bottom:1.3rem;"></JobCard>
           </div>
+        </div>
 
+<!--        右边：详细内容-->
+        <div style="margin-left:2rem;margin-top:1rem;">
+          <JobCardDetail></JobCardDetail>
         </div>
 
       </div>
@@ -135,6 +136,7 @@ const handleEducationUpdate = (value) => {
 </script>
 
 <style scoped>
+
 :deep .ant-menu-item-selected {
   font-weight: bold !important;
 }
@@ -150,20 +152,13 @@ const handleEducationUpdate = (value) => {
   background: rgba(255, 255, 255, 0) !important;
 }
 :deep .ant-input{
+  border-radius: 0.8rem;
   border-color: white;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.25);
   background: rgba(255, 255, 255);
   border-width: 0.08rem;
 }
 :deep .ant-input:hover{
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
 }
-.frame-style{
-  background:rgba(255,255,255,60);
-  border-radius:1rem;
-  height: 2.6rem;
-  margin-left:1rem;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
-
 </style>

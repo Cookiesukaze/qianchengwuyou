@@ -1,5 +1,6 @@
 <template>
-  <div class="job-card-detail">
+  <div class="job-card-detail card-detail-style bg3">
+
     <div class="job-title-and-actions">
       <div style="display: flex;flex-direction: row">
         <div class="job-title">{{ job.title }}</div>
@@ -54,6 +55,7 @@
 <script setup>
 import { ref } from 'vue'
 import './css/scrollBar.css'
+import '@/assets/global.css'
 import { HeartOutlined, SendOutlined } from '@ant-design/icons-vue'
 
 const job = ref({
@@ -88,16 +90,6 @@ const job = ref({
   padding: 1.25rem;
   border-radius: 15px;
   margin-bottom: 20px;
-//box-shadow: 3px 5px 5px 3px rgba(162, 161, 161, 0.2);
-//box-shadow: 3px 2px 3px 1px rgba(153, 153, 153, 0.1);
-//border-left: 2px solid var(--themeColor02) !important;
-//border-top: 1px solid var(--themeColor02) !important;
-//border-bottom: 2px solid var(--themeColor02) !important;
-//background: url("@/assets/ui/bg1.png");
-//background-position: 0 0;
-  background: white;
-  //background: linear-gradient(170deg, var(--themeColor005) 0 15%, rgba(251,251,251) 30% 80%);
-
 }
 
 .job-title-and-actions {
@@ -131,17 +123,17 @@ const job = ref({
 .job-match-detail {
   width: 27%;
   box-sizing:border-box;
-  background-color: var(--themeColor005);
+  background-color: var(--themeColor01);
   padding: 0.5rem 1.25rem;
   border-left: 4px var(--themeColor) solid;
   margin-top: 1rem;
   margin-bottom: 5px;
-  color: var(--themeColor125);
+  color: var(--themeColor);
 }
 
 .match-evaluation,
 .match-score {
-  color: var(--themeColor125);
+  color: var(--themeColor);
 }
 
 .job-tags{
@@ -204,9 +196,6 @@ const job = ref({
 */
 
 :deep(.ant-btn){
-  //border-color: var(--themeColor);
-  //color: var(--themeColor);
-  //background: rgb(246, 250, 250,0.9);
   padding: 0.2rem 0.5rem 0.2rem 0.5rem;
 }
 
@@ -221,17 +210,17 @@ const job = ref({
 .like-button-style{
   border-color: var(--themeColor);
   color: var(--themeColor);
-  background: var(--themeColor005);
+  background: var(--themeColor01);
 }
 .like-button-style:hover{
   border-color: var(--themeColor);
-  color: var(--themeColor075);
-  background: var(--themeColor001);
+  color: var(--themeColor02);
+  background: var(--themeColor01);
 }
 .like-button-style:hover{
   border-color: var(--themeColor);
-  color: var(--themeColor075);
-  background: var(--themeColor001);
+  color: var(--themeColor);
+  background: var(--themeColor02);
 }
 .submit-button-style{
   background: var(--themeColor);

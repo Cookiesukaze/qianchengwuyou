@@ -43,11 +43,5 @@ const handleChangeCV = value => {
   box-shadow: none !important;
   color:var(--greyFontColor);
 }
-.frame-style{
-  background:rgba(255,255,255,60);
-  border-radius:1rem;
-  height: 2.6rem;
-  margin-left:1rem;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
+
 </style>

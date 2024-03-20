@@ -37,8 +37,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   height: 2.75rem;  /* 使用固定值 */
-  //background-color: rgba(255, 255, 255, 0.6);
-  background: url("@/assets/ui/bar1.png");
+  background-color: rgba(255, 255, 255, 0.6);
   background-size:cover;
   backdrop-filter: blur(10px);
   z-index: 999;
@@ -57,7 +56,7 @@ onMounted(() => {
 }
 .links a {
   margin: 0 0.75rem;
-  color: #ffffff;
+  color: var(--blackFontColor);
   font-size: 16px;
   text-decoration: none;
 }
@@ -99,8 +98,8 @@ onMounted(() => {
 /* 按钮调整 */
 .btn {
   margin-left: auto; /* 把按钮推到最右边 */
-  border-color: #ffffff !important;
-  color: #ffffff !important;
+  border-color: #4852e6 !important;
+  color: var(--themeColor) !important;
   background: rgba(0, 0, 0, 0);
 }
 
@@ -123,7 +122,7 @@ onMounted(() => {
 /* 路由链接的普通样式 */
 .nav-link {
   margin: 0 0.75rem;
-  color: #ffffff;
+  color: var(--blackFontColor);
   font-size: 16px;
   text-decoration: none;
 }

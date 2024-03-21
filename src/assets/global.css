@@ -13,15 +13,6 @@
     z-index: -1;
     opacity: .7;
 }
-.card-style{
-    background: rgba(255, 255, 255, .9);
-    box-shadow: 0 5px 15px 0 rgba(176,191,231,.3);
-}
-:hover.card-style{
-    border: var(--themeColor075) solid 1px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 10px 20px 0 rgba(176,191,231,.55);
-}
 .card-detail-style{
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 5px 15px 0 rgba(176,191,231,.3);

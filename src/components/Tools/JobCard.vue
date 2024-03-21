@@ -1,5 +1,5 @@
 <template>
-  <div class="job-card card-style bg2">
+  <div class="job-card card-style bg2" @click="$emit('cardSelected')">
     <a-checkbox v-model:checked="checked" class="job-checkbox"></a-checkbox>
     <div class="job-header">
       <div class="job-title">{{ job.title }}</div>
@@ -48,14 +48,30 @@ const checked = ref(false)
   padding: 1rem 1rem 0.3rem 1rem;
   border-radius: 0.7rem;
 }
-.job-card:hover{
+.job-card:hover,
+.selected-card {
   background-image: url("https://s21.ax1x.com/2024/03/20/pFWjQf0.png");
-  .job-title{
-    color: var(--themeColor);
-  }
-  .job-salary{
-    color: var(--sararyColor08);
-  }
+}
+
+.job-card:hover .job-title,
+.selected-card .job-title {
+  color: var(--themeColor);
+}
+.job-card:hover .job-salary,
+.selected-card .job-salary {
+  color: var(--sararyColor08);
+}
+.job-card:hover .job-salary,
+.selected-card .job-salary {
+  color: var(--sararyColor08);
+}
+.card-style{
+  box-shadow: 0 5px 15px 0 rgba(176,191,231,.3);
+}
+:hover.card-style,
+.selected-card{
+  border: var(--themeColor075) solid 1px;
+  box-shadow: 0 10px 20px 0 rgba(176,191,231,.55);
 }
 .job-checkbox {
   border-color: var(--themeColor)!important;

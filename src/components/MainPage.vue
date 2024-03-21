@@ -56,8 +56,13 @@
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
 <!--        左边：卡片-->
         <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;">
-          <div v-for="x in [1,2,3,4,5,6]" :key="x" style="">
-            <JobCard  style="margin-bottom:1.3rem;"></JobCard>
+          <div v-for="(x, index) in [1, 2, 3, 4, 5, 6]" :key="x">
+            <JobCard
+              :class="{ 'selected-card': index === selectedCardIndex }"
+              style="margin-bottom: 1.3rem;"
+              @click="selectCard(index)"
+              @cardSelected="handleSelectedCard"
+            ></JobCard>
           </div>
         </div>
 
@@ -132,6 +137,14 @@ const currentEducation = ref([])
 const handleEducationUpdate = (value) => {
   currentEducation.value = value
   console.log('MainPage:education updated:' + value)
+}
+// 卡片选择（不是卡片的选框选择）
+const selectedCardIndex = ref(0)
+const selectCard = (index) => {
+  selectedCardIndex.value = index
+  console.log('MainPage:selectCard updated:' + index)
+}
+const handleSelectedCard = (value) => {
 }
 </script>
 

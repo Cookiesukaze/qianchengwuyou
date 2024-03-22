@@ -6,12 +6,12 @@
 <!--      第一栏-->
       <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem">
 <!--        checkjobtype 推荐职位或全部职位-->
-        <a-radio-group v-model:value="currentCheckJobType" class="frame-style" >
+        <a-radio-group v-model:value="currentCheckJobType" @update:modelValue="handleCheckJobTypeUpdate" class="frame-style" >
           <a-radio-button value="推荐职位" style="margin-top: 0.3rem">推荐职位</a-radio-button>
           <a-radio-button value="全部职位">全部职位</a-radio-button>
         </a-radio-group>
 <!--        cvselector 选择简历-->
-        <CVSelector :modelValue="currentCV" @update:city="handleCVUpdate" style="margin-right: auto"
+        <CVSelector :modelValue="currentCV" @update:CV="handleCVUpdate" style="margin-right: auto"
         ></CVSelector>
 <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
@@ -31,6 +31,7 @@
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
         <a-input
           v-model:value="currentSearch"
+          @update:search="handleSearchUpdate"
           placeholder="搜索职位/公司"
           size="large"
         />
@@ -40,7 +41,7 @@
 <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
           :modelValue="currentCity"
-          @update:city="handleCityUpdate"
+          @input="handleCityUpdate($event.target.value)"
         ></CitySelector></div>
 <!--        5.TODO:职位类型选择器等待补全-->
         <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"
@@ -52,7 +53,7 @@
         <WorkExperienceSelector :modelValue="currentWorkExperience" @update:workExperience="handleWorkExperienceUpdate"
         ></WorkExperienceSelector>
 <!--        4.学历选择器-->
-        <EducationSelector :modelValue="currentEducation" @update:workExperience="handleEducationUpdate"
+        <EducationSelector :modelValue="currentEducation" @update:education="handleEducationUpdate"
         ></EducationSelector>
 <!--        6.公司规模选择器-->
         <CompanySizeSelector :modelValue="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
@@ -96,53 +97,72 @@ import JobTypeSelector from '@/components/Tools/JobTypeSelector.vue'
 import JobCard from '@/components/Tools/JobCard.vue'
 import JobCardDetail from '@/components/Tools/JobCardDetail.vue'
 import CompanySizeSelector from '@/components/Tools/CompanySizeSelector.vue'
+// 对接
+import { fakePost } from '@/api/functions'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref('推荐职位')
+const handleCheckJobTypeUpdate = (value) => {
+  currentCheckJobType.value = value
+  fetchData()
+  console.log('MainPage:checkJobType updated:' + value)
+}
 // cvselector 选择简历
 const currentCV = ref([])
 const handleCVUpdate = (value) => {
   currentCV.value = value
+  fetchData()
   console.log('MainPage:CV updated:' + value)
 }
 // 选择视图
 const currentView = ref('详细')
 // 搜索框内容
 const currentSearch = ref('')
+const handleSearchUpdate = (value) => {
+  currentSearch.value = value
+  fetchData()
+  console.log('MainPage:search updated:' + value)
+}
 // 城市选择和变化
 const currentCity = ref([])
 const handleCityUpdate = (value) => {
   currentCity.value = value
+  fetchData()
   console.log('MainPage:city updated:' + value)
 }
 // 职位选择
 const currentJobType = ref([])
 const handleJobTypeUpdate = (value) => {
   currentJobType.value = value
+  fetchData()
   console.log('MainPage:jobType updated:' + value)
 }
 // 求职类型选择
 const currentSearchJobType = ref([])
 const handleSearchJobTypeUpdate = (value) => {
   currentSearchJobType.value = value
+  fetchData()
   console.log('MainPage:searchJobType updated:' + value)
 }
 // 工作经验选择
 const currentWorkExperience = ref([])
 const handleWorkExperienceUpdate = (value) => {
   currentWorkExperience.value = value
+  fetchData()
   console.log('MainPage:workExperience updated:' + value)
 }
 // 学历选择
 const currentEducation = ref([])
 const handleEducationUpdate = (value) => {
   currentEducation.value = value
+  fetchData()
   console.log('MainPage:education updated:' + value)
 }
 // 公司规模选择器
 const currentCompanySize = ref([])
 const handleCompanySizeUpdate = (value) => {
   currentCompanySize.value = value
+  fetchData()
   console.log('MainPage:company size updated:' + value)
 }
 // 卡片选择（不是卡片的选框选择）
@@ -152,6 +172,27 @@ const selectCard = (index) => {
   console.log('MainPage:selectCard updated:' + index)
 }
 const handleSelectedCard = (value) => {
+}
+const fetchData = async () => {
+  try {
+    const data = {
+      checkJobType: currentCheckJobType.value,
+      cv: currentCV.value,
+      search: currentSearch.value,
+      city: currentCity.value,
+      jobType: currentJobType.value,
+      searchJobType: currentSearchJobType.value,
+      workExperience: currentWorkExperience.value,
+      education: currentEducation.value,
+      companySize: currentCompanySize.value
+    }
+    const response = await fakePost(data)
+    // 处理响应数据
+    console.log(response.data)
+  } catch (error) {
+    // 处理错误
+    console.error(error)
+  }
 }
 </script>
 

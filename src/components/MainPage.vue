@@ -31,7 +31,7 @@
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
         <a-input
           v-model:value="currentSearch"
-          @update:search="handleSearchUpdate"
+          @input="handleSearchUpdate($event.target.value)"
           placeholder="搜索职位/公司"
           size="large"
         />
@@ -40,8 +40,7 @@
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
 <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
-          :modelValue="currentCity"
-          @input="handleCityUpdate($event.target.value)"
+          :modelValue="currentCity" @update:city="handleCityUpdate"
         ></CitySelector></div>
 <!--        5.TODO:职位类型选择器等待补全-->
         <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"

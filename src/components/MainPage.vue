@@ -17,13 +17,16 @@
 <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
           <a-radio-button value="详细"><MenuOutlined style="margin-top:0.7rem"/></a-radio-button>
-          <a-radio-button value="平铺"><AppstoreOutlined /></a-radio-button>
           <a-radio-button value="图谱"><DeploymentUnitOutlined /></a-radio-button>
         </a-radio-group>
-<!--        筛选折叠按钮-->
+<!--        换一批-->
         <div class="frame-style" style="">
-          <a-radio-button value="详细" style="margin-top:0.3rem">筛选</a-radio-button>
+          <a-radio-button value="详细"><RedoOutlined style="margin-top:0.7rem;margin-right: 0.7rem"/>换一批</a-radio-button>
         </div>
+<!--        筛选折叠按钮，感觉用处不大不要了-->
+<!--        <div class="frame-style" style="">-->
+<!--          <a-radio-button value="详细" style="margin-top:0.3rem">筛选</a-radio-button>-->
+<!--        </div>-->
       </div>
       <!--      第二栏（搜索框）-->
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
@@ -40,6 +43,9 @@
           :modelValue="currentCity"
           @update:city="handleCityUpdate"
         ></CitySelector></div>
+<!--        5.TODO:职位类型选择器等待补全-->
+        <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"
+        ></JobTypeSelector>
 <!--        2.求职类型选择器-->
         <SearchJobTypeSelector :modelValue="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
         ></SearchJobTypeSelector>
@@ -49,8 +55,6 @@
 <!--        4.学历选择器-->
         <EducationSelector :modelValue="currentEducation" @update:workExperience="handleEducationUpdate"
         ></EducationSelector>
-<!--        5.职位类型选择器等待写-->
-        <JobTypeSelector></JobTypeSelector>
 <!--        6.公司规模选择器-->
         <CompanySizeSelector :modelValue="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
         ></CompanySizeSelector>
@@ -83,7 +87,7 @@
 import '@/assets/global.css'
 import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 import { ref } from 'vue'
-import { MenuOutlined, AppstoreOutlined, DeploymentUnitOutlined } from '@ant-design/icons-vue'
+import { MenuOutlined, DeploymentUnitOutlined, RedoOutlined } from '@ant-design/icons-vue'
 import CitySelector from '@/components/Tools/CitySelector.vue'
 import CVSelector from '@/components/Tools/CVSelector.vue'
 import SearchJobTypeSelector from '@/components/Tools/SearchJobTypeSelector.vue'
@@ -123,6 +127,12 @@ const currentCity = ref([])
 const handleCityUpdate = (value) => {
   currentCity.value = value
   console.log('MainPage:city updated:' + value)
+}
+// 职位选择
+const currentJobType = ref([])
+const handleJobTypeUpdate = (value) => {
+  currentJobType.value = value
+  console.log('MainPage:jobType updated:' + value)
 }
 // 求职类型选择
 const currentSearchJobType = ref([])

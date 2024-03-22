@@ -6,7 +6,7 @@
       :options="options"
       showSearch
       :changeOnSelect="true"
-      placeholder="选择城市"
+      placeholder="全部城市"
       style="width: 12.5rem;"
     >
       <template v-slot:displayRender="{ labels }">

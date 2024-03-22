@@ -17,10 +17,6 @@ import { defineEmits, ref, watch } from 'vue'
 const currentEducation = ref([])
 const educationItems = ref([
   {
-    value: '不限',
-    label: '不限'
-  },
-  {
     value: '初中及以下',
     label: '初中及以下'
   },

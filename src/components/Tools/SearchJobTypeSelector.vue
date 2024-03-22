@@ -1,6 +1,7 @@
 <template>
   <div class="small-frame-style" style="margin-left: 1rem">
     <a-select
+      allowClear
       v-model:value="currentSearchJobType"
       style="width: 7rem"
       :options="searchJobTypeItems"
@@ -16,10 +17,6 @@ import { defineEmits, ref, watch } from 'vue'
 
 const currentSearchJobType = ref([])
 const searchJobTypeItems = ref([
-  {
-    value: '不限',
-    label: '不限'
-  },
   {
     value: '全职',
     label: '全职'

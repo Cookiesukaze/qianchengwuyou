@@ -17,10 +17,6 @@ import { defineEmits, ref, watch } from 'vue'
 const currentWorkExperience = ref([])
 const workExperienceItems = ref([
   {
-    value: '不限',
-    label: '不限'
-  },
-  {
     value: '在校生',
     label: '在校生'
   },

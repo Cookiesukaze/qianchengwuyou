@@ -17,10 +17,6 @@ import { defineEmits, ref, watch } from 'vue'
 const currentCompanySize = ref([])
 const companySizeItems = ref([
   {
-    value: '不限',
-    label: '不限'
-  },
-  {
     value: '0-20人',
     label: '0-20人'
   },

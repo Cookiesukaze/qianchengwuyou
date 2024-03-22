@@ -20,7 +20,7 @@
         </a-radio-group>
 <!--        换一批-->
         <div class="frame-style" style="">
-          <a-radio-button value="换一批"><RedoOutlined style="margin-top:0.7rem;margin-right: 0.7rem"/>换一批</a-radio-button>
+          <a-radio-button @click="handleRefresh" value="换一批"><RedoOutlined style="margin-top:0.7rem;margin-right: 0.7rem"/>换一批</a-radio-button>
         </div>
 <!--        筛选折叠按钮，感觉用处不大不要了-->
 <!--        <div class="frame-style" style="">-->
@@ -97,71 +97,83 @@ import JobCard from '@/components/Tools/JobCard.vue'
 import JobCardDetail from '@/components/Tools/JobCardDetail.vue'
 import CompanySizeSelector from '@/components/Tools/CompanySizeSelector.vue'
 // 对接
-import { fakePost } from '@/api/functions'
+import { postFilteredCards, postRefreshedCards } from '@/api/functions'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref('推荐职位')
 const handleCheckJobTypeUpdate = (value) => {
   currentCheckJobType.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:checkJobType updated:' + value)
 }
 // cvselector 选择简历
 const currentCV = ref([])
 const handleCVUpdate = (value) => {
   currentCV.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:CV updated:' + value)
 }
 // 选择视图
 const currentView = ref('详细')
+// 换一批
+const handleRefresh = async () => {
+  try {
+    const response = await postRefreshedCards()
+    // 处理响应数据
+    console.log(response.data)
+  } catch (error) {
+    // 处理错误
+    console.error(error)
+  }
+  console.log('MainPage:换一批')
+}
 // 搜索框内容
 const currentSearch = ref('')
 const handleSearchUpdate = (value) => {
   currentSearch.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:search updated:' + value)
 }
 // 城市选择和变化
 const currentCity = ref([])
 const handleCityUpdate = (value) => {
   currentCity.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:city updated:' + value)
 }
 // 职位选择
 const currentJobType = ref([])
 const handleJobTypeUpdate = (value) => {
   currentJobType.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:jobType updated:' + value)
 }
 // 求职类型选择
 const currentSearchJobType = ref([])
 const handleSearchJobTypeUpdate = (value) => {
   currentSearchJobType.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:searchJobType updated:' + value)
 }
 // 工作经验选择
 const currentWorkExperience = ref([])
 const handleWorkExperienceUpdate = (value) => {
   currentWorkExperience.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:workExperience updated:' + value)
 }
 // 学历选择
 const currentEducation = ref([])
 const handleEducationUpdate = (value) => {
   currentEducation.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:education updated:' + value)
 }
 // 公司规模选择器
 const currentCompanySize = ref([])
 const handleCompanySizeUpdate = (value) => {
   currentCompanySize.value = value
-  fetchData()
+  fetchFilteredData()
   console.log('MainPage:company size updated:' + value)
 }
 // 卡片选择（不是卡片的选框选择）
@@ -172,7 +184,7 @@ const selectCard = (index) => {
 }
 const handleSelectedCard = (value) => {
 }
-const fetchData = async () => {
+const fetchFilteredData = async () => {
   try {
     const data = {
       checkJobType: currentCheckJobType.value,
@@ -185,7 +197,7 @@ const fetchData = async () => {
       education: currentEducation.value,
       companySize: currentCompanySize.value
     }
-    const response = await fakePost(data)
+    const response = await postFilteredCards(data)
     // 处理响应数据
     console.log(response.data)
   } catch (error) {

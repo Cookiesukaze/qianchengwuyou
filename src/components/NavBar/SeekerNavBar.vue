@@ -42,7 +42,7 @@ onMounted(() => {
   backdrop-filter: blur(10px);
   z-index: 999;
   transition: background-color 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
   padding: 0 16px; /* 添加内边距 */
 }
 .logo img {

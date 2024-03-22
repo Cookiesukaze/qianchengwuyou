@@ -37,7 +37,6 @@ const handleChangeSearchJobType = value => {
   // console.log(`selected ${value}`)
 }
 const emit = defineEmits(['update:searchJobType'])
-// 监听所选城市的变化
 watch(currentSearchJobType, (newValue) => {
   emit('update:searchJobType', newValue)
 })

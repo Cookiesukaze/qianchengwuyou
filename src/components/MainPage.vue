@@ -49,8 +49,11 @@
 <!--        4.学历选择器-->
         <EducationSelector :modelValue="currentEducation" @update:workExperience="handleEducationUpdate"
         ></EducationSelector>
-<!--        5.职位类型选择器-->
+<!--        5.职位类型选择器等待写-->
         <JobTypeSelector></JobTypeSelector>
+<!--        6.公司规模选择器-->
+        <CompanySizeSelector :modelValue="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
+        ></CompanySizeSelector>
       </div>
 <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
@@ -89,6 +92,7 @@ import EducationSelector from '@/components/Tools/EducationSelector.vue'
 import JobTypeSelector from '@/components/Tools/JobTypeSelector.vue'
 import JobCard from '@/components/Tools/JobCard.vue'
 import JobCardDetail from '@/components/Tools/JobCardDetail.vue'
+import CompanySizeSelector from '@/components/Tools/CompanySizeSelector.vue'
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref(['reco'])
@@ -137,6 +141,12 @@ const currentEducation = ref([])
 const handleEducationUpdate = (value) => {
   currentEducation.value = value
   console.log('MainPage:education updated:' + value)
+}
+// 公司规模选择器
+const currentCompanySize = ref([])
+const handleCompanySizeUpdate = (value) => {
+  currentCompanySize.value = value
+  console.log('MainPage:company size updated:' + value)
 }
 // 卡片选择（不是卡片的选框选择）
 const selectedCardIndex = ref(0)

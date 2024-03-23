@@ -19,9 +19,9 @@
 <script setup>
 
 import { Cascader as ACascader } from 'ant-design-vue'
-import areas from './json/areas.json'
-import cities from './json/cities.json'
-import provinces from './json/provinces.json'
+import areas from '../json/areas.json'
+import cities from '../json/cities.json'
+import provinces from '../json/provinces.json'
 import { ref, watch, defineEmits } from 'vue'
 
 const selectedValue = ref([])

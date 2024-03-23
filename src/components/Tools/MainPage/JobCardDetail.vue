@@ -54,7 +54,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import './css/scrollBar.css'
+import '../css/scrollBar.css'
 import '@/assets/global.css'
 import { HeartOutlined, SendOutlined } from '@ant-design/icons-vue'
 

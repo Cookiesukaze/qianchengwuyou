@@ -8,7 +8,8 @@
 <!--          左上：简历列表-->
           <CVList :modelValue="currentSelectedCV" @update:selectedCV="handleSelectedCVUpdate"/>
 <!--          左下：简历目录-->
-          <CVCatalogue />
+          <CVCatalogue class="cv-catalogue-sticky"
+            :modelValue="currentSelectedCata" @update:selectedCata="handleSelectedCataUpdate"/>
         </div>
         <div class="cv-center">
           <CVHeader />
@@ -42,20 +43,24 @@ import CVCatalogue from '@/components/Tools/CV/CVCatalogue.vue'
 import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'
 import { ref } from 'vue'
 
-// 简历列表
+// 左上：简历列表
 const currentSelectedCV = ref([1])
 const handleSelectedCVUpdate = (value) => {
   currentSelectedCV.value = value
   console.log('CV:selectedCV updated:' + value)
 }
-
+// 左下：目录
+const currentSelectedCata = ref([])
+const handleSelectedCataUpdate = (value) => {
+  currentSelectedCata.value = value
+  console.log('CV:selectedCata updated:' + value)
+}
 </script>
 
 <style scoped>
 .cv-container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
 }
 
 .cv-left-side {
@@ -64,6 +69,12 @@ const handleSelectedCVUpdate = (value) => {
   flex-direction: column;
   margin-left:7rem;
   padding: 1rem;
+}
+
+.cv-catalogue-sticky {
+  position: sticky !important;
+  top: 3.5rem;
+  z-index: 999;
 }
 
 .cv-center {

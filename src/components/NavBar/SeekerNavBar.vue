@@ -36,14 +36,14 @@ onMounted(() => {
   right: 0;
   display: flex;
   align-items: center;
-  height: 2.75rem;  /* 使用固定值 */
+  height: 2.75rem;
   background-color: rgba(255, 255, 255, 0.6);
   background-size:cover;
   backdrop-filter: blur(10px);
   z-index: 999;
   transition: background-color 0.3s;
   box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
-  padding: 0 16px; /* 添加内边距 */
+  padding: 0 16px;
 }
 .logo img {
   height: 42px;

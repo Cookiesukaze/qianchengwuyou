@@ -1,7 +1,7 @@
 <template>
-  <div class="CV-card">
-    <div class="CV-header">简历列表</div>
-    <div class="CV-items">
+  <div class="CV-list">
+    <div class="list-header">简历列表</div>
+    <div class="list-items">
       <a-menu
         mode="inline"
         :items="CVList"
@@ -52,17 +52,17 @@ const handleNewCVClick = value => {
 </script>
 
 <style scoped>
-.CV-card {
+.CV-list {
   position: relative;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
-  box-shadow: 0 5px 15px 0 rgba(176,191,231,.4);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
 }
 
-.CV-header {
+.list-header {
   font-size: 0.95rem;
   font-weight: bold;
   color: var(--blackFontColor);
@@ -70,7 +70,7 @@ const handleNewCVClick = value => {
   margin-bottom: 0.5rem;
 }
 
-.CV-items {
+.list-items {
   width: 120%;
   max-height: 6rem;
   overflow: scroll;

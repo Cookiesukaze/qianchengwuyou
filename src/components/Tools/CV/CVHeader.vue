@@ -1,19 +1,18 @@
 <template>
-  <div class="resume-details">
+  <div class="CV-header">
     <div class="header">
-      <span>我的简历</span>
-      <div class="actions">
-        <div class="action-button" v-for="(action, index) in actions" :key="index">
-          <a-button @click="selectAction(index)" :class="{ active: selectedAction === index }">
-            {{ action }}
-          </a-button>
-        </div>
+      <div class="header-header">我的简历1</div>
+      <div style="margin-right: 0.5rem">
+        <a-button type="text" class="text-button-style">编辑</a-button>
+        <a-button type="text" class="text-button-style">导入</a-button>
       </div>
     </div>
-    <div class="score">
-      <span class="cv-score">当前简历得分：{{ cv.score }}</span>
-      <span class="cv-completeness"> 完整度：{{ cv.completeness }}%</span> <!-- 添加空格 -->
-      <a-button @click="generateReport" class="report-btn">生成详细报告</a-button>
+    <div class="CV-score-bar">
+      <div class="CV-score-text">当前简历得分&nbsp;&nbsp;</div>
+      <div class="CV-score">{{ cv.score }}分</div>
+      <div class="CV-completeness-text"> 完整度&nbsp;&nbsp;</div>
+      <div class="CV-completeness">{{ cv.completeness }}%</div>
+      <a-button style="margin-left: auto" type="text" class="text-button-style" >生成详细报告</a-button>
     </div>
     <div class="knowledge-graph">
         <a-button @click="toggleKnowledgeGraph" class="icon-btn">
@@ -34,17 +33,7 @@ const cv = ref({
   completeness: '80'
 })
 
-const actions = ref(['预览', '编辑', '导入', '下载'])
-const selectedAction = ref(-1)
 const isKnowledgeGraphVisible = ref(false)
-
-function selectAction (index) {
-  selectedAction.value = index
-}
-
-function generateReport () {
-  // 这里添加跳转到详细报告页面的逻辑
-}
 
 function toggleKnowledgeGraph () {
   isKnowledgeGraphVisible.value = !isKnowledgeGraphVisible.value
@@ -52,67 +41,60 @@ function toggleKnowledgeGraph () {
 </script>
 
 <style scoped>
-.resume-details {
+.CV-header {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 41.5rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
-  background: white; /* 添加背景色为白色 */
+  background: white;
 }
-
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.actions {
-  display: flex;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
-  flex-wrap: wrap;
-  gap: 10px; /* 增加按钮之间的间距 */
-}
-
-.action-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.2rem;
+.header-header {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: var(--blackFontColor);
+  margin-left: 0.1rem;
+  margin-top:0.5rem;
   margin-bottom: 0.5rem;
-  margin-left: auto;
 }
-
-/* .action-button.active {
-  color: #4CAF50;
-} */
-
-.score {
-  margin-top: 10px; /* 减少得分部分与标题的间距 */
+.text-button-style{
+  color: var(--themeColor);
+}
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor);
+  background: rgba(255, 255, 255, 0) !important;
+}
+.CV-score-bar {
+  margin-top: 10px;
+  height: 3rem;
+  border-radius: 1rem;
+  width: 100%;
+  background-image: url('https://s21.ax1x.com/2024/03/20/pFWjQf0.png');
+  background-size:100%;
   display: flex;
   align-items: center;
 }
-
-.cv-score,
-.cv-completeness {
-  margin-right: 10px; /* 增加得分和完整度之间的间距 */
+.CV-score-text,
+.CV-completeness-text{
+  margin-left: 0.95rem;
 }
-
-.report-btn {
-  margin-left: auto;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.CV-score,
+.CV-completeness {
+  margin-right: 10px;
+  color: var(--themeColor);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
-
-/* .report-btn:hover {
-  background-color: #f9f9f9;
-} */
 
 .knowledge-graph {
   margin-top: 10rem;
-  justify-content: center; /* 水平居中 */
+  justify-content: center;
   display: flex;
   align-items: center;
 }

@@ -80,7 +80,6 @@ const handleSelectedCataUpdate = (value) => {
 .cv-center {
   width: 60%;
   padding: 1rem;
-  /* background-color: #ffffff; */
   display: flex;
   flex-direction: column;
 }

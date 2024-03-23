@@ -6,21 +6,19 @@
       <div class="cv-container">
         <div class="cv-left-side">
           <CVList />
-          <!-- 添加一个空白的div来增加垂直间距 -->
-          <div style="height: 5rem;"></div>
-          <CVtableCard />
+          <CVCatalogue />
         </div>
         <div class="cv-center">
           <CVHeader />
           <!-- <div style="height: 2rem;"></div> -->
-          <InBase />
-          <Eception />
-          <EducationCard />
-          <CertificationCard />
-          <Experience />
-          <ProjectCard />
-          <SkillCard />
-          <InfoCard />
+          <CVBaseInfo />
+          <CVException />
+          <CVEducation />
+          <CVCertification />
+          <CVExperience />
+          <CVProject />
+          <CVSkills />
+          <CVAdditional />
         </div>
       </div>
     </div>
@@ -30,16 +28,16 @@
 <script setup>
 import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 import CVList from '@/components/Tools/CV/CVList.vue'
-import CVtableCard from '@/components/Tools/CV/CVtableCard.vue'
 import CVHeader from '@/components/Tools/CV/CVHeader.vue'
-import InBase from '@/components/Tools/CV/InBase.vue'
-import EducationCard from '@/components/Tools/CV/EducationCard.vue'
-import CertificationCard from '@/components/Tools/CV/CertificationCard.vue'
-import Experience from '@/components/Tools/CV/ExperienceCard.vue'
-import ProjectCard from '@/components/Tools/CV/ProjectCard.vue'
-import SkillCard from '@/components/Tools/CV/SkillCard.vue'
-import InfoCard from '@/components/Tools/CV/InfoCard.vue'
-import Eception from '@/components/Tools/CV/ExcePition.vue'
+import CVBaseInfo from '@/components/Tools/CV/CVBaseInfo.vue'
+import CVEducation from '@/components/Tools/CV/CVEducation.vue'
+import CVCertification from '@/components/Tools/CV/CVCertification.vue'
+import CVExperience from '@/components/Tools/CV/CVExperience.vue'
+import CVProject from '@/components/Tools/CV/CVProject.vue'
+import CVSkills from '@/components/Tools/CV/CVSkills.vue'
+import CVException from '@/components/Tools/CV/CVExpection.vue'
+import CVCatalogue from '@/components/Tools/CV/CVCatalogue.vue'
+import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'
 </script>
 
 <style scoped>
@@ -52,7 +50,7 @@ import Eception from '@/components/Tools/CV/ExcePition.vue'
 .cv-left-side {
   flex: 1;
   padding: 1rem;
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0);
   display: flex;
   flex-direction: column;
 }

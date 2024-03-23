@@ -60,7 +60,6 @@ function showResumeDescription (index) {
 <style scoped>
 .resume-card {
   position: relative;
-  box-shadow: 0 3px 3px rgba(162, 161, 161, 0.2);
   display: flex;
   flex-direction: column;
   width: 13rem; /* Adjust the width as needed */

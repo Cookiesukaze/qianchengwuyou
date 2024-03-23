@@ -75,7 +75,7 @@ const handleSelectedCataClick = (item) => {
   margin-bottom: 0.5rem;
 }
 .list-items {
-  width: 120%;
+  width: 110%;
   overflow: scroll;
   margin-left: -1rem;
 }

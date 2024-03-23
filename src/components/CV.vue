@@ -4,7 +4,7 @@
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
       <div class="cv-container">
-        <div class="cv-left-side">
+        <div class="cv-left">
 <!--          左上：简历列表-->
           <CVList :modelValue="currentSelectedCV" @update:selectedCV="handleSelectedCVUpdate"/>
 <!--          左下：简历目录-->
@@ -13,7 +13,6 @@
         </div>
         <div class="cv-center">
           <CVHeader />
-          <!-- <div style="height: 2rem;"></div> -->
           <CVBaseInfo />
           <CVException />
           <CVEducation />
@@ -59,12 +58,13 @@ const handleSelectedCataUpdate = (value) => {
 
 <style scoped>
 .cv-container {
+  width: 98vw;
   display: flex;
   flex-direction: row;
 }
 
-.cv-left-side {
-  width: 18%;
+.cv-left {
+  width: 15%;
   display: flex;
   flex-direction: column;
   margin-left:7rem;
@@ -78,7 +78,7 @@ const handleSelectedCataUpdate = (value) => {
 }
 
 .cv-center {
-  flex: 4;
+  width: 60%;
   padding: 1rem;
   /* background-color: #ffffff; */
   display: flex;
@@ -86,7 +86,7 @@ const handleSelectedCataUpdate = (value) => {
 }
 
 /* 设置左侧组件之间的垂直间距 */
-.cv-left-side > * {
+.cv-left > * {
   margin-bottom: 0.5rem; /* 左侧组件之间的垂直间距 */
 }
 

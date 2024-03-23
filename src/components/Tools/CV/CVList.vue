@@ -71,7 +71,7 @@ const handleNewCVClick = value => {
 }
 
 .list-items {
-  width: 120%;
+  width: 110%;
   max-height: 6rem;
   overflow: scroll;
   margin-left: -1rem;

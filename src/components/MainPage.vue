@@ -3,29 +3,29 @@
     <div class="bg1"></div>
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
-<!--      第一栏-->
+      <!--      第一栏-->
       <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem">
-<!--        checkjobtype 推荐职位或全部职位-->
+        <!--        checkjobtype 推荐职位或全部职位-->
         <a-radio-group v-model:value="currentCheckJobType" @update:modelValue="handleCheckJobTypeUpdate" class="frame-style" >
           <a-radio-button value="推荐职位" style="margin-top: 0.3rem">推荐职位</a-radio-button>
           <a-radio-button value="全部职位">全部职位</a-radio-button>
         </a-radio-group>
-<!--        cvselector 选择简历-->
+        <!--        cvselector 选择简历-->
         <CVSelector :modelValue="currentCV" @update:CV="handleCVUpdate" style="margin-right: auto"
         ></CVSelector>
-<!--        视图选择-->
+        <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
           <a-radio-button value="详细"><MenuOutlined style="margin-top:0.7rem"/></a-radio-button>
           <a-radio-button value="图谱"><DeploymentUnitOutlined /></a-radio-button>
         </a-radio-group>
-<!--        换一批-->
+        <!--        换一批-->
         <div class="frame-style" style="">
           <a-radio-button @click="handleRefresh" value="换一批"><RedoOutlined style="margin-top:0.7rem;margin-right: 0.7rem"/>换一批</a-radio-button>
         </div>
-<!--        筛选折叠按钮，感觉用处不大不要了-->
-<!--        <div class="frame-style" style="">-->
-<!--          <a-radio-button value="详细" style="margin-top:0.3rem">筛选</a-radio-button>-->
-<!--        </div>-->
+        <!--        筛选折叠按钮，感觉用处不大不要了-->
+        <!--        <div class="frame-style" style="">-->
+        <!--          <a-radio-button value="详细" style="margin-top:0.3rem">筛选</a-radio-button>-->
+        <!--        </div>-->
       </div>
       <!--      第二栏（搜索框）-->
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
@@ -36,32 +36,32 @@
           size="large"
         />
       </div>
-<!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
+      <!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
-<!--        1.城市选择器，缺不限-->
+        <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
           :modelValue="currentCity" @update:city="handleCityUpdate"
         ></CitySelector></div>
-<!--        5.TODO:职位类型选择器等待补全-->
+        <!--        5.TODO:职位类型选择器等待补全-->
         <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"
         ></JobTypeSelector>
-<!--        2.求职类型选择器-->
+        <!--        2.求职类型选择器-->
         <SearchJobTypeSelector :modelValue="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
         ></SearchJobTypeSelector>
-<!--        3.工作经验选择器-->
+        <!--        3.工作经验选择器-->
         <WorkExperienceSelector :modelValue="currentWorkExperience" @update:workExperience="handleWorkExperienceUpdate"
         ></WorkExperienceSelector>
-<!--        4.学历选择器-->
+        <!--        4.学历选择器-->
         <EducationSelector :modelValue="currentEducation" @update:education="handleEducationUpdate"
         ></EducationSelector>
-<!--        6.公司规模选择器-->
+        <!--        6.公司规模选择器-->
         <CompanySizeSelector :modelValue="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
         ></CompanySizeSelector>
       </div>
-<!--      下方：职位卡片们-->
+      <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
-<!--        左边：卡片-->
-        <div style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;">
+        <!--        左边：卡片-->
+        <div class="card-list" style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;max-height: 60vh;overflow: scroll;overscroll-behavior: contain;">
           <div v-for="(x, index) in [1, 2, 3, 4, 5, 6]" :key="x">
             <JobCard
               :class="{ 'selected-card': index === selectedCardIndex }"
@@ -72,7 +72,7 @@
           </div>
         </div>
 
-<!--        右边：详细内容-->
+        <!--        右边：详细内容-->
         <div style="margin-left:2rem;margin-top:1rem;">
           <JobCardDetail></JobCardDetail>
         </div>
@@ -208,7 +208,9 @@ const fetchFilteredData = async () => {
 </script>
 
 <style scoped>
-
+.card-list::-webkit-scrollbar {
+  display: none;
+}
 :deep .ant-menu-item-selected {
   font-weight: bold !important;
 }

@@ -9,9 +9,11 @@
     </div>
     <div class="CV-score-bar">
       <div class="CV-score-text">当前简历得分&nbsp;&nbsp;</div>
-      <div class="CV-score">{{ cv.score }}分</div>
+      <div class="CV-score">{{ cv.score }}</div>
+      <div>分</div>
       <div class="CV-completeness-text"> 完整度&nbsp;&nbsp;</div>
-      <div class="CV-completeness">{{ cv.completeness }}%</div>
+      <div class="CV-completeness">{{ cv.completeness }}</div>
+      <div>%</div>
       <a-button style="margin-left: auto" type="text" class="text-button-style" >生成详细报告</a-button>
     </div>
     <div class="knowledge-graph">
@@ -82,13 +84,14 @@ function toggleKnowledgeGraph () {
 }
 .CV-score-text,
 .CV-completeness-text{
-  margin-left: 0.95rem;
+  margin-left: 0.9rem;
 }
 .CV-score,
 .CV-completeness {
-  margin-right: 10px;
+  margin-right: 5px;
   color: var(--themeColor);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+  font-weight: bold;
   margin-bottom: 0.25rem;
 }
 

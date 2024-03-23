@@ -38,7 +38,6 @@ function selectSection (index) {
 .resume {
   display: flex;
   flex-direction: column; /* 保持column布局 */
-  width:13rem;
   background: white;
 }
 

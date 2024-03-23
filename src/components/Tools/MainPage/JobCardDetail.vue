@@ -214,11 +214,6 @@ const job = ref({
 }
 .like-button-style:hover{
   border-color: var(--themeColor);
-  color: var(--themeColor02);
-  background: var(--themeColor01);
-}
-.like-button-style:hover{
-  border-color: var(--themeColor);
   color: var(--themeColor);
   background: var(--themeColor02);
 }

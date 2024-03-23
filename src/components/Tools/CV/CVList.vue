@@ -1,105 +1,93 @@
 <template>
-  <div class="resume-card">
-    <div class="resume-header">
-      <h1 class="resume-title">简历列表</h1>
-      <p class="resume-description">我的简历</p>
+  <div class="CV-card">
+    <div class="CV-header">简历列表</div>
+    <div class="CV-items">
+      <a-menu
+        mode="inline"
+        :items="CVList"
+        v-model:selectedKeys="currentSelectedCV"
+        @click="handleSelectedCVClick"
+      ></a-menu>
     </div>
-    <div class="resume-items">
-      <div
-        v-for="(resume, index) in resumes"
-        :key="index"
-        class="resume-item"
-        :class="{ active: isActiveResume(index) }"
-        @click="selectResume(index)"
-        @mouseover="showDescription(index)"
-        @mouseout="hideDescription(index)"
-      >
-        <p>{{ resume.title }}</p>
-        <p v-if="showResumeDescription(index)" class="resume-description">
-          {{ resume.description }}
-        </p>
-      </div>
-    </div>
+    <a-button @click="handleNewCVClick" type="text" class="button-style like-button-style" >
+      新建简历
+    </a-button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { defineEmits, ref, watch } from 'vue'
 
-const resumes = ref([
-  { title: '我的简历1', description: '前端开发工程师' },
-  { title: '我的简历2', description: '后端开发工程师' }
-  // 更多简历...
-])
-
-const selectedResumeIndex = ref(-1)
-
-function selectResume (index) {
-  selectedResumeIndex.value = index
-}
-
-function isActiveResume (index) {
-  return selectedResumeIndex.value === index
-}
-
-function showDescription (index) {
-  selectedResumeIndex.value = index
-}
-
-function hideDescription (index) {
-  if (selectedResumeIndex.value !== index) {
-    selectedResumeIndex.value = -1
+const CVList = ref([
+  {
+    key: '1',
+    label: '我的简历1',
+    title: '我的简历1'
+  }, {
+    key: '2',
+    label: '我的简历2',
+    title: '我的简历2'
+  }, {
+    key: '3',
+    label: '我的简历3',
+    title: '我的简历3'
+  }, {
+    key: '4',
+    label: '我的简历4',
+    title: '我的简历4'
   }
+])
+const currentSelectedCV = ref(['1'])
+const handleSelectedCVClick = value => {
+  // console.log(`selected ${value}`)
 }
-
-function showResumeDescription (index) {
-  return selectedResumeIndex.value === index
+const emit = defineEmits(['update:selectedCV'])
+watch(currentSelectedCV, (newValue) => {
+  emit('update:selectedCV', newValue)
+})
+// 新增简历
+const handleNewCVClick = value => {
+  // console.log('新增简历')
 }
 </script>
 
 <style scoped>
-.resume-card {
+.CV-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 13rem; /* Adjust the width as needed */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
+  box-shadow: 0 5px 15px 0 rgba(176,191,231,.4);
 }
 
-.resume-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.resume-title {
-  font-size: 1.5rem;
+.CV-header {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--blackFontColor);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
 
-.resume-description {
-  font-size: 1rem;
-  color: #666;
+.CV-items {
+  width: 120%;
+  max-height: 6rem;
+  overflow: scroll;
+  margin-left: -1rem;
 }
 
-.resume-items {
-  margin-top: 1rem;
+:deep(.ant-menu-light.ant-menu-root.ant-menu-inline){
+  border: none;
 }
 
-.resume-item {
-  border-bottom: 1px solid #eee; /* Adjusted border thickness */
-  padding: 0.5rem 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.like-button-style{
+  border-color: var(--themeColor);
+  color: var(--themeColor);
 }
-
-.resume-item:hover,
-.resume-item.active {
-  background-color: #f9f9f9; /* Hover and active background color */
-}
-
-.active p {
-  font-weight: bold; /* Bold text for active resume */
+.like-button-style:hover{
+  border-color: var(--themeColor);
+  color: var(--themeColor);
+  background: var(--themeColor02);
 }
 </style>

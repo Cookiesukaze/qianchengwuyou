@@ -5,7 +5,9 @@
     <div style="margin-top:3.5rem">
       <div class="cv-container">
         <div class="cv-left-side">
-          <CVList />
+<!--          左上：简历列表-->
+          <CVList :modelValue="currentSelectedCV" @update:selectedCV="handleSelectedCVUpdate"/>
+<!--          左下：简历目录-->
           <CVCatalogue />
         </div>
         <div class="cv-center">
@@ -38,6 +40,15 @@ import CVSkills from '@/components/Tools/CV/CVSkills.vue'
 import CVException from '@/components/Tools/CV/CVExpection.vue'
 import CVCatalogue from '@/components/Tools/CV/CVCatalogue.vue'
 import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'
+import { ref } from 'vue'
+
+// 简历列表
+const currentSelectedCV = ref([1])
+const handleSelectedCVUpdate = (value) => {
+  currentSelectedCV.value = value
+  console.log('CV:selectedCV updated:' + value)
+}
+
 </script>
 
 <style scoped>
@@ -48,11 +59,11 @@ import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'
 }
 
 .cv-left-side {
-  flex: 1;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0);
+  width: 18%;
   display: flex;
   flex-direction: column;
+  margin-left:7rem;
+  padding: 1rem;
 }
 
 .cv-center {

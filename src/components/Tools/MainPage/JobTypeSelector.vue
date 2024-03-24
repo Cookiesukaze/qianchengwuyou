@@ -33,7 +33,7 @@ const handleChangeJobType = value => {
 }
 const emit = defineEmits(['update:jobType'])
 watch(currentJobType, (newValue) => {
-  emit('update:jobType', newValue)
+  emit('update:jobType', newValue[0] || null) // cascader组件默认传递数组所以调一下
 })
 </script>
 

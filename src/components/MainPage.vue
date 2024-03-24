@@ -52,7 +52,7 @@
         <WorkExperienceSelector :modelValue="currentWorkExperience" @update:workExperience="handleWorkExperienceUpdate"
         ></WorkExperienceSelector>
         <!--        4.学历选择器-->
-        <EducationSelector :modelValue="currentEducation" @update:education="handleEducationUpdate"
+        <EducationSelector v-model:currentEducation="currentEducation" @update:education="handleEducationUpdate"
         ></EducationSelector>
         <!--        6.公司规模选择器-->
         <CompanySizeSelector v-model:currentCompanySize="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
@@ -163,7 +163,7 @@ const handleWorkExperienceUpdate = (value) => {
   console.log('MainPage:workExperience updated:' + value)
 }
 // 学历选择
-const currentEducation = ref([])
+const currentEducation = ref()
 const handleEducationUpdate = (value) => {
   currentEducation.value = value
   fetchFilteredData()

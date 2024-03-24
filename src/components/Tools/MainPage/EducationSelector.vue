@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentEducation = ref([])
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentEducation: String
+})
+const currentEducation = ref(props.currentEducation)
 const educationItems = ref([
   {
     value: '初中及以下',

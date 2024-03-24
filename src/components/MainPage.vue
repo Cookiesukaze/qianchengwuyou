@@ -55,7 +55,7 @@
         <EducationSelector :modelValue="currentEducation" @update:education="handleEducationUpdate"
         ></EducationSelector>
         <!--        6.公司规模选择器-->
-        <CompanySizeSelector :modelValue="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
+        <CompanySizeSelector v-model:currentCompanySize="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
         ></CompanySizeSelector>
       </div>
       <!--      下方：职位卡片们-->
@@ -170,7 +170,7 @@ const handleEducationUpdate = (value) => {
   console.log('MainPage:education updated:' + value)
 }
 // 公司规模选择器
-const currentCompanySize = ref([])
+const currentCompanySize = ref()
 const handleCompanySizeUpdate = (value) => {
   currentCompanySize.value = value
   fetchFilteredData()

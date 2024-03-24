@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentCompanySize = ref([])
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentCompanySize: String
+})
+const currentCompanySize = ref(props.currentCompanySize)
 const companySizeItems = ref([
   {
     value: '0-20人',

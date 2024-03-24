@@ -10,10 +10,10 @@
     <div class="CV-score-bar">
       <div class="CV-score-text">当前简历得分&nbsp;&nbsp;</div>
       <div class="CV-score">{{ cv.score }}</div>
-      <div>分</div>
+      <div style="font-size: 0.9rem;">分</div>
       <div class="CV-completeness-text"> 完整度&nbsp;&nbsp;</div>
       <div class="CV-completeness">{{ cv.completeness }}</div>
-      <div>%</div>
+      <div style="font-size: 0.9rem;">%</div>
       <a-button @click="handleChangeKGVisibleClick" style="margin-left: auto;font-size: 1.5rem;margin-bottom: 1.1rem"
          type="text" class="text-button-style"><DeploymentUnitOutlined /></a-button>
       <a-button type="text" class="text-button-style" >生成详细报告</a-button>
@@ -27,12 +27,12 @@
 <script setup>
 import { ref } from 'vue'
 import { DeploymentUnitOutlined } from '@ant-design/icons-vue'
-
+// 简历的得分和完整度
 const cv = ref({
   score: '70',
   completeness: '80'
 })
-// 是否展开简历图谱
+// 点按icon，是否展开简历图谱
 const isKGVisible = ref(false)
 const handleChangeKGVisibleClick = () => {
   isKGVisible.value = !isKGVisible.value
@@ -83,6 +83,7 @@ const handleChangeKGVisibleClick = () => {
 .CV-score-text,
 .CV-completeness-text{
   margin-left: 0.9rem;
+  font-size: 0.9rem;
 }
 .CV-score,
 .CV-completeness {
@@ -99,17 +100,5 @@ const handleChangeKGVisibleClick = () => {
   justify-content: center;
   display: flex;
   align-items: center;
-}
-
-.icon-btn {
-  margin-left: 10rem;
-  cursor: pointer;
-}
-
-.knowledge-graph-frame {
-  margin-top: 10rem;
-  border: 1rem solid #ddd;
-  width: 100%;
-  height: 20rem; /* 根据需要调整 */
 }
 </style>

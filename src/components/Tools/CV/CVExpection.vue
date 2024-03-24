@@ -1,43 +1,35 @@
 <template>
-  <div class="expectation-card">
-    <div class="title">
-      <span>期望岗位</span>
-      <a-button
-        class="edit-btn"
-        @click="isEditing = true"
-      >
-        编辑
+  <div class="CV-exp">
+    <div class="CV-exp-header">
+      <div class="CV-exp-header-text">期望岗位</div>
+      <a-button type="text" class="CV-exp-header-edit-btn"
+                @click="handleEditClick(null)"><EditOutlined />
       </a-button>
     </div>
-    <div class="content" v-if="!isEditing">
-      <span>求职类型：{{ editInfo.type }}</span>
-      <span>期望岗位：{{ editInfo.jobTitle }}</span>
-      <span>工作城市：{{ editInfo.city }}</span>
+<!--    期望岗位内容列表-->
+    <div class="CV-exp-content" v-if="!isEditing">
+      <div @click="handleEditClick(item)" class="CV-exp-content-item" v-for="item in CVExpList" :key="item" >
+        <div style="display: flex;flex-direction: row;margin-left: 1rem">
+          <div style="margin-right: 1rem"> {{ item.jobType ? item.jobType : '行业不限' }} </div>
+          <div class="split-line"></div>
+          <div style="margin-right: 1rem">{{ item.searchJobType ? item.searchJobType : '求职类型不限' }}</div>
+          <div class="split-line"></div>
+          <div >{{ item.city ? item.city : '城市不限' }}</div>
+        </div>
+      </div>
     </div>
-
-    <!-- 编辑期望的悬浮框，在编辑状态下显示 -->
-    <div v-if="isEditing" class="edit-popup">
-      <div class="edit-title">编辑求职期望</div>
-      <div class="edit-field">
-        <span>求职类型：</span>
-        <select v-model="editInfo.type">
-          <option value="全职">全职</option>
-          <option value="实习">实习</option>
-        </select>
+<!--    期望岗位编辑区域-->
+    <div v-if="isEditing">
+      <!-- 编辑窗口 -->
+      <div style="display: flex;flex-direction: row">
+        <jobTypeSelector v-model="editingItem.jobType" />
+        <searchJobTypeSelector v-model="editingItem.searchJobType" />
+        <CitySelector v-model="editingItem.city" />
       </div>
-      <div class="edit-field">
-        <a-input type="text" v-model="editInfo.jobTitle" placeholder="请输入期望岗位:" />
-      </div>
-      <div class="edit-field">
-        <span>工作城市：</span>
-        <city-selector
-          @update:city="updateJobCity"
-          :selected="editInfo.city"
-        ></city-selector>
-      </div>
-      <div class="button-row">
-        <a-button @click="cancelEdit">取消</a-button>
+      <div style="display: flex;flex-direction: row">
         <a-button type="primary" @click="saveEdit">保存</a-button>
+        <a-button @click="cancelEdit">取消</a-button>
+        <a-button v-if="editingItem.id" @click="deleteEdit" style="color: red;">删除</a-button>
       </div>
     </div>
   </div>
@@ -45,89 +37,121 @@
 
 <script setup>
 import { ref } from 'vue'
-import CitySelector from '@/components/Tools/MainPage/CitySelector.vue' // 假设这是一个现有的组件
-
+import { EditOutlined } from '@ant-design/icons-vue'
+import CitySelector from '@/components/Tools/MainPage/CitySelector.vue'
+import JobTypeSelector from '@/components/Tools/MainPage/JobTypeSelector.vue'
+import SearchJobTypeSelector from '@/components/Tools/MainPage/SearchJobTypeSelector.vue'
+// 期望职位列表
+const CVExpList = ref([
+  {
+    id: 1,
+    searchJobType: '全职',
+    jobType: '互联网',
+    city: ''
+  },
+  {
+    id: 2,
+    searchJobType: '',
+    jobType: '其它',
+    city: '杭州'
+  }])
+// 编辑区域
 const isEditing = ref(false)
-const editInfo = ref({
-  type: '全职', // 求职类型
-  jobTitle: '前端开发工程师 ', // 期望岗位
-  city: '' // 工作城市
-})
-
-function updateJobCity (city) {
-  editInfo.value.city = city
+const editingItem = ref({})
+function handleEditClick (item) { // 点按编辑icon或者已有岗位后
+  if (item) {
+    editingItem.value = { ...item } // 复制一份要编辑的项
+    console.log(editingItem.value.city)
+  } else {
+    editingItem.value = { id: null, searchJobType: '', jobType: '', city: '' } // 新增岗位
+  }
+  isEditing.value = true
 }
-
+function saveEdit () {
+  if (editingItem.value.id) {
+    // 保存已存在的岗位
+    const index = CVExpList.value.findIndex(item => item.id === editingItem.value.id)
+    if (index !== -1) {
+      CVExpList.value[index] = { ...editingItem.value }
+    }
+  } else {
+    // 新增岗位
+    editingItem.value.id = Date.now() // 用时间戳作为新项的id
+    CVExpList.value.push(editingItem.value)
+  }
+  isEditing.value = false
+}
 function cancelEdit () {
   isEditing.value = false
 }
-
-function saveEdit () {
+function deleteEdit () {
+  CVExpList.value = CVExpList.value.filter(item => item.id !== editingItem.value.id)
   isEditing.value = false
-  // 这里可以添加保存到后端的逻辑
 }
 </script>
 
 <style scoped>
-/* 卡片样式 */
-.expectation-card {
+.CV-exp {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-/* 头部样式，包括标题和编辑按钮 */
-.title {
+.CV-exp-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-/* 编辑按钮样式 */
-.edit-btn {
-  margin-left: auto;
-  color: black;
-}
-
-/* 内容样式 */
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* 增加垂直间距 */
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
-
-/* 编辑期望的悬浮框样式 */
-.edit-popup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* 垂直间距 */
-}
-
-/* 编辑字段样式 */
-.edit-field {
-  display: flex;
-  align-items: center;
+.CV-exp-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-/* 完成和取消按钮样式 */
-.buttons {
-  /* 移动按钮至右侧 */
-  justify-content: flex-end;
-  margin-top: 1rem; /* 添加间距 */
+.CV-exp-header-edit-btn {
+  margin-left: auto;
+  margin-top:-0.7rem;
+  color: var(--themeColor);
 }
-
-/* 按钮行样式，包括取消和保存按钮 */
-.button-row {
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
+}
+.CV-exp-content {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.CV-exp-content-item {
+  align-items: center;
+  width: 80%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+.CV-exp-content-item:hover {
+  color: var(--themeColor);
+  background: var(--themeColor01);
+}
+.split-line {
+  position: relative;
+  margin-right: 1rem;
+}
+.split-line:after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -6px;
+  width: 1px;
+  height: 12px;
+  background-color: #ccc;
 }
 </style>

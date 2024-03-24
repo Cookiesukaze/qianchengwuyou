@@ -12,8 +12,11 @@
             :modelValue="currentSelectedCata" @update:selectedCata="handleSelectedCataUpdate"/>
         </div>
         <div class="cv-center">
+<!--          简历头-->
           <CVHeader />
+<!--          简历基本信息-->
           <CVBaseInfo />
+<!--          期望岗位-->
           <CVException />
           <CVEducation />
           <CVCertification />

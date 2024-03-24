@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentJobType = ref([])
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentJobType: String
+})
+const currentJobType = ref(props.currentJobType)
 const jobTypeItems = ref([
   {
     value: '互联网',

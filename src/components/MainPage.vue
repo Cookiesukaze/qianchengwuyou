@@ -43,7 +43,7 @@
           v-model:city="currentCity" @update:city="handleCityUpdate"
         ></CitySelector></div>
         <!--        5.TODO:职位类型选择器等待补全-->
-        <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"
+        <JobTypeSelector v-model:currentJobType="currentJobType" @update:jobType="handleJobTypeUpdate"
         ></JobTypeSelector>
         <!--        2.求职类型选择器-->
         <SearchJobTypeSelector :modelValue="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
@@ -141,8 +141,8 @@ const handleCityUpdate = (value) => {
   fetchFilteredData()
   console.log('MainPage:city updated:' + value)
 }
-// 职位选择
-const currentJobType = ref([])
+// 职位类型选择
+const currentJobType = ref()
 const handleJobTypeUpdate = (value) => {
   currentJobType.value = value
   fetchFilteredData()

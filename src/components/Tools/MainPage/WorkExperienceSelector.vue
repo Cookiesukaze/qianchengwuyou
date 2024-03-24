@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentWorkExperience = ref([])
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentWorkExperience: String
+})
+const currentWorkExperience = ref(props.currentWorkExperience)
 const workExperienceItems = ref([
   {
     value: '在校生',

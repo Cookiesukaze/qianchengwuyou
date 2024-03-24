@@ -14,31 +14,29 @@
       <div class="CV-completeness-text"> 完整度&nbsp;&nbsp;</div>
       <div class="CV-completeness">{{ cv.completeness }}</div>
       <div>%</div>
-      <a-button style="margin-left: auto" type="text" class="text-button-style" >生成详细报告</a-button>
+      <a-button @click="handleChangeKGVisibleClick" style="margin-left: auto;font-size: 1.5rem;margin-bottom: 1.1rem"
+         type="text" class="text-button-style"><DeploymentUnitOutlined /></a-button>
+      <a-button type="text" class="text-button-style" >生成详细报告</a-button>
     </div>
-    <div class="knowledge-graph">
-        <a-button @click="toggleKnowledgeGraph" class="icon-btn">
-      <DeploymentUnitOutlined :style="{ color: 'black' }" />
-      </a-button>
-      <div v-if="isKnowledgeGraphVisible" class="knowledge-graph-frame"></div>
+    <div v-if="isKGVisible" class="CV-KG">
+      hi
     </div>
   </div>
 </template>
 
 <script setup>
-// eslint-disable-next-line no-unused-vars
-import { ref, onMounted } from 'vue'
-import { DeploymentUnitOutlined } from 'ant-design-vue'
+import { ref } from 'vue'
+import { DeploymentUnitOutlined } from '@ant-design/icons-vue'
 
 const cv = ref({
   score: '70',
   completeness: '80'
 })
-
-const isKnowledgeGraphVisible = ref(false)
-
-function toggleKnowledgeGraph () {
-  isKnowledgeGraphVisible.value = !isKnowledgeGraphVisible.value
+// 是否展开简历图谱
+const isKGVisible = ref(false)
+const handleChangeKGVisibleClick = () => {
+  isKGVisible.value = !isKGVisible.value
+  console.log('CV：展开知识图谱状态改变：' + isKGVisible.value)
 }
 </script>
 
@@ -69,12 +67,12 @@ function toggleKnowledgeGraph () {
   color: var(--themeColor);
 }
 :deep(.ant-btn-text:not(:disabled):hover){
-  color: var(--themeColor);
+  color: var(--themeColor075);
   background: rgba(255, 255, 255, 0) !important;
 }
 .CV-score-bar {
   margin-top: 10px;
-  height: 3rem;
+  height: 2.9rem;
   border-radius: 1rem;
   width: 100%;
   background-image: url('https://s21.ax1x.com/2024/03/20/pFWjQf0.png');
@@ -95,8 +93,9 @@ function toggleKnowledgeGraph () {
   margin-bottom: 0.25rem;
 }
 
-.knowledge-graph {
-  margin-top: 10rem;
+.CV-KG {
+  height: 10rem;
+  width: 90%;
   justify-content: center;
   display: flex;
   align-items: center;

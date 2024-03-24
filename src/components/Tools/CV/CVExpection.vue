@@ -24,7 +24,7 @@
       <div style="display: flex;flex-direction: row">
         <jobTypeSelector v-model="editingItem.jobType" />
         <searchJobTypeSelector v-model="editingItem.searchJobType" />
-        <CitySelector v-model="editingItem.city" />
+        <CitySelector v-model:city="editingItem.city" />
       </div>
       <div style="display: flex;flex-direction: row">
         <a-button type="primary" @click="saveEdit">保存</a-button>
@@ -47,7 +47,7 @@ const CVExpList = ref([
     id: 1,
     searchJobType: '全职',
     jobType: '互联网',
-    city: ''
+    city: ['11', '1101', '110101']
   },
   {
     id: 2,

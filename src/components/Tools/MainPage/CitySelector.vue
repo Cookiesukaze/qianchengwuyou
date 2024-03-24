@@ -2,7 +2,7 @@
   <div class="small-frame-style">
     <a-cascader
       class="citySelector"
-      v-model:value="selectedValue"
+      v-model:value="city"
       :options="options"
       showSearch
       :changeOnSelect="true"
@@ -22,12 +22,15 @@ import { Cascader as ACascader } from 'ant-design-vue'
 import areas from '../json/areas.json'
 import cities from '../json/cities.json'
 import provinces from '../json/provinces.json'
-import { ref, watch, defineEmits } from 'vue'
+import { ref, watch, defineEmits, defineProps } from 'vue'
 
-const selectedValue = ref([])
+// 接收父组件传值
+const props = defineProps({
+  city: Array
+})
 const emit = defineEmits(['update:city'])
-// 监听所选城市的变化
-watch(selectedValue, (newValue) => {
+const city = ref(props.city)
+watch(city, (newValue) => {
   emit('update:city', newValue)
 })
 

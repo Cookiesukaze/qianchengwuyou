@@ -40,7 +40,7 @@
       <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
         <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
-          :modelValue="currentCity" @update:city="handleCityUpdate"
+          v-model:city="currentCity" @update:city="handleCityUpdate"
         ></CitySelector></div>
         <!--        5.TODO:职位类型选择器等待补全-->
         <JobTypeSelector :modelValue="currentJobType" @update:jobType="handleJobTypeUpdate"

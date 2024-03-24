@@ -46,7 +46,7 @@
         <JobTypeSelector v-model:currentJobType="currentJobType" @update:jobType="handleJobTypeUpdate"
         ></JobTypeSelector>
         <!--        2.求职类型选择器-->
-        <SearchJobTypeSelector :modelValue="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
+        <SearchJobTypeSelector v-model:currentSearchJobType="currentSearchJobType" @update:searchJobType="handleSearchJobTypeUpdate"
         ></SearchJobTypeSelector>
         <!--        3.工作经验选择器-->
         <WorkExperienceSelector :modelValue="currentWorkExperience" @update:workExperience="handleWorkExperienceUpdate"
@@ -149,7 +149,7 @@ const handleJobTypeUpdate = (value) => {
   console.log('MainPage:jobType updated:' + value)
 }
 // 求职类型选择
-const currentSearchJobType = ref([])
+const currentSearchJobType = ref()
 const handleSearchJobTypeUpdate = (value) => {
   currentSearchJobType.value = value
   fetchFilteredData()

@@ -13,9 +13,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentSearchJobType = ref([])
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentSearchJobType: String
+})
+const currentSearchJobType = ref(props.currentSearchJobType)
 const searchJobTypeItems = ref([
   {
     value: '全职',

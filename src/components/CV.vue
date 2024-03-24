@@ -18,6 +18,7 @@
           <CVBaseInfo />
 <!--          期望岗位-->
           <CVException />
+<!--          教育经历-->
           <CVEducation />
           <CVCertification />
           <CVExperience />

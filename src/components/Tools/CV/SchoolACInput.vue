@@ -49,11 +49,9 @@ const handleSearchSchool = (value) => {
 :deep(.ant-select-selector){
   border-radius: 0.8rem;
   border: none !important;
-  box-shadow: 0 5px 10px 0 rgba(176,191,231,.2);
   background: rgba(255, 255, 255);
   border-width: 0.08rem;
 }
 :deep(.ant-select-selector:hover){
-  box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
 }
 </style>

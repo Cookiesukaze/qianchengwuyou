@@ -54,7 +54,7 @@ const handleChangeEducation = value => {
 const emit = defineEmits(['update:education'])
 // 监听所选城市的变化
 watch(currentEducation, (newValue) => {
-  emit('update:education', newValue)
+  emit('update:education', newValue[0] || null) // cascader组件默认传递数组所以调一下
 })
 </script>
 

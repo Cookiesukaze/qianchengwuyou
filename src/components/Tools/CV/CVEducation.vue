@@ -14,7 +14,7 @@
           <div class="split-line"></div>
           <div style="margin-right: 1rem">{{ item.major }}</div>
           <div class="split-line"></div>
-          <div style="margin-right: 1rem">{{ item.startDate }}~{{ item.endDate }}</div>
+          <div style="margin-right: 1rem">{{ item.startTime }}~{{ item.endTime }}</div>
           <div class="split-line"></div>
           <div >{{ item.degree }}</div>
         </div>
@@ -26,8 +26,14 @@
       <div style="display: flex;flex-direction: row">
         <SchoolACInput v-model:school="CVEduEditItem.school"
                        @update:school="handleSchoolUpdate"></SchoolACInput>
-        <MajorACInput v-model:major="CVEduEditItem.major"
+        <MajorACInput v-model:major="CVEduEditItem.major" style="margin-left: 1rem"
                        @update:major="handleMajorUpdate"></MajorACInput>
+        <StartTimeSelector v-model:startTime="CVEduEditItem.startTime"
+                      @update:startTime="handleStartTimeUpdate"></StartTimeSelector>
+        <EndTimeSelector v-model:endTime="CVEduEditItem.endTime"
+                           @update:endTime="handleEndTimeUpdate"></EndTimeSelector>
+        <EducationSelector v-model:currentEducation="CVEduEditItem.degree"
+                           @update:education="handleEducationUpdate"></EducationSelector>
 <!--        <jobTypeSelector v-model:currentJobType="CVEduEditItem.jobType"-->
 <!--                         @update:jobType="handleJobTypeUpdate"/>-->
 <!--        <searchJobTypeSelector v-model:currentSearchJobType="CVEduEditItem.searchJobType"-->
@@ -49,35 +55,47 @@ import { ref } from 'vue'
 import { EditOutlined } from '@ant-design/icons-vue'
 import SchoolACInput from '@/components/Tools/CV/SchoolACInput.vue'
 import MajorACInput from '@/components/Tools/CV/MajorACInput.vue'
+import StartTimeSelector from '@/components/Tools/CV/StartTimeSelector.vue'
+import EndTimeSelector from '@/components/Tools/CV/EndTimeSelector.vue'
+import EducationSelector from '@/components/Tools/MainPage/EducationSelector.vue'
 // 期望职位列表
 const CVEduList = ref([
   {
     id: 1,
     school: '杭州电子科技大学',
     major: '计算机科学与技术',
-    startDate: '2021',
-    endDate: '2025',
+    startTime: '2021',
+    endTime: '2025',
     degree: '本科'
   },
   {
     id: 2,
     school: '杭州电子科技大学',
     major: '计算机科学与技术',
-    startDate: '2021',
-    endDate: '2025',
+    startTime: '2021',
+    endTime: '2025',
     degree: '本科'
   }])
 
 // 编辑区域
 // 编辑状态和编辑数据
 const CVEduIsEdit = ref(false)
-const CVEduEditItem = ref({ school: null, major: null, startDate: null, endDate: null, degree: null })
+const CVEduEditItem = ref({ school: null, major: null, startTime: null, endTime: null, degree: null })
 // 子组件更新项
 const handleSchoolUpdate = (newSchool) => {
   CVEduEditItem.value.school = newSchool
 }
 const handleMajorUpdate = (newMajor) => {
   CVEduEditItem.value.major = newMajor
+}
+const handleStartTimeUpdate = (newTime) => {
+  CVEduEditItem.value.startTime = newTime
+}
+const handleEndTimeUpdate = (newTime) => {
+  CVEduEditItem.value.endTime = newTime
+}
+const handleEducationUpdate = (newDegree) => {
+  CVEduEditItem.value.degree = newDegree
 }
 // 编辑和新增逻辑
 function handleEditClick (item) {

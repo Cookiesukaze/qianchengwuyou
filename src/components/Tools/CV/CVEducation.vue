@@ -26,6 +26,8 @@
       <div style="display: flex;flex-direction: row">
         <SchoolACInput v-model:school="CVEduEditItem.school"
                        @update:school="handleSchoolUpdate"></SchoolACInput>
+        <MajorACInput v-model:major="CVEduEditItem.major"
+                       @update:major="handleMajorUpdate"></MajorACInput>
 <!--        <jobTypeSelector v-model:currentJobType="CVEduEditItem.jobType"-->
 <!--                         @update:jobType="handleJobTypeUpdate"/>-->
 <!--        <searchJobTypeSelector v-model:currentSearchJobType="CVEduEditItem.searchJobType"-->
@@ -46,6 +48,7 @@
 import { ref } from 'vue'
 import { EditOutlined } from '@ant-design/icons-vue'
 import SchoolACInput from '@/components/Tools/CV/SchoolACInput.vue'
+import MajorACInput from '@/components/Tools/CV/MajorACInput.vue'
 // 期望职位列表
 const CVEduList = ref([
   {
@@ -72,6 +75,9 @@ const CVEduEditItem = ref({ school: null, major: null, startDate: null, endDate:
 // 子组件更新项
 const handleSchoolUpdate = (newSchool) => {
   CVEduEditItem.value.school = newSchool
+}
+const handleMajorUpdate = (newMajor) => {
+  CVEduEditItem.value.major = newMajor
 }
 // 编辑和新增逻辑
 function handleEditClick (item) {

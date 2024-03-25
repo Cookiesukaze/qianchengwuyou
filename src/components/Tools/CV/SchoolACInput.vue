@@ -19,7 +19,7 @@ import schoolList from '../json/大学-8084-只有省市区.json'
 
 // 接收父组件传值
 const props = defineProps({
-  school: Array
+  school: String
 })
 const emit = defineEmits(['update:school'])
 const school = ref(props.school)

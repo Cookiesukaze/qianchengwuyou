@@ -7,7 +7,7 @@
     }"
   >
     <div class="bg">
-      <router-view></router-view>
+      <router-view />
     </div>
   </a-config-provider>
 </template>

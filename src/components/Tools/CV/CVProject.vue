@@ -34,18 +34,33 @@
       </div>
     </div>
     <!--    项目经历编辑区域-->
-    <div v-if="CVProjIsEdit">
-      <!-- 编辑窗口 -->
-      <div style="display: flex;flex-direction: row">
-        <jobTypeSelector v-model:currentJobType="CVProjEditItem.jobType"
-                         @update:jobType="handleJobTypeUpdate"/>
-        <searchJobTypeSelector v-model:currentSearchJobType="CVProjEditItem.searchJobType"
-                               @update:searchJobType="handleSearchJobTypeUpdate" />
-        <CitySelector v-model:city="CVProjEditItem.city" style="margin-left: 1rem"
-                      @update:city="handleCityUpdate"/>
-      </div>
+    <div v-if="CVProjIsEdit" class="CV-proj-edit">
+      <a-form model="CVProjEditItem" layout="vertical" >
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="项目标题" style="width: 15rem">
+            <a-input v-model:value="CVProjEditItem.title" />
+          </a-form-item>
+          <a-form-item label="担任角色" style="width: 15rem;margin-left: 2rem">
+            <a-input v-model:value="CVProjEditItem.role" />
+          </a-form-item>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="开始时间" style="width: 9rem">
+            <a-date-picker v-model:value="CVProjEditItem.startTime" picker="month"  placeholder="开始时间" />
+          </a-form-item>
+          <a-form-item label="结束时间" style="width: 9rem;margin-left: 2rem">
+            <a-date-picker v-model:value="CVProjEditItem.endTime" picker="month"  placeholder="结束时间"/>
+          </a-form-item>
+        </div>
+        <a-form-item label="项目描述" style="width: 40rem">
+          <a-textarea v-model:value="CVProjEditItem.description" :rows=3 />
+        </a-form-item>
+        <a-form-item label="项目业绩" style="width: 40rem">
+          <a-textarea v-model:value="CVProjEditItem.achievement" :rows=3 />
+        </a-form-item>
+      </a-form>
       <div class="CV-proj-op-btn">
-        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick" >保存</a-button>
+        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick">保存</a-button>
         <a-button class="CV-proj-op-btn-item" danger v-if="CVProjEditItem.id" @click="handleDeleteEditClick">删除</a-button>
         <a-button class="CV-proj-op-btn-item" @click="handleCancelEditClick">取消</a-button>
       </div>
@@ -56,17 +71,17 @@
 <script setup>
 import { ref } from 'vue'
 import { EditOutlined } from '@ant-design/icons-vue'
-import CitySelector from '@/components/Tools/MainPage/CitySelector.vue'
-import JobTypeSelector from '@/components/Tools/MainPage/JobTypeSelector.vue'
-import SearchJobTypeSelector from '@/components/Tools/MainPage/SearchJobTypeSelector.vue'
+// 时间选择器用
+import dayjs from 'dayjs'
+
 // 项目经历列表
 const CVProjList = ref([
   {
     id: 1,
     title: '签程无忧',
     role: '前端开发工程师',
-    startTime: '2023.02',
-    endTime: '2023.04',
+    startTime: '2023-02',
+    endTime: '2023-04',
     description: '1. 生态公益林区，严格防范火患，请不要携带火种，刀具，危险物品上山。2. 山林危险，请不要随意离开登山健身步道。3. 水深危险，请不要在沿途的溪流或水潭中游玩。',
     achievement: '上线使用5人次，获得参与奖'
   },
@@ -74,8 +89,8 @@ const CVProjList = ref([
     id: 2,
     title: '签程无忧pro',
     role: '前端开发工程师',
-    startTime: '2023.02',
-    endTime: '2023.04',
+    startTime: '2023-02',
+    endTime: '2023-04',
     description: '签程无忧是一款基于知识图谱的大学生就业能力评价和职位推荐系统1. 爱护环境，请为山林留下养料。\n' +
       '\n' +
       '2. 亲近自然，本处免费开放游泳。\n' +
@@ -87,21 +102,26 @@ const CVProjList = ref([
 // 编辑区域
 // 编辑状态和编辑数据
 const CVProjIsEdit = ref(false)
-const CVProjEditItem = ref({ title: null, role: null, startTime: null, endTime: null, description: null, achievement: null })
+const CVProjEditItem = ref({
+  title: null,
+  role: null,
+  startTime: null,
+  endTime: null,
+  description: null,
+  achievement: null
+})
 // 子组件更新项
-const handleJobTypeUpdate = (newJobType) => {
-  CVProjEditItem.value.jobType = newJobType
-}
-const handleSearchJobTypeUpdate = (newSearchJobType) => {
-  CVProjEditItem.value.searchJobType = newSearchJobType
-}
-const handleCityUpdate = (newCity) => {
-  CVProjEditItem.value.city = newCity
-}
+// const handleJobTypeUpdate = (newJobType) => {
+//   CVProjEditItem.value.jobType = newJobType
+// }
 // 编辑和新增逻辑
 function handleEditClick (item) {
   if (item) {
-    CVProjEditItem.value = { ...item }
+    CVProjEditItem.value = {
+      ...item,
+      startTime: dayjs(item.startTime),
+      endTime: dayjs(item.endTime)
+    }
   } else {
     CVProjEditItem.value = { id: null, title: null, role: null, startTime: null, endTime: null, description: null, achievement: null } // 新增项目经历
   }
@@ -110,16 +130,28 @@ function handleEditClick (item) {
 }
 // 保存逻辑
 function handleSaveEditClick () {
+  // 转日期
+  const formattedStartTime = CVProjEditItem.value.startTime ? dayjs(CVProjEditItem.value.startTime).format('YYYY-MM') : ''
+  const formattedEndTime = CVProjEditItem.value.endTime ? dayjs(CVProjEditItem.value.endTime).format('YYYY-MM') : ''
   if (CVProjEditItem.value.id) { // 保存已存在的项目经历
     const index = CVProjList.value.findIndex(item => item.id === CVProjEditItem.value.id)
     if (index !== -1) {
-      CVProjList.value[index] = { ...CVProjEditItem.value }
+      CVProjList.value[index] = {
+        ...CVProjEditItem.value,
+        startTime: formattedStartTime,
+        endTime: formattedEndTime
+      }
     }
   } else { // 新增项目经历
     // CVProjEditItem.value.id = Date.now()  用时间戳作为新项的id
     const maxId = CVProjList.value.reduce((max, item) => item.id > max ? item.id : max, 0) // 顺序id
-    CVProjEditItem.value.id = maxId + 1
-    CVProjList.value.push(CVProjEditItem.value)
+    const newItem = {
+      ...CVProjEditItem.value,
+      id: maxId + 1,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime
+    }
+    CVProjList.value.push(newItem)
   }
   CVProjIsEdit.value = false
   console.log('CV:Project save')
@@ -242,5 +274,8 @@ function handleDeleteEditClick () {
 .CV-proj-op-btn-item{
   margin-left: 0.5rem;
 }
-
+.CV-proj-edit{
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
 </style>

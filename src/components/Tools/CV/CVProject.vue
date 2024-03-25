@@ -1,61 +1,53 @@
 <template>
-  <div class="project-card">
-    <div class="project-header">
-      <span>项目经历</span>
-      <a-button
-        class="add-button"
-        @mouseover="showAdd = true"
-        @mouseout="showAdd = false"
-        v-show="!isAdding"
-      >
-        添加
+  <div class="CV-proj">
+    <div class="CV-proj-header">
+      <div class="CV-proj-header-text">项目经历</div>
+      <a-button type="text" class="CV-proj-header-edit-btn"
+                @click="handleEditClick(null)"><EditOutlined />
       </a-button>
     </div>
-
-  <div class="project-info" v-for="project in projects" :key="project.id">
-  <div class="project-title-wrapper">
-    <span class="project-title">{{ project.title }}</span>
-    <div class="edit-delete-buttons">
-      <a-button @click="editProject(project.id)" v-show="!isEditing"
-        >编辑</a-button
-      >
-      <a-button @click="deleteProject(project.id)">删除</a-button>
+    <!--    项目经历内容列表-->
+    <div class="CV-proj-content" v-if="!CVProjIsEdit">
+      <div @click="handleEditClick(item)" class="CV-proj-content-item" v-for="item in CVProjList" :key="item" >
+        <div style="display: flex;flex-direction: column;">
+<!--          第一栏，项目名和职责-->
+          <div class="CV-proj-content-item-piece" style="margin-bottom: 0.7rem">
+            <div class="CV-proj-title"> {{ item.title }} </div>
+            <div class="split-line"></div>
+            <div class="CV-proj-role">{{ item.role }}</div>
+            <div class="CV-proj-time-container">
+              <div class="CV-proj-time">{{ item.startTime }}~{{ item.endTime }}</div>
+            </div>
+          </div>
+<!--          第二栏，项目描述-->
+          <div class="CV-proj-content-item-piece">
+            <div class="CV-proj-desc-title">内容：</div>
+            <div class="CV-proj-desc-content">{{item.description}}</div>
+          </div>
+<!--          第三栏，项目业绩-->
+          <div class="CV-proj-content-item-piece">
+            <div class="CV-proj-desc-title">业绩：</div>
+            <div class="CV-proj-desc-content">{{item.achievement}}</div>
+          </div>
+          <div style="height: 0.5rem"></div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="project-role-duration">
-    <span>{{ project.role }}</span>
-    <span class="project-duration">{{ project.duration }}</span>
-  </div>
-  <div class="project-description">{{ project.description }}</div>
-  <a-button
-        class="optimize-button"
-        @mouseover="showOptimize = true"
-        @mouseout="showOptimize = false"
-        v-show="!isOptimizing"
-      >
-        一键优化
-      </a-button>
-</div>
-
-    <div class="add-edit-project" v-show="isAdding || isEditing">
-      <div class="input-row">
-        <a-input v-model="newProject.title" placeholder="输入项目名称" />
+    <!--    项目经历编辑区域-->
+    <div v-if="CVProjIsEdit">
+      <!-- 编辑窗口 -->
+      <div style="display: flex;flex-direction: row">
+        <jobTypeSelector v-model:currentJobType="CVProjEditItem.jobType"
+                         @update:jobType="handleJobTypeUpdate"/>
+        <searchJobTypeSelector v-model:currentSearchJobType="CVProjEditItem.searchJobType"
+                               @update:searchJobType="handleSearchJobTypeUpdate" />
+        <CitySelector v-model:city="CVProjEditItem.city" style="margin-left: 1rem"
+                      @update:city="handleCityUpdate"/>
       </div>
-      <div class="input-row">
-        <a-input v-model="newProject.role" placeholder="输入项目角色" />
-      </div>
-      <div class="input-row">
-        <a-input v-model="newProject.link" placeholder="输入项目链接（选填）" />
-      </div>
-      <div class="input-row">
-        <a-input v-model="newProject.duration" placeholder="输入项目起始时间" />
-      </div>
-      <div class="input-row">
-        <a-input v-model="newProject.description" placeholder="输入项目描述" />
-      </div>
-      <div class="button-row">
-        <a-button @click="cancelAddEdit">取消</a-button>
-        <a-button type="primary" @click="saveProject">保存</a-button>
+      <div class="CV-proj-op-btn">
+        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick" >保存</a-button>
+        <a-button class="CV-proj-op-btn-item" danger v-if="CVProjEditItem.id" @click="handleDeleteEditClick">删除</a-button>
+        <a-button class="CV-proj-op-btn-item" @click="handleCancelEditClick">取消</a-button>
       </div>
     </div>
   </div>
@@ -63,177 +55,192 @@
 
 <script setup>
 import { ref } from 'vue'
-
-const projects = ref([
+import { EditOutlined } from '@ant-design/icons-vue'
+import CitySelector from '@/components/Tools/MainPage/CitySelector.vue'
+import JobTypeSelector from '@/components/Tools/MainPage/JobTypeSelector.vue'
+import SearchJobTypeSelector from '@/components/Tools/MainPage/SearchJobTypeSelector.vue'
+// 项目经历列表
+const CVProjList = ref([
   {
     id: 1,
-    title: '签程无忧——基于知识图谱的大学生就业能力评价和职位推荐系统',
+    title: '签程无忧',
     role: '前端开发工程师',
-    duration: '2023.11-2024.06',
-    description: '签程无忧是一款基于知识图谱的大学生就业能力评价和职位推荐系统'
+    startTime: '2023.02',
+    endTime: '2023.04',
+    description: '1. 生态公益林区，严格防范火患，请不要携带火种，刀具，危险物品上山。2. 山林危险，请不要随意离开登山健身步道。3. 水深危险，请不要在沿途的溪流或水潭中游玩。',
+    achievement: '上线使用5人次，获得参与奖'
+  },
+  {
+    id: 2,
+    title: '签程无忧pro',
+    role: '前端开发工程师',
+    startTime: '2023.02',
+    endTime: '2023.04',
+    description: '签程无忧是一款基于知识图谱的大学生就业能力评价和职位推荐系统1. 爱护环境，请为山林留下养料。\n' +
+      '\n' +
+      '2. 亲近自然，本处免费开放游泳。\n' +
+      '\n' +
+      '3. 树林中存在通往大洛村的小道，您可以尝试通行，但后果自负。',
+    achievement: '上线使用5人次，获得参与奖'
   }
-  // ... 其他项目经历
 ])
-
-const newProject = ref({
-  id: null,
-  title: '',
-  role: '',
-  link: '',
-  duration: '',
-  description: ''
-})
-
-const isAdding = ref(false)
-const isEditing = ref(false)
-
-const showAdd = () => {
-  isAdding.value = true
-  isEditing.value = false
+// 编辑区域
+// 编辑状态和编辑数据
+const CVProjIsEdit = ref(false)
+const CVProjEditItem = ref({ title: null, role: null, startTime: null, endTime: null, description: null, achievement: null })
+// 子组件更新项
+const handleJobTypeUpdate = (newJobType) => {
+  CVProjEditItem.value.jobType = newJobType
 }
-
-const cancelAddEdit = () => {
-  newProject.value = {
-    id: null,
-    title: '',
-    role: '',
-    link: '',
-    duration: '',
-    description: ''
+const handleSearchJobTypeUpdate = (newSearchJobType) => {
+  CVProjEditItem.value.searchJobType = newSearchJobType
+}
+const handleCityUpdate = (newCity) => {
+  CVProjEditItem.value.city = newCity
+}
+// 编辑和新增逻辑
+function handleEditClick (item) {
+  if (item) {
+    CVProjEditItem.value = { ...item }
+  } else {
+    CVProjEditItem.value = { id: null, title: null, role: null, startTime: null, endTime: null, description: null, achievement: null } // 新增项目经历
   }
-  isAdding.value = false
-  isEditing.value = false
+  CVProjIsEdit.value = true
+  console.log('CV:Project edit')
 }
-
-// const showOptimize = () => {
-//   isOptimizing.value = true;
-// };
-
-// eslint-disable-next-line no-unused-vars
-const optimizeProject = () => {
-  // 优化项目的逻辑
-  console.log('项目已优化')
-  // eslint-disable-next-line no-undef
-  cancelOptimize()
-}
-
-// eslint-disable-next-line no-unused-vars
-const optimizeProjectModal = ref(false)
-
-// const toggleOptimizeModal = () => {
-//   optimizeProjectModal.value = !optimizeProjectModal.value;
-// };
-
-const saveProject = () => {
-  if (isAdding.value) {
-    projects.value.push({ ...newProject.value, id: Date.now() })
-  } else if (isEditing.value) {
-    const index = projects.value.findIndex((p) => p.id === newProject.value.id)
+// 保存逻辑
+function handleSaveEditClick () {
+  if (CVProjEditItem.value.id) { // 保存已存在的项目经历
+    const index = CVProjList.value.findIndex(item => item.id === CVProjEditItem.value.id)
     if (index !== -1) {
-      projects.value[index] = { ...newProject.value }
+      CVProjList.value[index] = { ...CVProjEditItem.value }
     }
+  } else { // 新增项目经历
+    // CVProjEditItem.value.id = Date.now()  用时间戳作为新项的id
+    const maxId = CVProjList.value.reduce((max, item) => item.id > max ? item.id : max, 0) // 顺序id
+    CVProjEditItem.value.id = maxId + 1
+    CVProjList.value.push(CVProjEditItem.value)
   }
-  cancelAddEdit()
+  CVProjIsEdit.value = false
+  console.log('CV:Project save')
 }
-
-const editProject = (projectId) => {
-  const projectToEdit = projects.value.find((p) => p.id === projectId)
-  if (projectToEdit) {
-    newProject.value = { ...projectToEdit }
-    isEditing.value = true
-    isAdding.value = false
-  }
+// 取消逻辑
+function handleCancelEditClick () {
+  CVProjIsEdit.value = false
+  console.log('CV:Project cancel')
 }
-
-const deleteProject = (projectId) => {
-  projects.value = projects.value.filter((p) => p.id !== projectId)
+// 删除逻辑
+function handleDeleteEditClick () {
+  CVProjList.value = CVProjList.value.filter(item => item.id !== CVProjEditItem.value.id)
+  CVProjIsEdit.value = false
+  console.log('CV:Project delete')
 }
 </script>
 
 <style scoped>
-/* 卡片样式 */
-.project-card {
+.CV-proj {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-/* 头部样式，包括标题和添加按钮 */
-.project-header {
+.CV-proj-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+  justify-content: space-between;
+}
+.CV-proj-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-/* 添加按钮样式 */
-.add-button {
+.CV-proj-header-edit-btn {
+  margin-left: auto;
+  margin-top:-0.7rem;
+  color: var(--themeColor);
+}
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
+}
+.CV-proj-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+.CV-proj-title{
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+.CV-proj-role{
+  font-size: 1rem;
+}
+.CV-proj-time{
+  font-size: 0.9rem;
+  color: var(--greyFontColor);
+}
+.CV-proj-time-container {
   margin-left: auto;
 }
-
-/* 项目信息样式 */
-.project-info {
-  margin-bottom: 1rem;
-}
-
-.project-title-wrapper {
-  display: flex;
+.CV-proj-content-item {
   align-items: center;
-  margin-bottom: 0.5rem;
-}
-/* 项目角色和时间的容器样式 */
-.project-role-duration {
+  width: 95%;
+  height: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  flex-direction: row;
 }
-.project-role-duration span {
-  margin-right: 0.5rem; /* 添加到下一个 span 的间距 */
+.CV-proj-content-item:hover {
+  background: var(--themeColor01);
 }
-
-/* 增加垂直间距的样式 */
-.project-role-duration + .project-description {
-  margin-top: 1rem; /* 增加垂直间距 */
+.CV-proj-content-item:hover .CV-proj-title,
+.CV-proj-content-item:hover .CV-proj-role,
+.CV-proj-content-item:hover .CV-proj-time{
+  color: var(--themeColor);
 }
-
-/* 项目标题样式 */
-.project-title {
-  flex-grow: 1; /* 允许标题占满剩余空间 */
-  margin-right: 1rem; /* 标题和按钮之间的间隔 */
-}
-
-/* 编辑和删除按钮容器样式 */
-.edit-delete-buttons {
+.CV-proj-content-item-piece {
   display: flex;
+  flex-direction: row;
+  margin-top:0.5rem;
 }
-
-/* 项目描述样式 */
-.project-description {
+.CV-proj-desc-title{
+  min-width: 3.3rem;
+  font-weight: bold;
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
 }
-
-/* 优化按钮样式 */
-.optimize-button {
-  margin-top: 1rem; /* 调整按钮与描述的间距 */
+.CV-proj-desc-content{
+  font-size: 0.9rem;
+  color: var(--greyFontColor)
 }
-
-/* 输入行样式 */
-.input-row {
+.split-line {
+  position: relative;
+  margin-right: 0.5rem;
+}
+.split-line:after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -6px;
+  width: 1px;
+  height: 12px;
+  background-color: #ccc;
+}
+.CV-proj-op-btn{
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.CV-proj-op-btn-item{
+  margin-left: 0.5rem;
 }
 
-/* 按钮行样式 */
-.button-row {
-  display: flex;
-  justify-content: flex-end;
-}
 </style>

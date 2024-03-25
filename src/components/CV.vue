@@ -22,7 +22,9 @@
           <CVEducation />
 <!--          资格证书-->
           <CVCertification />
+<!--          工作实习经历-->
           <CVExperience />
+<!--          项目经历-->
           <CVProject />
           <CVSkills />
           <CVAdditional />

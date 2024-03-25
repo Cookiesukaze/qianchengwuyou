@@ -1,0 +1,186 @@
+[
+  {
+    "label": "Java",
+    "value": "Java"
+  },
+  {
+    "label": "PHP",
+    "value": "PHP"
+  },
+  {
+    "label": "Lisp",
+    "value": "Lisp"
+  },
+  {
+    "label": "Lua",
+    "value": "Lua"
+  },
+  {
+    "label": ".NET",
+    "value": "NET"
+  },
+  {
+    "label": "ActiveX",
+    "value": "ActiveX"
+  },
+  {
+    "label": "ASP.NET",
+    "value": "ASP_NET"
+  },
+  {
+    "label": "C#.NET",
+    "value": "C_SHARP_NET"
+  },
+  {
+    "label": "C/C++",
+    "value": "C_CPP"
+  },
+  {
+    "label": "Golang",
+    "value": "Golang"
+  },
+  {
+    "label": "ERP",
+    "value": "ERP"
+  },
+  {
+    "label": "SAP",
+    "value": "SAP"
+  },
+  {
+    "label": "HTML5",
+    "value": "HTML5"
+  },
+  {
+    "label": "iOS",
+    "value": "iOS"
+  },
+  {
+    "label": "J2EE",
+    "value": "J2EE"
+  },
+  {
+    "label": "JavaScript",
+    "value": "JavaScript"
+  },
+  {
+    "label": "Perl",
+    "value": "Perl"
+  },
+  {
+    "label": "Python",
+    "value": "Python"
+  },
+  {
+    "label": "SEO",
+    "value": "SEO"
+  },
+  {
+    "label": "VB.Net",
+    "value": "VB_Net"
+  },
+  {
+    "label": "UI",
+    "value": "UI"
+  },
+  {
+    "label": "Web前端",
+    "value": "Web_Frontend"
+  },
+  {
+    "label": "移动前端",
+    "value": "Mobile_Frontend"
+  },
+  {
+    "label": "Android",
+    "value": "Android"
+  },
+  {
+    "label": "Clojure",
+    "value": "Clojure"
+  },
+  {
+    "label": "Ruby",
+    "value": "Ruby"
+  },
+  {
+    "label": "Matlab",
+    "value": "Matlab"
+  },
+  {
+    "label": "XML/XSLT",
+    "value": "XML_XSLT"
+  },
+  {
+    "label": "Linux",
+    "value": "Linux"
+  },
+  {
+    "label": "Unix/Linux development",
+    "value": "Unix_Linux_Development"
+  },
+  {
+    "label": "TensorFlow",
+    "value": "TensorFlow"
+  },
+  {
+    "label": "Scala",
+    "value": "Scala"
+  },
+  {
+    "label": "Shell",
+    "value": "Shell"
+  },
+  {
+    "label": "Visual Basic",
+    "value": "Visual_Basic"
+  },
+  {
+    "label": "Transact-SQL",
+    "value": "Transact_SQL"
+  },
+  {
+    "label": "SSH",
+    "value": "SSH"
+  },
+  {
+    "label": "三大框架",
+    "value": "Three_Major_Frameworks"
+  },
+  {
+    "label": "Objective-C",
+    "value": "Objective_C"
+  },
+  {
+    "label": "Ruby",
+    "value": "Ruby"
+  },
+  {
+    "label": "Pascal",
+    "value": "Pascal"
+  },
+  {
+    "label": "Ibatis",
+    "value": "Ibatis"
+  },
+  {
+    "label": "Ajax",
+    "value": "Ajax"
+  },
+  {
+    "label": "ASP",
+    "value": "ASP"
+  },
+  {
+    "label": "JPA",
+    "value": "JPA"
+  },
+  {
+    "label": "MFC",
+    "value": "MFC"
+  },
+  {
+    "label": "Qt",
+    "value": "Qt"
+  }
+]

@@ -26,7 +26,8 @@
           <CVExperience />
 <!--          项目经历-->
           <CVProject />
-          <CVSkills />
+<!--          技能-->
+          <CVSkill />
           <CVAdditional />
         </div>
       </div>
@@ -43,7 +44,7 @@ import CVEducation from '@/components/Tools/CV/CVEducation.vue'
 import CVCertification from '@/components/Tools/CV/CVCertification.vue'
 import CVExperience from '@/components/Tools/CV/CVExperience.vue'
 import CVProject from '@/components/Tools/CV/CVProject.vue'
-import CVSkills from '@/components/Tools/CV/CVSkills.vue'
+import CVSkill from '@/components/Tools/CV/CVSkill.vue'
 import CVException from '@/components/Tools/CV/CVExpection.vue'
 import CVCatalogue from '@/components/Tools/CV/CVCatalogue.vue'
 import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'

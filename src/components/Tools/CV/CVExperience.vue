@@ -10,7 +10,7 @@
     <div class="CV-exp-content" v-if="!CVExpIsEdit">
       <div @click="handleEditClick(item)" class="CV-exp-content-item" v-for="item in CVExpList" :key="item" >
         <div style="display: flex;flex-direction: column;width: 100%">
-          <!--          第一栏，公司名和职业名-->
+          <!--          第一栏，公司名和职位名-->
           <div class="CV-exp-content-item-piece" style="margin-bottom: 0.7rem">
             <div class="CV-exp-companyName"> {{ item.companyName }} </div>
             <div class="split-line"></div>

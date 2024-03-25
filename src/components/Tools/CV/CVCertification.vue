@@ -4,7 +4,7 @@
       <div class="CV-cer-header-text">资格证书</div>
     </div>
     <!--    资格证书：多选器-->
-    <div class="CV-exp-content">
+    <div class="CV-cer-content">
       <CertificationSelector style="width: 90%;" v-model:currentCertificates="CVCerList"
                              @update:currentCertificates="handleCertificatesUpdate"
       ></CertificationSelector>

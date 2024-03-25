@@ -1,116 +1,61 @@
 <template>
-  <div class="certification-card">
-    <!-- 标题和添加按钮 -->
-    <div class="certification-header">
-      <span>资格证书</span>
-      <!-- 添加按钮，点击时显示输入框 -->
-      <a-button
-        class="add-button"
-        @click="isAdding = true"
-      >
-        添加
-      </a-button>
+  <div class="CV-cer">
+    <div class="CV-cer-header">
+      <div class="CV-cer-header-text">资格证书</div>
     </div>
-
-    <!-- 资格证书列表 -->
-    <div class="certification-list">
-      <div v-for="cert in certifications" :key="cert">{{ cert }}</div>
-    </div>
-
-    <!-- 添加资格证书的输入框和按钮 -->
-    <div class="add-certification" v-if="isAdding">
-      <div class="input-row">
-        <!-- 输入提示和输入框 -->
-        <a-input v-model="newCertification" placeholder="输入资格证书名称" />
-      </div>
-      <div class="button-row">
-        <!-- 取消和保存按钮 -->
-        <a-button @click="cancelAdd">取消</a-button>
-        <a-button type="primary" @click="saveCertification">保存</a-button>
-      </div>
+    <!--    资格证书：多选器-->
+    <div class="CV-exp-content">
+      <CertificationSelector style="width: 90%;" v-model:currentCertificates="CVCerList"
+                             @update:currentCertificates="handleCertificatesUpdate"
+      ></CertificationSelector>
     </div>
   </div>
 </template>
 
 <script setup>
+import CertificationSelector from '@/components/Tools/CV/CertificationSelector.vue'
 import { ref } from 'vue'
-
-// 资格证书列表，初始包含一些示例证书
-const certifications = ref([
-  '大学英语六级(CET6)',
-  '大学英语四级(CET4)',
-  '驾驶证C1'
-])
-// 新资格证书的输入值
-const newCertification = ref('')
-// 控制添加框是否显示的标志
-const isAdding = ref(false)
-
-// 取消添加操作
-const cancelAdd = () => {
-  newCertification.value = ''
-  isAdding.value = false
-}
-
-// 保存新添加的资格证书
-const saveCertification = () => {
-  // if (newCertification.value.trim() !== '') { // 添加了 trim() 来去除输入前后的空格
-  //   certifications.value.push(newCertification.value.trim())
-  //   newCertification.value = ''
-  //   isAdding.value = false // 添加此行来隐藏添加框
-  // }
-  isAdding.value = false
+const CVCerList = ref([ // 数据必须要一个label一个value
+  {
+    label: '大学英语四级',
+    value: '大学英语四级'
+  },
+  {
+    label: '大学英语六级',
+    value: '大学英语六级'
+  }])
+// 子组件更新项
+const handleCertificatesUpdate = (newCer) => {
+  CVCerList.value = newCer
 }
 </script>
 
 <style scoped>
-/* 卡片样式 */
-.certification-card {
+.CV-cer {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-/* 头部样式，包括标题和添加按钮 */
-.certification-header {
+.CV-cer-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-/* 添加按钮样式 */
-.add-button {
-  margin-left: auto;
-}
-
-/* 资格证书列表样式 */
-.certification-list {
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
-
-/* 添加资格证书的输入框和按钮样式 */
-.add-certification {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 输入行样式，包括输入提示和输入框 */
-.input-row {
-  display: flex;
-  align-items: center;
+.CV-cer-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-/* 按钮行样式，包括取消和保存按钮 */
-.button-row {
-  display: flex;
-  justify-content: flex-end;
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
 }
+
 </style>

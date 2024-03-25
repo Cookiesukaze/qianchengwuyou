@@ -34,12 +34,6 @@
                            @update:endTime="handleEndTimeUpdate"></EndTimeSelector>
         <EducationSelector v-model:currentEducation="CVEduEditItem.degree"
                            @update:education="handleEducationUpdate"></EducationSelector>
-<!--        <jobTypeSelector v-model:currentJobType="CVEduEditItem.jobType"-->
-<!--                         @update:jobType="handleJobTypeUpdate"/>-->
-<!--        <searchJobTypeSelector v-model:currentSearchJobType="CVEduEditItem.searchJobType"-->
-<!--                               @update:searchJobType="handleSearchJobTypeUpdate" />-->
-<!--        <CitySelector v-model:city="CVEduEditItem.city" style="margin-left: 1rem"-->
-<!--                      @update:city="handleCityUpdate"/>-->
       </div>
       <div class="CV-edu-op-btn">
         <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick" >保存</a-button>

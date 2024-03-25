@@ -1,0 +1,119 @@
+{
+  "certifications": [
+    {
+      "category": "语言能力",
+      "list": [
+        {
+          "name": "大学英语四级",
+          "abbreviation": "CET-4",
+          "description": "中国大学生英语水平考试四级证书，评估大学生的英语听说读写能力。"
+        },
+        {
+          "name": "大学英语六级",
+          "abbreviation": "CET-6",
+          "description": "中国大学生英语水平考试六级证书，评估大学生的英语听说读写能力。"
+        },
+        {
+          "name": "雅思",
+          "abbreviation": "IELTS",
+          "description": "国际英语语言测试系统，评估使用者的英语听说读写能力。"
+        },
+        {
+          "name": "托福",
+          "abbreviation": "TOEFL",
+          "description": "托福考试，评估非英语母语者的英语能力。"
+        }
+      ]
+    },
+    {
+      "category": "计算机/IT证书",
+      "list": [
+        {
+          "name": "计算机等级考试一级",
+          "abbreviation": "NCRE-1",
+          "description": "国家计算机等级考试一级，评估计算机基础知识和应用能力。"
+        },
+        {
+          "name": "计算机等级考试二级",
+          "abbreviation": "NCRE-2",
+          "description": "国家计算机等级考试二级，评估编程能力等专业技能。"
+        },
+        {
+          "name": "计算机等级考试三级",
+          "abbreviation": "NCRE-3",
+          "description": "国家计算机等级考试三级，评估网络、数据库等高级IT技能。"
+        },
+        {
+          "name": "微软认证专家",
+          "abbreviation": "MCP",
+          "description": "微软认证专家证书，证明持有者在微软技术方面具有专业技能。"
+        }
+      ]
+    },
+    {
+      "category": "驾驶执照",
+      "list": [
+        {
+          "name": "小型汽车驾驶证",
+          "abbreviation": "C1",
+          "description": "允许驾驶小型、微型载客汽车等非营运性质的机动车。"
+        },
+        {
+          "name": "大型客车驾驶证",
+          "abbreviation": "A1",
+          "description": "允许驾驶大型载客汽车。"
+        },
+        {
+          "name": "货车驾驶证",
+          "abbreviation": "B2",
+          "description": "允许驾驶中型以上货车。"
+        }
+      ]
+    },
+    {
+      "category": "专业技能资格",
+      "list": [
+        {
+          "name": "注册会计师",
+          "abbreviation": "CPA",
+          "description": "注册会计师资格证书，证明持有者具有专业会计和财务管理能力。"
+        },
+        {
+          "name": "执业药师资格证",
+          "abbreviation": "Licensed Pharmacist",
+          "description": "执业药师资格证书，证明持有者具有专业的药品知识和管理能力。"
+        },
+        {
+          "name": "一级建造师",
+          "abbreviation": "First-Class Constructor",
+          "description": "一级建造师资格证书，证明持有者在建筑工程领域的高级管理与实务能力。"
+        },
+        {
+          "name": "心理咨询师",
+          "abbreviation": "Certified Psychological Counselor",
+          "description": "心理咨询师资格证书，评估心理咨询的专业知识和实际操作能力。"
+        }
+      ]
+    },
+    {
+      "category": "职业资格",
+      "list": [
+        {
+          "name": "人力资源管理师",
+          "abbreviation": "HR Manager",
+          "description": "人力资源管理师资格证书，证明持有者具备人力资源管理的专业知识与技能。"
+        },
+        {
+          "name": "公共营养师",
+          "abbreviation": "Public Nutritionist",
+          "description": "公共营养师资格证书，证明持有者具有专业的营养与健康管理能力。"
+        },
+        {
+          "name": "导游证",
+          "abbreviation": "Tour Guide License",
+          "description": "导游员资格证书，证明持有者具有专业导游能力和服务技能。"
+        }
+      ]
+    }
+  ]
+}

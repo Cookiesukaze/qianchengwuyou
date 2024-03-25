@@ -20,6 +20,7 @@
           <CVException />
 <!--          教育经历-->
           <CVEducation />
+<!--          资格证书-->
           <CVCertification />
           <CVExperience />
           <CVProject />

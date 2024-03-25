@@ -31,6 +31,13 @@
 <!--          附加信息-->
           <CVAdditional id="CVAdditional"/>
         </div>
+        <div class="cv-right">
+          <!--          右上：简历列表-->
+          <CVList :modelValue="currentSelectedCV" @update:selectedCV="handleSelectedCVUpdate"/>
+          <!--          右下：简历目录-->
+          <CVCatalogue class="cv-catalogue-sticky"
+                       :modelValue="currentSelectedCata" @update:selectedCata="handleSelectedCataUpdate"/>
+        </div>
       </div>
     </div>
   </div>
@@ -79,7 +86,12 @@ const handleSelectedCataUpdate = (value) => {
   margin-left:7rem;
   padding: 1rem;
 }
-
+.cv-right {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
 .cv-catalogue-sticky {
   position: sticky !important;
   top: 3.5rem;
@@ -87,21 +99,19 @@ const handleSelectedCataUpdate = (value) => {
 }
 
 .cv-center {
-  width: 60%;
+  width: 50%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-/* 设置左侧组件之间的垂直间距 */
 .cv-left > * {
-  margin-bottom: 0.5rem; /* 左侧组件之间的垂直间距 */
+  margin-bottom: 0.5rem;
 }
-
-/* 设置中间组件之间的垂直间距 */
 .cv-center > *{
-  margin-bottom: 0.5rem; /* 中间组件之间的垂直间距 */
-  width: 90%;
+  margin-bottom: 0.5rem;
 }
-
+.cv-right > * {
+  margin-bottom: 0.5rem;
+}
 </style>

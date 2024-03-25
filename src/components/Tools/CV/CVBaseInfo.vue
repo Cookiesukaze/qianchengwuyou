@@ -1,55 +1,65 @@
 <template>
   <div class="basic-info">
-    <div class="title">
-      <span>基本信息</span>
-      <a-button class="edit-btn" @click="isEditing = true">
-        编辑
+    <div class="basic-info-header">
+      <div class="basic-info-header-text">基本信息</div>
+      <a-button type="text" class="basic-info-header-edit-btn" @click="handleEditClick">
+        <EditOutlined />
       </a-button>
     </div>
-    <div class="content" v-if="userInfo">
-      <span>姓名：{{ userInfo.name }}</span>
-      <span>届数：{{ userInfo.session }}</span>
-      <span>学历：{{ userInfo.education }}</span>
-      <span>在读状态：{{ userInfo.status }}</span>
-      <span>电话：{{ userInfo.phone }}</span>
-      <span>邮箱：{{ userInfo.email }}</span>
+    <!-- 基本信息内容 -->
+    <div class="basic-info-content" v-if="!basicInfoIsEdit">
+      <div class="basic-info-content-item" @click="handleEditClick">
+        <div style="display: flex; flex-direction: column; width: 100%">
+          <div style="display: flex; flex-direction: row;">
+            <!-- 姓名 -->
+            <div class="basic-info-content-item-piece">
+              <UserOutlined class="basic-info-icon-style"/>
+              <div class="basic-info-desc-content">{{ basicInfoItem.name }}</div>
+            </div>
+            <!-- 学历 -->
+            <div class="basic-info-content-item-piece" style="margin-left: 3rem">
+              <ScheduleOutlined class="basic-info-icon-style"/>
+              <div class="basic-info-desc-content">{{ basicInfoItem.education }}</div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: row;margin-top:0.2rem">
+            <!-- 电话 -->
+            <div class="basic-info-content-item-piece">
+              <PhoneOutlined class="basic-info-icon-style"/>
+              <div class="basic-info-desc-content">{{ basicInfoItem.phone }}</div>
+            </div>
+            <!-- 邮箱 -->
+            <div class="basic-info-content-item-piece" style="margin-left: 1rem">
+              <MailOutlined class="basic-info-icon-style"/>
+              <div class="basic-info-desc-content">{{ basicInfoItem.email }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div v-else>加载中...</div>
-
-    <!-- 编辑信息的悬浮框 -->
-    <div v-if="isEditing" class="edit-popup">
-      <div class="edit-title">编辑个人信息</div>
-      <div class="edit-field">
-        <span>姓名：</span>
-        <input type="text" v-model="editInfo.name">
-      </div>
-      <div class="edit-field">
-        <span>当前求职状态：</span>
-        <select v-model="editInfo.status">
-          <option>离校-随时到岗</option>
-          <option>在校-暂不考虑</option>
-          <option>在校-考虑机会</option>
-          <option>在校-月内到岗</option>
-        </select>
-      </div>
-      <div class="edit-field">
-        <span>性别：</span>
-        <select v-model="editInfo.gender">
-          <option>男</option>
-          <option>女</option>
-        </select>
-      </div>
-      <div class="edit-field">
-        <span>签友身份：</span>
-        <select v-model="editInfo.identity">
-          <option>学生</option>
-          <option>社会求职者</option>
-        </select>
-      </div>
-      <!-- ... 其他编辑字段 ... -->
-      <div class="button-row">
-        <a-button @click="cancelEdit">取消</a-button>
-        <a-button type="primary" @click="saveEdit">保存</a-button>
+    <!-- 基本信息编辑区域 -->
+    <div v-if="basicInfoIsEdit" class="basic-info-edit">
+      <a-form layout="vertical">
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="姓名" style="width: 15rem">
+            <a-input v-model:value="basicInfoItem.name" />
+          </a-form-item>
+          <a-form-item label="学历" style="width: 15rem;margin-left: 2rem">
+            <a-input v-model:value="basicInfoItem.education" />
+          </a-form-item>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="电话" style="width: 15rem">
+            <a-input v-model:value="basicInfoItem.phone" />
+          </a-form-item>
+          <a-form-item label="邮箱" style="width: 15rem;margin-left: 2rem">
+            <a-input v-model:value="basicInfoItem.email" />
+          </a-form-item>
+        </div>
+      </a-form>
+      <div class="basic-info-op-btn">
+        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick">保存</a-button>
+        <a-button class="basic-info-op-btn-item" @click="handleCancelEditClick">取消</a-button>
       </div>
     </div>
   </div>
@@ -57,93 +67,118 @@
 
 <script setup>
 import { ref } from 'vue'
+import { EditOutlined, UserOutlined, PhoneOutlined, ScheduleOutlined, MailOutlined } from '@ant-design/icons-vue'
 
-const userInfo = ref({
+// 基本信息对象
+const basicInfoItem = ref({
   name: '小明',
-  session: '25届应届',
   education: '本科',
-  status: '在读',
-  phone: '177******79',
-  email: '11111111@126.com'
-  // 其他信息...
+  phone: '123-4567-8901',
+  email: 'xiaoming@example.com'
 })
 
-const isEditing = ref(false)
+// 编辑状态
+const basicInfoIsEdit = ref(false)
 
-function cancelEdit () {
-  isEditing.value = false
+// 编辑逻辑
+function handleEditClick () {
+  basicInfoIsEdit.value = true
 }
 
-function saveEdit () {
-  // 这里可以添加保存到后端的逻辑
-  isEditing.value = false
+// 保存逻辑
+function handleSaveEditClick () {
+  basicInfoIsEdit.value = false
+}
+
+// 取消逻辑
+function handleCancelEditClick () {
+  basicInfoIsEdit.value = false
 }
 </script>
 
 <style scoped>
-/* 卡片样式 */
 .basic-info {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-/* 头部样式，包括标题和编辑按钮 */
-.title {
+.basic-info-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+  justify-content: space-between;
+}
+.basic-info-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-.content {
-  display: flex;
-  flex-wrap: wrap; /* 允许换行 */
-  gap: 1rem; /* 添加间隔 */
+.basic-info-header-edit-btn {
+  margin-left: auto;
+  margin-top: -0.7rem;
+  color: var(--themeColor);
 }
-
-.edit-btn {
-  cursor: pointer;
-  /* 其他按钮样式 */
-}
-
-/* 编辑框样式 */
-.edit-popup {
-   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  /* 移除绝对定位，改为相对定位，以便于悬浮在基本信息内容上方 */
-  position: relative;
-  /* 添加与卡片内容相同的flex布局和垂直间距 */
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background: white;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
-}
-
-.edit-title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.edit-field {
-  margin-bottom: 1rem;
-}
-
-.button-row {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.button-row button {
+.basic-info-icon-style{
+  color: var(--greyFontColor075);
+  font-size: 1rem;
+  margin-right: 1rem;
   margin-left: 1rem;
-  cursor: pointer;
+}
+:deep(.ant-btn-text:not(:disabled):hover) {
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
+}
+.basic-info-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+.basic-info-content-item {
+  align-items: center;
+  width: 95%;
+  height: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+.basic-info-content-item:hover {
+  background: var(--themeColor01);
+}
+.basic-info-content-item:hover .basic-info-desc-content,
+.basic-info-content-item:hover .basic-info-icon-style{
+  color: var(--themeColor);
+}
+.basic-info-content-item-piece {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.basic-info-desc-title {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.basic-info-desc-content {
+  line-height: 1.3rem;
+}
+.basic-info-op-btn {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.basic-info-op-btn-item {
+  margin-left: 0.5rem;
+}
+.basic-info-edit {
+  margin-left: 1.5rem;
+  margin-top: 1rem;
 }
 </style>

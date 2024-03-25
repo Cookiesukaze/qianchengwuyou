@@ -91,7 +91,7 @@ const CVExpList = ref([
     role: '后端开发',
     startTime: '2023-02',
     endTime: '2023-04',
-    description: '1. 游客声称自己已经迷路\n2. 游客的距离感或时间感存在极大误差\n3. 游客坚称自己被人跟踪（请确定是否真的存在跟踪）\n',
+    description: '1. 游客声称自己已经迷路\n2. 游客的距离感或时间感存在极大误差\n3. 游客坚称自己被人跟踪\n',
     achievement: '您已经运动 4800步'
   }
 ])

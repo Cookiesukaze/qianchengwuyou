@@ -28,6 +28,7 @@
           <CVProject />
 <!--          专业技能-->
           <CVSkill />
+<!--          附加信息-->
           <CVAdditional />
         </div>
       </div>

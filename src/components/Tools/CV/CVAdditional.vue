@@ -1,26 +1,32 @@
 <template>
-  <div class="additional-info-card">
-    <div class="additional-info-header">
-      <span>附加信息</span>
-      <div class="edit-delete-buttons">
-        <a-button @click="editInfo" v-show="!isEditing">编辑</a-button>
-        <a-button @click="deleteInfo">删除</a-button>
+  <div class="CV-add">
+    <div class="CV-add-header">
+      <div class="CV-add-header-text">附加信息</div>
+      <a-button type="text" class="CV-add-header-edit-btn" @click="handleEditClick">
+        <EditOutlined />
+      </a-button>
+    </div>
+    <!-- 附加信息内容 -->
+    <div class="CV-add-content" v-if="!CVAddIsEdit">
+      <div class="CV-add-content-item" @click="handleEditClick">
+        <div style="display: flex; flex-direction: column; width: 100%">
+          <!-- 附加信息 -->
+          <div class="CV-add-content-item-piece">
+            <div class="CV-add-desc-content">{{ CVAddItem.description }}</div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="additional-info-content" v-if="!isEditing">
-      {{ additionalInfoContent }}
-    </div>
-
-    <div class="edit-additional-info" v-if="isEditing">
-      <a-textarea
-        v-model="editContent"
-        placeholder="请输入附加信息"
-        :auto-size="{ minRows: 2, maxRows: 5 }"
-      />
-      <div class="button-row">
-        <a-button @click="cancelEdit">取消</a-button>
-        <a-button type="primary" @click="saveEdit">完成</a-button>
+    <!-- 附加信息编辑区域 -->
+    <div v-if="CVAddIsEdit" class="CV-add-edit">
+      <a-form layout="vertical">
+        <a-form-item style="width: 40rem">
+          <a-textarea v-model:value="CVAddItem.description" :rows="3" />
+        </a-form-item>
+      </a-form>
+      <div class="CV-add-op-btn">
+        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick">保存</a-button>
+        <a-button class="CV-add-op-btn-item" @click="handleCancelEditClick">取消</a-button>
       </div>
     </div>
   </div>
@@ -28,74 +34,111 @@
 
 <script setup>
 import { ref } from 'vue'
+import { EditOutlined } from '@ant-design/icons-vue'
 
-const additionalInfoContent = ref('哈哈哈') // 初始附加信息内容
-const editContent = ref('') // 编辑时的附加信息内容
-const isEditing = ref(false) // 是否正在编辑
+// 附加信息对象
+const CVAddItem = ref({
+  id: 1,
+  description: '大型无害垃圾务必进行分割处理，为了医院运行稳定，由专门的医生负责\n如果必要的话，请在临时休息室就寝'
+})
 
-const editInfo = () => {
-  editContent.value = additionalInfoContent.value
-  isEditing.value = true
+// 编辑状态
+const CVAddIsEdit = ref(false)
+
+// 编辑逻辑
+function handleEditClick () {
+  CVAddIsEdit.value = true
+  console.log('CV:Additional edit')
 }
 
-const cancelEdit = () => {
-  editContent.value = ''
-  isEditing.value = false
+// 保存逻辑
+function handleSaveEditClick () {
+  CVAddIsEdit.value = false
+  console.log('CV:Additional save')
 }
 
-const saveEdit = () => {
-  additionalInfoContent.value = editContent.value
-  cancelEdit()
-}
-
-const deleteInfo = () => {
-  additionalInfoContent.value = '' // 删除附加信息内容
+// 取消逻辑
+function handleCancelEditClick () {
+  CVAddIsEdit.value = false
+  console.log('CV:Additional cancel')
 }
 </script>
 
 <style scoped>
-/* 卡片样式 */
-.additional-info-card {
+.CV-add {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-/* 头部样式，包括标题和编辑删除按钮 */
-.additional-info-header {
+.CV-add-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+  justify-content: space-between;
+}
+.CV-add-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-/* 编辑删除按钮样式 */
-.edit-delete-buttons {
+.CV-add-header-edit-btn {
   margin-left: auto;
+  margin-top:-0.7rem;
+  color: var(--themeColor);
 }
-
-/* 附加信息内容样式 */
-.additional-info-content {
-  font-size: 0.9rem;
-  color: #666;
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
 }
-
-/* 编辑附加信息的输入框和按钮样式 */
-.edit-additional-info {
+.CV-add-content {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-left: 1rem;
 }
-
-/* 按钮行样式 */
-.button-row {
+.CV-add-content-item {
+  align-items: center;
+  width: 95%;
+  height: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 0.5rem;
+  flex-direction: row;
+}
+.CV-add-content-item:hover {
+  background: var(--themeColor01);
+}
+.CV-add-content-item:hover .CV-add-desc-content{
+  color: var(--themeColor075);
+}
+.CV-add-content-item-piece {
+  display: flex;
+  flex-direction: row;
+  margin-top:0.5rem;
+}
+.CV-add-desc-content{
+  font-size: 0.9rem;
+  color: var(--greyFontColor);
+  white-space: pre-wrap;/*使其换行*/
+  line-height: 1.3rem;
+  margin-top: -0.15rem;
+}
+.CV-add-op-btn{
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.CV-add-op-btn-item{
+  margin-left: 0.5rem;
+}
+.CV-add-edit{
+  margin-left: 1.5rem;
+  margin-top: 1rem;
 }
 </style>

@@ -8,6 +8,7 @@
         :items="cataList"
         :inlineIndent="12"
         @click="handleSelectedCataClick"
+        style="color: var(--greyFontColor)"
       ></a-menu>
     </div>
   </div>
@@ -83,14 +84,15 @@ const handleSelectedCataClick = (item) => {
 .list-items {
   width: 110%;
   overflow: scroll;
-  margin-left: -1rem;
+  margin-left: -0.8rem;
 }
 :deep(.ant-menu-light.ant-menu-root.ant-menu-inline){
   border: none;
 }
 :deep(.ant-menu-item-selected){
   background: white;
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--greyFontColor); /*因为不需要选中才这样设置颜色的*/
+  /*color: var(--themeColor);*/
 }
 :deep(.ant-menu-inline .ant-menu-item){
   height: 2.3rem;

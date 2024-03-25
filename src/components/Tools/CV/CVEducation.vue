@@ -24,7 +24,8 @@
     <div v-if="CVEduIsEdit">
       <!-- 编辑窗口 -->
       <div style="display: flex;flex-direction: row">
-        <SchoolACInput></SchoolACInput>
+        <SchoolACInput v-model:school="CVEduEditItem.school"
+                       @update:school="handleSchoolUpdate"></SchoolACInput>
 <!--        <jobTypeSelector v-model:currentJobType="CVEduEditItem.jobType"-->
 <!--                         @update:jobType="handleJobTypeUpdate"/>-->
 <!--        <searchJobTypeSelector v-model:currentSearchJobType="CVEduEditItem.searchJobType"-->
@@ -68,6 +69,10 @@ const CVEduList = ref([
 // 编辑状态和编辑数据
 const CVEduIsEdit = ref(false)
 const CVEduEditItem = ref({ school: null, major: null, startDate: null, endDate: null, degree: null })
+// 子组件更新项
+const handleSchoolUpdate = (newSchool) => {
+  CVEduEditItem.value.school = newSchool
+}
 // 编辑和新增逻辑
 function handleEditClick (item) {
   if (item) {

@@ -9,14 +9,14 @@
     <!--    项目经历内容列表-->
     <div class="CV-proj-content" v-if="!CVProjIsEdit">
       <div @click="handleEditClick(item)" class="CV-proj-content-item" v-for="item in CVProjList" :key="item" >
-        <div style="display: flex;flex-direction: column;">
+        <div style="display: flex;flex-direction: column;width: 100%">
 <!--          第一栏，项目名和职责-->
           <div class="CV-proj-content-item-piece" style="margin-bottom: 0.7rem">
             <div class="CV-proj-title"> {{ item.title }} </div>
             <div class="split-line"></div>
             <div class="CV-proj-role">{{ item.role }}</div>
             <div class="CV-proj-time-container">
-              <div class="CV-proj-time">{{ item.startTime }}~{{ item.endTime }}</div>
+              <div class="CV-proj-time">{{ item.startTime }}&nbsp;~&nbsp;{{ item.endTime }}</div>
             </div>
           </div>
 <!--          第二栏，项目描述-->
@@ -82,7 +82,7 @@ const CVProjList = ref([
     role: '前端开发工程师',
     startTime: '2023-02',
     endTime: '2023-04',
-    description: '1. 生态公益林区，严格防范火患，请不要携带火种，刀具，危险物品上山。2. 山林危险，请不要随意离开登山健身步道。3. 水深危险，请不要在沿途的溪流或水潭中游玩。',
+    description: '1. 生态公益林区，严格防范火患，请不要携带火种，刀具，危险物品上山。\n2. 山林危险，请不要随意离开登山健身步道。\n3. 水深危险，请不要在沿途的溪流或水潭中游玩。',
     achievement: '上线使用5人次，获得参与奖'
   },
   {
@@ -91,11 +91,7 @@ const CVProjList = ref([
     role: '前端开发工程师',
     startTime: '2023-02',
     endTime: '2023-04',
-    description: '签程无忧是一款基于知识图谱的大学生就业能力评价和职位推荐系统1. 爱护环境，请为山林留下养料。\n' +
-      '\n' +
-      '2. 亲近自然，本处免费开放游泳。\n' +
-      '\n' +
-      '3. 树林中存在通往大洛村的小道，您可以尝试通行，但后果自负。',
+    description: '签程无忧是一款基于知识图谱的大学生就业能力评价和职位推荐系统\n1. 爱护环境，请为山林留下养料。\n2. 亲近自然，本处免费开放游泳。\n3. 树林中存在通往大洛村的小道，您可以尝试通行，但后果自负。',
     achievement: '上线使用5人次，获得参与奖'
   }
 ])
@@ -217,9 +213,12 @@ function handleDeleteEditClick () {
 .CV-proj-time{
   font-size: 0.9rem;
   color: var(--greyFontColor);
+  text-align: right;
 }
 .CV-proj-time-container {
-  margin-left: auto;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 .CV-proj-content-item {
   align-items: center;
@@ -250,7 +249,10 @@ function handleDeleteEditClick () {
 }
 .CV-proj-desc-content{
   font-size: 0.9rem;
-  color: var(--greyFontColor)
+  color: var(--greyFontColor);
+  white-space: pre-wrap;/*使其换行*/
+  line-height: 1.3rem;
+  margin-top: -0.15rem;
 }
 .split-line {
   position: relative;

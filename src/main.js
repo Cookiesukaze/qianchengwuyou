@@ -8,7 +8,6 @@ import '@/assets/font/font.css'
 import axios from 'axios'
 // dayjs
 import dayjs from 'dayjs'
-import { Dayjs } from '@ant-design-vue/use'
 
 // axios：添加响应拦截器
 axios.interceptors.response.use(
@@ -22,4 +21,4 @@ axios.interceptors.response.use(
 
 const app = createApp(App)
 app.config.globalProperties.$axios = axios
-app.use(store).use(router).use(Antd).provide(Dayjs, dayjs).mount('#app')
+app.use(store).use(router).use(Antd).provide(dayjs).mount('#app')

@@ -13,23 +13,23 @@
         </div>
         <div class="cv-center">
 <!--          简历头-->
-          <CVHeader />
+          <CVHeader id="CVHeader"/>
 <!--          简历基本信息-->
-          <CVBaseInfo />
+          <CVBaseInfo id="CVBaseInfo"/>
 <!--          期望岗位-->
-          <CVException />
+          <CVException id="CVException"/>
 <!--          教育经历-->
-          <CVEducation />
+          <CVEducation id="CVEducation"/>
 <!--          资格证书-->
-          <CVCertification />
+          <CVCertification id="CVCertification"/>
 <!--          工作实习经历-->
-          <CVExperience />
+          <CVExperience id="CVExperience"/>
 <!--          项目经历-->
-          <CVProject />
+          <CVProject id="CVProject"/>
 <!--          专业技能-->
-          <CVSkill />
+          <CVSkill id="CVSkill"/>
 <!--          附加信息-->
-          <CVAdditional />
+          <CVAdditional id="CVAdditional"/>
         </div>
       </div>
     </div>

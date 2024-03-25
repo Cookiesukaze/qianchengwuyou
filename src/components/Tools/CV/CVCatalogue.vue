@@ -18,35 +18,35 @@ import { defineEmits, ref } from 'vue'
 
 const cataList = ref([
   {
-    key: '1',
-    label: '个人详细信息',
-    title: '个人详细信息'
+    key: 'CVBaseInfo',
+    label: '基本信息',
+    title: '基本信息'
   }, {
-    key: '2',
+    key: 'CVException',
+    label: '期望岗位',
+    title: '期望岗位'
+  }, {
+    key: 'CVEducation',
     label: '教育经历',
     title: '教育经历'
   }, {
-    key: '3',
+    key: 'CVCertification',
     label: '资格证书',
     title: '资格证书'
   }, {
-    key: '4',
-    label: '求职期望',
-    title: '求职期望'
-  }, {
-    key: '5',
+    key: 'CVExperience',
     label: '工作/实习经历',
     title: '工作/实习经历'
   }, {
-    key: '6',
+    key: 'CVProject',
     label: '项目经历',
     title: '项目经历'
   }, {
-    key: '7',
+    key: 'CVSkill',
     label: '技能标签',
     title: '技能标签'
   }, {
-    key: '8',
+    key: 'CVAdditional',
     label: '附加信息',
     title: '附加信息'
   }
@@ -54,8 +54,14 @@ const cataList = ref([
 const emit = defineEmits(['update:selectedCata'])
 const handleSelectedCataClick = (item) => {
   emit('update:selectedCata', item.key)
+  // 跳转
+  const yOffset = -100
+  const section = document.getElementById(item.key)
+  if (section) {
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
 }
-
 </script>
 
 <style scoped>

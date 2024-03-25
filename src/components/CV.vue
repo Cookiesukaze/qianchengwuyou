@@ -32,11 +32,10 @@
           <CVAdditional id="CVAdditional"/>
         </div>
         <div class="cv-right">
-          <!--          右上：简历列表-->
-          <CVList :modelValue="currentSelectedCV" @update:selectedCV="handleSelectedCVUpdate"/>
-          <!--          右下：简历目录-->
-          <CVCatalogue class="cv-catalogue-sticky"
-                       :modelValue="currentSelectedCata" @update:selectedCata="handleSelectedCataUpdate"/>
+          <!--          右上：聊天-->
+          <CVChat />
+          <!--          右下：设置-->
+          <CVSetting class="cv-catalogue-sticky" />
         </div>
       </div>
     </div>
@@ -57,6 +56,8 @@ import CVException from '@/components/Tools/CV/CVExpection.vue'
 import CVCatalogue from '@/components/Tools/CV/CVCatalogue.vue'
 import CVAdditional from '@/components/Tools/CV/CVAdditional.vue'
 import { ref } from 'vue'
+import CVSetting from '@/components/Tools/CV/CVSetting.vue'
+import CVChat from '@/components/Tools/CV/CVChat.vue'
 
 // 左上：简历列表
 const currentSelectedCV = ref([1])
@@ -87,7 +88,7 @@ const handleSelectedCataUpdate = (value) => {
   padding: 1rem;
 }
 .cv-right {
-  width: 20%;
+  width: 18%;
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -99,7 +100,7 @@ const handleSelectedCataUpdate = (value) => {
 }
 
 .cv-center {
-  width: 50%;
+  width: 53%;
   padding: 1rem;
   display: flex;
   flex-direction: column;

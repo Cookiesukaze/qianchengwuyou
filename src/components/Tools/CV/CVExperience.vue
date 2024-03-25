@@ -1,46 +1,68 @@
-复制
 <template>
-  <div class="experience-card">
-    <div class="experience-header">
-      <span>工作/实习经历</span>
-      <a-button class="add-button" @click="showAdd">
-        添加
+  <div class="CV-exp">
+    <div class="CV-exp-header">
+      <div class="CV-exp-header-text">实习/工作经历</div>
+      <a-button type="text" class="CV-exp-header-edit-btn"
+                @click="handleEditClick(null)"><EditOutlined />
       </a-button>
     </div>
-
-    <div class="experience-info" v-for="experience in experiences" :key="experience.id">
-      <div class="experience-title-wrapper">
-        <span class="experience-title">{{ experience.company }}</span>
-        <div class="edit-delete-buttons">
-          <a-button @click="editExperience(experience.id)" v-show="!isEditing"
-            >编辑</a-button
-          >
-          <a-button @click="deleteExperience(experience.id)">删除</a-button>
+    <!--    实习工作经历内容列表-->
+    <div class="CV-exp-content" v-if="!CVExpIsEdit">
+      <div @click="handleEditClick(item)" class="CV-exp-content-item" v-for="item in CVExpList" :key="item" >
+        <div style="display: flex;flex-direction: column;width: 100%">
+          <!--          第一栏，公司名和职业名-->
+          <div class="CV-exp-content-item-piece" style="margin-bottom: 0.7rem">
+            <div class="CV-exp-companyName"> {{ item.companyName }} </div>
+            <div class="split-line"></div>
+            <div class="CV-exp-role">{{ item.role }}</div>
+            <div class="CV-exp-time-container">
+              <div class="CV-exp-time">{{ item.startTime }}&nbsp;~&nbsp;{{ item.endTime }}</div>
+            </div>
+          </div>
+          <!--          第二栏，工作描述-->
+          <div class="CV-exp-content-item-piece">
+            <div class="CV-exp-desc-title">内容：</div>
+            <div class="CV-exp-desc-content">{{item.description}}</div>
+          </div>
+          <!--          第三栏，业绩-->
+          <div class="CV-exp-content-item-piece">
+            <div class="CV-exp-desc-title">业绩：</div>
+            <div class="CV-exp-desc-content">{{item.achievement}}</div>
+          </div>
+          <div style="height: 0.5rem"></div>
         </div>
       </div>
-      <div class="experience-role-duration">
-        <span>{{ experience.position }}</span>
-        <span class="experience-duration">{{ experience.duration }}</span>
-      </div>
-      <div class="experience-description">{{ experience.content }}</div>
     </div>
-
-    <div class="add-edit-experience" v-show="isAdding || isEditing">
-      <div class="input-row">
-        <a-input v-model="newExperience.company" placeholder="输入公司名称" />
-      </div>
-      <div class="input-row">
-        <a-input v-model="newExperience.position" placeholder="输入职位名称" />
-      </div>
-      <div class="input-row">
-        <a-input v-model="newExperience.duration" placeholder="输入在职时间" />
-      </div>
-      <div class="input-row">
-        <a-textarea v-model="newExperience.content" placeholder="输入工作内容" />
-      </div>
-      <div class="button-row">
-        <a-button @click="cancelAddEdit">取消</a-button>
-        <a-button type="primary" @click="saveExperience">保存</a-button>
+    <!--    实习工作经历编辑区域-->
+    <div v-if="CVExpIsEdit" class="CV-exp-edit">
+      <a-form model="CVExpEditItem" layout="vertical" >
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="公司名称" style="width: 15rem">
+            <a-input v-model:value="CVExpEditItem.companyName" />
+          </a-form-item>
+          <a-form-item label="职位名称" style="width: 15rem;margin-left: 2rem">
+            <a-input v-model:value="CVExpEditItem.role" />
+          </a-form-item>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <a-form-item label="开始时间" style="width: 9rem">
+            <a-date-picker v-model:value="CVExpEditItem.startTime" picker="month"  placeholder="开始时间" />
+          </a-form-item>
+          <a-form-item label="结束时间" style="width: 9rem;margin-left: 2rem">
+            <a-date-picker v-model:value="CVExpEditItem.endTime" picker="month"  placeholder="结束时间"/>
+          </a-form-item>
+        </div>
+        <a-form-item label="工作描述" style="width: 40rem">
+          <a-textarea v-model:value="CVExpEditItem.description" :rows=3 />
+        </a-form-item>
+        <a-form-item label="工作业绩" style="width: 40rem">
+          <a-textarea v-model:value="CVExpEditItem.achievement" :rows=3 />
+        </a-form-item>
+      </a-form>
+      <div class="CV-exp-op-btn">
+        <a-button style="margin-left: auto" type="primary" @click="handleSaveEditClick">保存</a-button>
+        <a-button class="CV-exp-op-btn-item" danger v-if="CVExpEditItem.id" @click="handleDeleteEditClick">删除</a-button>
+        <a-button class="CV-exp-op-btn-item" @click="handleCancelEditClick">取消</a-button>
       </div>
     </div>
   </div>
@@ -48,173 +70,210 @@
 
 <script setup>
 import { ref } from 'vue'
+import { EditOutlined } from '@ant-design/icons-vue'
+// 时间选择器用
+import dayjs from 'dayjs'
 
-const experiences = ref([
+// 工作经历列表
+const CVExpList = ref([
   {
     id: 1,
-    company: '签程无忧科技有限公司',
-    position: '前端开发工程师',
-    duration: '2023.11-2024.03',
-    content: '哈哈哈哈哈'
+    companyName: '签程无忧部落',
+    role: '前端开发',
+    startTime: '2023-02',
+    endTime: '2023-04',
+    description: '如果您出现头晕眼花，意识不清醒，或对灯光感到不适\n请配合医院工作人员的一切行为，相信我们\n严格保证所有文字文件都是使用打印，不允许出现任何手写的情况',
+    achievement: '遇到任何问题可以联系执勤人员寻求帮助'
+  },
+  {
+    id: 2,
+    companyName: '签程无忧联盟',
+    role: '后端开发',
+    startTime: '2023-02',
+    endTime: '2023-04',
+    description: '1. 游客声称自己已经迷路\n2. 游客的距离感或时间感存在极大误差\n3. 游客坚称自己被人跟踪（请确定是否真的存在跟踪）\n',
+    achievement: '您已经运动 4800步'
   }
-  // ... 其他工作/实习经历
 ])
-
-const newExperience = ref({
-  id: null,
-  company: '',
-  position: '',
-  duration: '',
-  content: ''
+// 编辑区域
+// 编辑状态和编辑数据
+const CVExpIsEdit = ref(false)
+const CVExpEditItem = ref({
+  companyName: null,
+  role: null,
+  startTime: null,
+  endTime: null,
+  description: null,
+  achievement: null
 })
-
-const isAdding = ref(false)
-const isEditing = ref(false)
-
-const showAdd = () => {
-  isAdding.value = true
-  isEditing.value = false
-}
-
-const cancelAddEdit = () => {
-  newExperience.value = {
-    id: null,
-    company: '',
-    position: '',
-    duration: '',
-    content: ''
-  }
-  isAdding.value = false
-  isEditing.value = false
-}
-
-const saveExperience = () => {
-  if (isAdding.value) {
-    experiences.value.push({ ...newExperience.value, id: Date.now() })
-  } else if (isEditing.value) {
-    const index = experiences.value.findIndex((e) => e.id === newExperience.value.id)
-    if (index !== -1) {
-      experiences.value[index] = { ...newExperience.value }
+// 编辑和新增逻辑
+function handleEditClick (item) {
+  if (item) {
+    CVExpEditItem.value = {
+      ...item,
+      startTime: dayjs(item.startTime),
+      endTime: dayjs(item.endTime)
     }
+  } else {
+    CVExpEditItem.value = { id: null, companyName: null, role: null, startTime: null, endTime: null, description: null, achievement: null } // 新增实习工作经历
   }
-  cancelAddEdit()
+  CVExpIsEdit.value = true
+  console.log('CV:Experience edit')
 }
-
-const editExperience = (experienceId) => {
-  const experienceToEdit = experiences.value.find((e) => e.id === experienceId)
-  if (experienceToEdit) {
-    newExperience.value = { ...experienceToEdit }
-    isEditing.value = true
-    isAdding.value = false
+// 保存逻辑
+function handleSaveEditClick () {
+  // 转日期
+  const formattedStartTime = CVExpEditItem.value.startTime ? dayjs(CVExpEditItem.value.startTime).format('YYYY-MM') : ''
+  const formattedEndTime = CVExpEditItem.value.endTime ? dayjs(CVExpEditItem.value.endTime).format('YYYY-MM') : ''
+  if (CVExpEditItem.value.id) { // 保存已存在的工作经历
+    const index = CVExpList.value.findIndex(item => item.id === CVExpEditItem.value.id)
+    if (index !== -1) {
+      CVExpList.value[index] = {
+        ...CVExpEditItem.value,
+        startTime: formattedStartTime,
+        endTime: formattedEndTime
+      }
+    }
+  } else { // 新增工作经历
+    // CVExpEditItem.value.id = Date.now()  用时间戳作为新项的id
+    const maxId = CVExpList.value.reduce((max, item) => item.id > max ? item.id : max, 0) // 顺序id
+    const newItem = {
+      ...CVExpEditItem.value,
+      id: maxId + 1,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime
+    }
+    CVExpList.value.push(newItem)
   }
+  CVExpIsEdit.value = false
+  console.log('CV:Experience save')
 }
-
-const deleteExperience = (experienceId) => {
-  experiences.value = experiences.value.filter((e) => e.id !== experienceId)
+// 取消逻辑
+function handleCancelEditClick () {
+  CVExpIsEdit.value = false
+  console.log('CV:Experience cancel')
+}
+// 删除逻辑
+function handleDeleteEditClick () {
+  CVExpList.value = CVExpList.value.filter(item => item.id !== CVExpEditItem.value.id)
+  CVExpIsEdit.value = false
+  console.log('CV:Experience delete')
 }
 </script>
 
 <style scoped>
-.experience-card {
+.CV-exp {
   position: relative;
-  box-shadow: 0 3rem 3rem rgba(162, 161, 161, 0.2);
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.4);
   display: flex;
   flex-direction: column;
-  width: 26rem; /* 根据需要调整宽度 */
   padding: 1rem;
   border-radius: 0.7rem;
   background: white;
 }
-
-.experience-header {
+.CV-exp-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  font-size: 1.2rem;
+}
+.CV-exp-header-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--greyFontColor125);
+  margin-left: 0.1rem;
   margin-bottom: 0.5rem;
 }
-
-.add-button {
-  margin-left: auto; /* 调整按钮至右侧 */
+.CV-exp-header-edit-btn {
+  margin-left: auto;
+  margin-top:-0.7rem;
+  color: var(--themeColor);
 }
-
-.experience-info {
+:deep(.ant-btn-text:not(:disabled):hover){
+  color: var(--themeColor075);
+  background: rgba(255, 255, 255, 0) !important;
+}
+.CV-exp-content {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
-}
-
-.experience-title-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* 水平布局，标题和按钮分别在左右 */
-  margin-bottom: 0.5rem;
-}
-
-.experience-role-duration {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-.experience-role-duration span {
-  margin-right: 0.5rem; /* 添加到下一个 span 的间距 */
-}
-
-.experience-description {
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
-
-.edit-delete-buttons {
-  display: flex;
+.CV-exp-companyName{
+  font-size: 1rem;
+  margin-right: 0.5rem;
 }
-
-.content span {
-  display: block;
-  margin-bottom: 0.5rem;
+.CV-exp-role{
+  font-size: 1rem;
 }
-
-.edit-popup {
-  position: absolute;
-  background: white;
-  padding: 1rem;
-  border: 1rem solid #ddd;
-  /* 样式调整 */
+.CV-exp-time{
+  font-size: 0.9rem;
+  color: var(--greyFontColor);
+  text-align: right;
 }
-
-.edit-title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.edit-field {
-  margin-bottom: 1rem;
-}
-
-.buttons {
+.CV-exp-time-container {
+  flex-grow: 1;
   display: flex;
   justify-content: flex-end;
 }
-
-.buttons button {
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
-.add-edit-experience {
-  position: relative; /* 设置相对定位以便绝对定位的按钮行 */
-  padding: 1rem;
-  background: white;
-  border: 1px solid #ddd;
+.CV-exp-content-item {
+  align-items: center;
+  width: 95%;
+  height: max-content;
+  padding: 0.5rem;
   border-radius: 0.5rem;
-  margin-top: 1rem; /* 根据需要调整 */
+  display: flex;
+  flex-direction: row;
 }
-
-.button-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem; /* 调整按钮行距离表单顶部的高度 */
-  }
-
-.button-row button {
-  margin-left: 1rem; /* 调整按钮之间的间距 */
+.CV-exp-content-item:hover {
+  background: var(--themeColor01);
+}
+.CV-exp-content-item:hover .CV-exp-companyName,
+.CV-exp-content-item:hover .CV-exp-role,
+.CV-exp-content-item:hover .CV-exp-time{
+  color: var(--themeColor);
+}
+.CV-exp-content-item-piece {
+  display: flex;
+  flex-direction: row;
+  margin-top:0.5rem;
+}
+.CV-exp-desc-title{
+  min-width: 3.3rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.CV-exp-desc-content{
+  font-size: 0.9rem;
+  color: var(--greyFontColor);
+  white-space: pre-wrap;/*使其换行*/
+  line-height: 1.3rem;
+  margin-top: -0.15rem;
+}
+.split-line {
+  position: relative;
+  margin-right: 0.5rem;
+}
+.split-line:after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -6px;
+  width: 1px;
+  height: 12px;
+  background-color: #ccc;
+}
+.CV-exp-op-btn{
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.CV-exp-op-btn-item{
+  margin-left: 0.5rem;
+}
+.CV-exp-edit{
+  margin-left: 1.5rem;
+  margin-top: 1rem;
 }
 </style>

@@ -26,7 +26,7 @@
           <CVExperience />
 <!--          项目经历-->
           <CVProject />
-<!--          技能-->
+<!--          专业技能-->
           <CVSkill />
           <CVAdditional />
         </div>

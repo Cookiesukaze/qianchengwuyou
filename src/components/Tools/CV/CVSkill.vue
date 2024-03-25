@@ -138,6 +138,7 @@ function handleDeleteEditClick () {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  margin-left: 1rem;
   font-size: 0.9rem;
 }
 .CV-ski-content-item {

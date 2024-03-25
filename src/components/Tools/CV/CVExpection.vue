@@ -9,7 +9,7 @@
 <!--    期望岗位内容列表-->
     <div class="CV-exp-content" v-if="!CVExpIsEdit">
       <div @click="handleEditClick(item)" class="CV-exp-content-item" v-for="item in CVExpList" :key="item" >
-        <div style="display: flex;flex-direction: row;margin-left: 1rem">
+        <div style="display: flex;flex-direction: row;margin-left: 1rem;">
           <div style="margin-right: 1rem"> {{ item.jobType ? item.jobType : '行业不限' }} </div>
           <div class="split-line"></div>
           <div style="margin-right: 1rem">{{ item.searchJobType ? item.searchJobType : '求职类型不限' }}</div>
@@ -154,6 +154,7 @@ function handleDeleteEditClick () {
   background: rgba(255, 255, 255, 0) !important;
 }
 .CV-exp-content {
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;

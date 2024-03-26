@@ -29,13 +29,15 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { SendOutlined } from '@ant-design/icons-vue'
+import axios from 'axios'
 
-const getDefaultTime = () => { // 获取页面加载时的时间
+const getDefaultTime = () => {
   return new Date().toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit'
   })
 }
+
 const chatMessages = ref([
   {
     id: 0,
@@ -48,37 +50,71 @@ const chatMessages = ref([
 const newMessage = ref('')
 const messagesContainer = ref(null)
 
-const sendNewMessage = () => {
+const sendNewMessage = async () => {
   if (newMessage.value.trim() !== '') {
-    const currentTime = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-    const message = {
+    const currentTime = getDefaultTime()
+    const userMessageContent = newMessage.value
+    // 构造用户消息对象
+    const userMessage = {
       id: chatMessages.value.length,
-      content: newMessage.value,
+      content: userMessageContent,
       time: currentTime,
       isOwn: true
     }
-    chatMessages.value.push(message)
+    // 将用户消息添加到聊天数组
+    chatMessages.value.push(userMessage)
+    // 清空输入框
     newMessage.value = ''
-    // 滚动到最新消息
-    nextTick(() => {
-      const container = messagesContainer.value
+
+    // 立即滚动到最新的消息
+    await nextTick()
+    const container = messagesContainer.value
+    if (container) {
       container.scrollTop = container.scrollHeight
-    })
+    }
+
+    // 准备发送到后端的数据
+    const payload = { message: userMessageContent }
+    try {
+      // 发送消息到 Flask 服务
+      const response = await axios.post('http://127.0.0.1:5000/cvchat', payload)
+      // 构造机器人回复消息对象
+      const botMessage = {
+        id: chatMessages.value.length,
+        content: response.data.content,
+        time: currentTime,
+        isOwn: false
+      }
+      // 将机器人消息添加到聊天数组
+      chatMessages.value.push(botMessage)
+    } catch (error) {
+      // 错误处理
+      console.error('Error sending message:', error)
+      // 可选：将错误消息添加到聊天中
+      chatMessages.value.push({
+        id: chatMessages.value.length,
+        content: '无法连接到服务器，请稍后再试。',
+        time: currentTime,
+        isOwn: false
+      })
+    }
+
+    // 再次滚动到最新的消息，确保机器人回复也可见
+    await nextTick()
+    if (container) {
+      container.scrollTop = container.scrollHeight
+    }
   }
 }
 
 onMounted(() => {
-  // 初始加载时滚动到最底部
   nextTick(() => {
     const container = messagesContainer.value
-    container.scrollTop = container.scrollHeight
+    if (container) {
+      container.scrollTop = container.scrollHeight
+    }
   })
 })
-
-// 对接
 </script>
 
 <style scoped>

@@ -41,7 +41,7 @@ const getDefaultTime = () => {
 const chatMessages = ref([
   {
     id: 0,
-    content: '有什么可以帮助你的吗？\n请点击“生成详细报告”获取更加详细全面的简历修改建议。',
+    content: '有什么可以帮助你的吗？\n请点击“生成详细报告”获取全面的简历修改建议。',
     time: getDefaultTime(),
     isOwn: false
   }
@@ -139,7 +139,8 @@ onMounted(() => {
 }
 
 .chat-message-robot {
-  font-size: 0.9rem;
+  font-size: 0.87rem;
+  line-height: 130%;
   background-color: #f3f3f3;
   align-self: flex-start;
   color: var(--blackFontColor);
@@ -147,7 +148,8 @@ onMounted(() => {
 }
 
 .chat-message-own {
-  font-size: 0.9rem;
+  font-size: 0.87rem;
+  line-height: 130%;
   color: var(--blackFontColor);
   background-color: var(--themeLightBlue);
   align-self: flex-end;
@@ -159,7 +161,7 @@ onMounted(() => {
 }
 
 .chat-message-time {
-  font-size: 0.8rem;
+  font-size: 0.77rem;
   color: var(--greyFontColor);
   text-align: right;
 }
@@ -171,7 +173,7 @@ onMounted(() => {
 
 :deep(.ant-input){
   width: 80% !important;
-  border-radius: 0.8rem;
+  border-radius: 0.75rem;
   border-color: white !important;
   box-shadow: 0 5px 5px 0 rgba(176,191,231,.25);
   background: rgba(255, 255, 255);

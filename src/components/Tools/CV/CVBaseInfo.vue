@@ -40,6 +40,7 @@
     <!-- 基本信息编辑区域 -->
     <div v-if="basicInfoIsEdit" class="basic-info-edit">
       <a-form layout="vertical">
+<!--        TODO:隐藏姓名和电话和邮箱-->
         <div style="display: flex;flex-direction: row">
           <a-form-item label="姓名" style="width: 15rem">
             <a-input v-model:value="basicInfoItem.name" />

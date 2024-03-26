@@ -1,5 +1,6 @@
 <template>
   <div class="CV-list">
+<!--    TODO：传值：简历和简历内容-->
     <div class="list-header">简历列表</div>
     <div class="list-items">
       <a-menu

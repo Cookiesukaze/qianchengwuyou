@@ -18,6 +18,11 @@
           <a-switch class="CV-setting-item-piece-op" size="small"
                     v-model:checked="CVSettingItem.emailIsVisible" />
         </a-form-item>
+        <a-form-item class="CV-setting-item-piece">
+          <div class="CV-setting-item-piece-label">隐藏学历</div>
+          <a-switch class="CV-setting-item-piece-op" size="small"
+                    v-model:checked="CVSettingItem.eduIsVisible" />
+        </a-form-item>
       </a-form>
     </div>
   </div>
@@ -27,9 +32,10 @@
 import { ref } from 'vue'
 // 设置们
 const CVSettingItem = ref({
-  CVIsVisible: true,
+  CVIsVisible: false,
   nameIsVisible: true,
-  emailIsVisible: true
+  emailIsVisible: true,
+  eduIsVisible: true
 })
 </script>
 

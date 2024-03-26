@@ -40,6 +40,7 @@ export default defineComponent({
   --themeColor075: rgba(72, 82, 230, 0.75);
   --themeColor02: rgba(72, 82, 230, 0.2);
   --themeColor01: rgba(72, 82, 230, 0.1);
+  --themeLightBlue:#f1f5ff;
   --subThemeColor: rgba(206, 94, 207, 1);
   --sararyColor125: #e3424a;
   --sararyColor: #ff636c;

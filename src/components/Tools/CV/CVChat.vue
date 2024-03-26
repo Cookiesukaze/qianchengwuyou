@@ -13,26 +13,34 @@
       </div>
     </div>
     <div class="chat-input">
-      <input
-        style="height: 2rem;width: 80%"
-        type="text"
-        v-model="newMessage"
+      <a-input
+        style="margin-right: 5%"
+        v-model:value="newMessage"
         placeholder="请输入"
         @keyup.enter="sendNewMessage"
       />
-      <button @click="sendNewMessage">发送</button>
+      <a-button type="primary" shape="circle" @click="sendNewMessage">
+        <SendOutlined />
+      </a-button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
+import { SendOutlined } from '@ant-design/icons-vue'
 
+const getDefaultTime = () => { // 获取页面加载时的时间
+  return new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
 const chatMessages = ref([
   {
     id: 0,
-    content: '你好！我是你的简历修改，有什么可以帮助你的吗？',
-    time: '08:00',
+    content: '有什么可以帮助你的吗？\n请点击“生成详细报告”获取更加详细全面的简历修改建议。',
+    time: getDefaultTime(),
     isOwn: false
   }
 ])
@@ -69,6 +77,8 @@ onMounted(() => {
     container.scrollTop = container.scrollHeight
   })
 })
+
+// 对接
 </script>
 
 <style scoped>
@@ -101,18 +111,24 @@ onMounted(() => {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 15px;
-  max-width: 80%;
+  max-width: 90%;
   word-wrap: break-word;
 }
 
 .chat-message-robot {
+  font-size: 0.9rem;
   background-color: #f3f3f3;
   align-self: flex-start;
+  color: var(--blackFontColor);
+  white-space: pre-wrap;/*使其换行*/
 }
 
 .chat-message-own {
-  background-color: #b2dffb;
+  font-size: 0.9rem;
+  color: var(--blackFontColor);
+  background-color: var(--themeLightBlue);
   align-self: flex-end;
+  white-space: pre-wrap;/*使其换行*/
 }
 
 .chat-message-content {
@@ -121,28 +137,24 @@ onMounted(() => {
 
 .chat-message-time {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--greyFontColor);
   text-align: right;
 }
 
-.chat-input {
+.chat-input{
   display: flex;
+  flex-direction: row;
 }
 
-.chat-input input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  margin-right: 1rem;
+:deep(.ant-input){
+  width: 80% !important;
+  border-radius: 0.8rem;
+  border-color: white !important;
+  box-shadow: 0 5px 5px 0 rgba(176,191,231,.25);
+  background: rgba(255, 255, 255);
+  border-width: 0.08rem;
 }
-
-.chat-input button {
-  padding: 0.5rem 1rem;
-  background: var(--themeColor);
-  color: white;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
+:deep(.ant-input:hover){
+  box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
 }
 </style>

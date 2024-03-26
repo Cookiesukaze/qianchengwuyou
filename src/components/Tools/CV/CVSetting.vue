@@ -1,72 +1,40 @@
 <template>
-  <div class="CV-cata">
-    <div class="cata-header">设置</div>
+  <div class="CV-setting">
+    <div class="CV-setting-header">简历设置</div>
     <div class="list-items">
-      <!--      不绑定v-model因为不需要选中-->
-      <a-menu
-        mode="inline"
-        :items="cataList"
-        :inlineIndent="12"
-        @click="handleSelectedCataClick"
-        style="color: var(--greyFontColor)"
-      ></a-menu>
+      <a-form model="CVSettingItem"  class="CV-setting-item">
+          <a-form-item class="CV-setting-item-piece">
+            <div class="CV-setting-item-piece-label">隐藏此简历</div>
+            <a-switch class="CV-setting-item-piece-op" size="small"
+                      v-model:checked="CVSettingItem.CVIsVisible" />
+          </a-form-item>
+        <a-form-item class="CV-setting-item-piece">
+          <div class="CV-setting-item-piece-label">隐藏姓名</div>
+          <a-switch class="CV-setting-item-piece-op" size="small"
+                    v-model:checked="CVSettingItem.nameIsVisible" />
+        </a-form-item>
+        <a-form-item class="CV-setting-item-piece">
+          <div class="CV-setting-item-piece-label">隐藏邮箱</div>
+          <a-switch class="CV-setting-item-piece-op" size="small"
+                    v-model:checked="CVSettingItem.emailIsVisible" />
+        </a-form-item>
+      </a-form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineEmits, ref } from 'vue'
-
-const cataList = ref([
-  {
-    key: 'CVBaseInfo',
-    label: '基本信息',
-    title: '基本信息'
-  }, {
-    key: 'CVException',
-    label: '期望岗位',
-    title: '期望岗位'
-  }, {
-    key: 'CVEducation',
-    label: '教育经历',
-    title: '教育经历'
-  }, {
-    key: 'CVCertification',
-    label: '资格证书',
-    title: '资格证书'
-  }, {
-    key: 'CVExperience',
-    label: '工作/实习经历',
-    title: '工作/实习经历'
-  }, {
-    key: 'CVProject',
-    label: '项目经历',
-    title: '项目经历'
-  }, {
-    key: 'CVSkill',
-    label: '技能标签',
-    title: '技能标签'
-  }, {
-    key: 'CVAdditional',
-    label: '附加信息',
-    title: '附加信息'
-  }
-])
-const emit = defineEmits(['update:selectedCata'])
-const handleSelectedCataClick = (item) => {
-  emit('update:selectedCata', item.key)
-  // 跳转
-  const yOffset = -100
-  const section = document.getElementById(item.key)
-  if (section) {
-    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset
-    window.scrollTo({ top: y, behavior: 'smooth' })
-  }
-}
+import { ref } from 'vue'
+// 设置们
+const CVSettingItem = ref({
+  CVIsVisible: true,
+  nameIsVisible: true,
+  emailIsVisible: true
+})
 </script>
 
 <style scoped>
-.CV-cata {
+.CV-setting {
   display: flex;
   flex-direction: column;
   background: white;
@@ -74,7 +42,7 @@ const handleSelectedCataClick = (item) => {
   border-radius: 0.7rem;
   box-shadow: 0 5px 15px 0 rgba(176,191,231,.4);
 }
-.cata-header {
+.CV-setting-header {
   font-size: 0.95rem;
   font-weight: bold;
   color: var(--blackFontColor);
@@ -96,5 +64,27 @@ const handleSelectedCataClick = (item) => {
 }
 :deep(.ant-menu-inline .ant-menu-item){
   height: 2.3rem;
+}
+.CV-setting-item{
+  margin-top: 0.5rem;
+}
+.CV-setting-item-piece{
+  margin-left: 1rem;
+  width: 90%;
+  display: flex !important;
+  flex-direction: row !important;
+}
+.CV-setting-item-piece-label{
+  color: var(--greyFontColor);
+}
+.CV-setting-item-piece-op{
+  margin-bottom: 0.2rem;
+  margin-left: 3rem;
+}
+div{
+  display: unset;/* 消除用户样式表，居然用block搞我布局！*/
+}
+:deep(.ant-form-item){
+  margin-bottom: 0.5rem;
 }
 </style>

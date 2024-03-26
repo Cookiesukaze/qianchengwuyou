@@ -54,52 +54,39 @@ const sendNewMessage = async () => {
   if (newMessage.value.trim() !== '') {
     const currentTime = getDefaultTime()
     const userMessageContent = newMessage.value
-    // 构造用户消息对象
-    const userMessage = {
+    const userMessage = { // 用户消息对象
       id: chatMessages.value.length,
       content: userMessageContent,
       time: currentTime,
       isOwn: true
     }
-    // 将用户消息添加到聊天数组
-    chatMessages.value.push(userMessage)
-    // 清空输入框
-    newMessage.value = ''
-
-    // 立即滚动到最新的消息
-    await nextTick()
+    chatMessages.value.push(userMessage) // 将用户消息添加到聊天数组
+    newMessage.value = '' // 清空输入框
+    await nextTick() // 立即滚动到最新的消息
     const container = messagesContainer.value
     if (container) {
       container.scrollTop = container.scrollHeight
     }
-
-    // 准备发送到后端的数据
     const payload = { message: userMessageContent }
     try {
-      // 发送消息到 Flask 服务
       const response = await axios.post('http://127.0.0.1:5000/cvchat', payload)
-      // 构造机器人回复消息对象
-      const botMessage = {
+      const botMessage = { // 机器人回复消息对象
         id: chatMessages.value.length,
         content: response.data.content,
         time: currentTime,
         isOwn: false
       }
-      // 将机器人消息添加到聊天数组
-      chatMessages.value.push(botMessage)
+      chatMessages.value.push(botMessage) // 将机器人消息添加到聊天数组
     } catch (error) {
-      // 错误处理
-      console.error('Error sending message:', error)
-      // 可选：将错误消息添加到聊天中
-      chatMessages.value.push({
+      console.error('CV:Chat:', error)
+      chatMessages.value.push({ // 将错误消息添加到聊天中
         id: chatMessages.value.length,
         content: '无法连接到服务器，请稍后再试。',
         time: currentTime,
         isOwn: false
       })
     }
-
-    // 再次滚动到最新的消息，确保机器人回复也可见
+    // 再次滚动到最新的消息forbot
     await nextTick()
     if (container) {
       container.scrollTop = container.scrollHeight

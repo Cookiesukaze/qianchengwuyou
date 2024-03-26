@@ -8,13 +8,15 @@
       <router-link class="nav-link" :to="{ name: 'mainpage' }" active-class="active">求职</router-link>
       <router-link class="nav-link" :to="{ name: 'cv' }" active-class="active">简历</router-link>
     </div>
-    <a-button class="btn" :style="{ borderColor: resources.themeColor, color: resources.themeColor }">登录 / 注册</a-button>
+<!--    TODO：暂时先把我的页面绑在登录按钮上-->
+    <a-button @click="gotoUserPage" class="btn" :style="{ borderColor: resources.themeColor, color: resources.themeColor }">登录 / 注册</a-button>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import resources from '@/assets/resources'
+import router from '@/router'
 
 const isSticky = ref(false)
 
@@ -25,6 +27,10 @@ const handleScroll = () => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
+
+const gotoUserPage = () => {
+  router.push('/user')
+}
 </script>
 
 <style scoped>

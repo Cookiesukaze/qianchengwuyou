@@ -51,6 +51,7 @@ const { job } = toRefs(props)
 const confirmWithdraw = () => { // 撤回弹窗
   Modal.confirm({
     title: '确认撤回简历？',
+    okText: '确定',
     cancelText: '取消',
     onOk () {
       emit('withdrawJob', job.value)
@@ -60,6 +61,7 @@ const confirmWithdraw = () => { // 撤回弹窗
 const confirmDislike = () => { // 不再喜欢弹窗
   Modal.confirm({
     title: '不再喜欢该岗位？',
+    okText: '确定',
     cancelText: '取消',
     onOk () {
       emit('withdrawJob', job.value)

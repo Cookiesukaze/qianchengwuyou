@@ -26,7 +26,8 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: ''
+    state: '',
+    checked: false
   },
   {
     id: 1,
@@ -45,7 +46,8 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: '签约成功'
+    state: '签约成功',
+    checked: false
   },
   {
     id: 2,
@@ -64,7 +66,8 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: '喜欢'
+    state: '喜欢',
+    checked: false
   },
   {
     id: 3,
@@ -83,7 +86,8 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: '已投递'
+    state: '已投递',
+    checked: false
   },
   {
     id: 4,
@@ -102,7 +106,8 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: '被拒绝'
+    state: '被拒绝',
+    checked: false
   },
   {
     id: 5,
@@ -121,6 +126,7 @@ export const fakeJobList = [
     hrPosition: 'HR Manager',
     companyLogo: 'https://via.placeholder.com/32',
     lastActiveTime: '2024年3月27日',
-    state: ''
+    state: '',
+    checked: false
   }
 ]

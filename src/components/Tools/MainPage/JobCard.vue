@@ -1,6 +1,5 @@
 <template>
   <div class="job-card card-style bg2" @click="$emit('cardSelected')">
-    <a-checkbox v-model:checked="checked" class="job-checkbox"></a-checkbox>
     <div class="job-header">
       <div class="job-title">{{ job.title }}</div>
       <span class="job-salary">{{ job.salary }}</span>
@@ -21,7 +20,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, toRefs } from 'vue'
+import { defineProps, toRefs } from 'vue'
 import '@/assets/global.css'
 const props = defineProps({
   job: {
@@ -30,8 +29,6 @@ const props = defineProps({
   }
 })
 const { job } = toRefs(props)
-
-const checked = ref(false)
 
 </script>
 
@@ -69,15 +66,6 @@ const checked = ref(false)
 .selected-card{
   border: var(--themeColor075) solid 1px;
   box-shadow: 0 10px 20px 0 rgba(176,191,231,.55);
-}
-.job-checkbox {
-  border-color: var(--themeColor)!important;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  margin-left: -1.5rem;
-  z-index: 10;
 }
 
 .job-header {

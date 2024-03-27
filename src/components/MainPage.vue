@@ -64,8 +64,9 @@
       <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
         <!--        左边：卡片-->
-        <div class="card-list" style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;max-height: 60vh;overflow: scroll;overscroll-behavior: contain;">
-          <div v-for="job in jobList" :key="job.id">
+        <div class="card-list" style="display: flex;flex-direction: column;margin-left:2rem;margin-top:1rem;max-height: 60vh;overflow: scroll;overscroll-behavior: contain;">
+          <div v-for="job in jobList" :key="job.id" class="job-card-wrapper">
+            <a-checkbox v-model:checked="job.checked" class="job-checkbox"></a-checkbox>
             <JobCard
               :job="job"
               :class="{ 'selected-card': job.id === selectedCardIndex }"
@@ -254,5 +255,16 @@ const fetchFilteredData = async () => {
 }
 :deep(.ant-input:hover){
   box-shadow: 0 5px 10px 0 rgba(176,191,231,.5);
+}
+.job-card-wrapper {
+  position: relative;
+  padding-left: 2rem;
+}
+.job-checkbox {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 </style>

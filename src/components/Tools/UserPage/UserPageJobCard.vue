@@ -27,6 +27,9 @@
         <a-button class="withdraw-button-style" v-if="job.state === '已投递'" type="text"
                   size="small" @click.stop="confirmWithdraw" style="margin-left: 8px;">
           撤回</a-button>
+        <a-button class="dislike-button-style" v-if="job.state === '喜欢'" type="text"
+                  size="small" @click.stop="confirmDislike" style="margin-left: 8px;">
+          取消</a-button>
       </div>
     </div>
   </div>
@@ -48,6 +51,15 @@ const { job } = toRefs(props)
 const confirmWithdraw = () => { // 撤回弹窗
   Modal.confirm({
     title: '确认撤回简历？',
+    cancelText: '取消',
+    onOk () {
+      emit('withdrawJob', job.value)
+    }
+  })
+}
+const confirmDislike = () => { // 不再喜欢弹窗
+  Modal.confirm({
+    title: '不再喜欢该岗位？',
     cancelText: '取消',
     onOk () {
       emit('withdrawJob', job.value)
@@ -153,7 +165,8 @@ const confirmWithdraw = () => { // 撤回弹窗
   font-size: 1.15rem;
   margin-right: 0.2rem;
 }
-.withdraw-button-style{
+.withdraw-button-style ,
+.dislike-button-style{
   border:none;
   color: var(--themeColor);
   background: none;
@@ -162,7 +175,8 @@ const confirmWithdraw = () => { // 撤回弹窗
 :deep(.ant-btn.ant-btn-sm){
   font-size: 0.75rem;
 }
-.withdraw-button-style:hover{
+.withdraw-button-style:hover,
+.dislike-button-style:hover{
   color: var(--themeColor);
   background: var(--themeColor02);
 }

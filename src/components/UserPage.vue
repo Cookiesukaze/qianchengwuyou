@@ -18,6 +18,7 @@
           <div v-for="job in filteredJobList" :key="job.id">
             <UserPageJobCard
               :job="job"
+              @dislikeJob ="handleDislikeJob"
               @withdrawJob="handleWithdrawJob"
               style="margin-bottom: 1.3rem;"
             ></UserPageJobCard>
@@ -110,6 +111,10 @@ const filteredJobList = computed(() => {
 const handleWithdrawJob = (jobToWithdraw) => {
   jobList.value = jobList.value.filter(job => job !== jobToWithdraw)
   console.log('UserPage:withdraw submit')
+}
+const handleDislikeJob = (jobToDislike) => {
+  jobList.value = jobList.value.filter(job => job !== jobToDislike)
+  console.log('UserPage:dislike job')
 }
 </script>
 

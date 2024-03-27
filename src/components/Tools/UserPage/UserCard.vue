@@ -152,7 +152,7 @@ function handleEditClick () {
 // 保存逻辑
 function handleSaveEditClick () {
   if (Array.isArray(userCardItem.value.expCity) && userCardItem.value.expCity.length > 0) {
-    const cityName = getCityNameByCode(userCardItem.value.city[0])
+    const cityName = getCityNameByCode(userCardItem.value.city)
     userCardItem.value.expCity = cityName || '城市不限'
   }
   userCardIsEdit.value = false

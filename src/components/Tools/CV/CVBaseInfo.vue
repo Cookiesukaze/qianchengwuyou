@@ -45,8 +45,9 @@
           <a-form-item label="姓名" style="width: 15rem">
             <a-input v-model:value="basicInfoItem.name" />
           </a-form-item>
-          <a-form-item label="学历" style="width: 15rem;margin-left: 2rem">
-            <a-input v-model:value="basicInfoItem.education" />
+          <a-form-item label="学历" style="width:unset;margin-left: 2rem">
+            <EducationSelector style="margin-left: -0.2rem;width: 7rem" v-model:currentEducation="basicInfoItem.education" @update:education="handleEducationUpdate"
+            ></EducationSelector>
           </a-form-item>
         </div>
         <div style="display: flex;flex-direction: row">
@@ -69,6 +70,7 @@
 <script setup>
 import { ref } from 'vue'
 import { EditOutlined, UserOutlined, PhoneOutlined, ScheduleOutlined, MailOutlined } from '@ant-design/icons-vue'
+import EducationSelector from '@/components/Tools/MainPage/EducationSelector.vue'
 
 // 基本信息对象
 const basicInfoItem = ref({
@@ -77,7 +79,11 @@ const basicInfoItem = ref({
   phone: '123-4567-8901',
   email: 'xiaoming@example.com'
 })
-
+// 来自子组件的更新
+const handleEducationUpdate = (value) => {
+  basicInfoItem.value.education = value
+  console.log('CV:baseInfo:education updated:' + value)
+}
 // 编辑状态
 const basicInfoIsEdit = ref(false)
 

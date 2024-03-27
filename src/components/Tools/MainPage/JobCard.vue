@@ -26,7 +26,7 @@ import '@/assets/global.css'
 
 const job = ref({
   title: '前端开发工程师',
-  location: '上海·黄浦区',
+  location: '上海市',
   salary: '20-40k',
   tags: ['JavaScript', 'Vue.js', 'HTML/CSS'],
   company: '签程无忧电子科技公司',

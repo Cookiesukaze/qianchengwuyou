@@ -48,7 +48,7 @@ const jobList = ref([
   {
     id: 1,
     title: '前端开发工程师 - A公司',
-    location: '上海·黄浦区',
+    location: '上海市',
     salary: '20-30k',
     tags: ['JavaScript', 'Vue.js', 'HTML/CSS'],
     company: 'A电子科技公司',
@@ -62,7 +62,7 @@ const jobList = ref([
   {
     id: 2,
     title: '全栈开发工程师 - B公司',
-    location: '北京·朝阳区',
+    location: '北京市',
     salary: '25-35k',
     tags: ['JavaScript', 'React.js', 'Node.js'],
     company: 'B互联网公司',
@@ -76,7 +76,7 @@ const jobList = ref([
   {
     id: 3,
     title: '数据分析师 - C金融集团',
-    location: '广州·天河区',
+    location: '广州省',
     salary: '18-25k',
     tags: ['SQL', 'Python', '数据分析'],
     company: 'C金融集团',
@@ -90,7 +90,7 @@ const jobList = ref([
   {
     id: 4,
     title: 'UI/UX 设计师 - D设计公司',
-    location: '深圳·南山区',
+    location: '北京市',
     salary: '15-22k',
     tags: ['Sketch', 'Adobe XD', '用户研究'],
     company: 'D设计公司',

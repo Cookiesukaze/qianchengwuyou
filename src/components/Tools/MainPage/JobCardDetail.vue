@@ -64,7 +64,7 @@ const job = ref({
   title: '前端开发工程师',
   salary: '20-40k',
   company: '签程无忧电子科技公司',
-  location: '上海·黄浦区',
+  location: '上海市',
   experience: '3-5 年',
   education: '本科及以上',
   matchScore: '92分',

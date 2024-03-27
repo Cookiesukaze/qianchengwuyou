@@ -99,7 +99,7 @@ const userCardItem = ref({
   school: '杭州电子科技大学',
   major: '计算机科学与技术',
   expJobType: '互联网',
-  expCity: '杭州市',
+  expCity: '浙江省·杭州市',
   state: '在校-寻找实习',
   lastActive: '8天前活跃'
 })

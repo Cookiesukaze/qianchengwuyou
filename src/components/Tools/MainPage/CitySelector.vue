@@ -10,7 +10,7 @@
       style="width: 12.5rem;"
     >
       <template v-slot:displayRender="{ labels }">
-        {{ labels[labels.length - 1] }}
+        {{ labels.join('·') }}
       </template>
     </a-cascader>
   </div>

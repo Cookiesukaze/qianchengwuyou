@@ -57,7 +57,7 @@ const CVExpList = ref([
     id: 2,
     searchJobType: null,
     jobType: '其它',
-    city: '杭州市'
+    city: '浙江省·杭州市'
   }])
 // 编辑区域
 // 编辑状态和编辑数据

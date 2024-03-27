@@ -30,6 +30,12 @@
     box-shadow: 0 5px 10px 0 rgba(176,191,231,.2);
     background: rgba(255, 255, 255);
 }
+.modify-small-frame-style{
+    border-radius:0.5rem;
+    height: 2rem !important;
+    box-shadow: 0 5px 10px 0 rgba(176,191,231,.2);
+    background: rgba(255, 255, 255);
+}
 .divide-line-style{
     height: 1px;
     opacity: .5;

@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import MainPage from '@/components/MainPage.vue'
 import CV from '@/components/CV.vue'
 import UserPage from '@/components/UserPage.vue'
+import CVModify from '@/components/CVModify.vue'
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: '/user',
     name: 'user',
     component: UserPage
+  }, {
+    path: '/cvmodify',
+    name: 'cvmodify',
+    component: CVModify,
+    props: route => ({ jobIds: route.query.jobIds, cv: route.query.cv })
   },
   {
     path: '/about',

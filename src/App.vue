@@ -47,6 +47,7 @@ export default defineComponent({
   --sararyColor08: #fa747b;
   --sararyColor001: rgba(250, 116, 123, 0.1);
   --greyFontColor075: rgba(133, 135, 141, 1);
+  --greyFontColor05: rgba(102, 102, 110, 0.5);
   --greyFontColor: #66666e;
   --greyFontColor125: #44444e;
   --blackFontColor:#222222;

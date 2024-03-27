@@ -60,6 +60,12 @@
         <!--        6.公司规模选择器-->
         <CompanySizeSelector v-model:currentCompanySize="currentCompanySize" @update:companySize="handleCompanySizeUpdate"
         ></CompanySizeSelector>
+        <!--        7.去改简历-->
+        <div class="modify-small-frame-style" style="margin-left: auto;">
+          <a-radio-button @click="handleModify" value="去改简历" :disabled="!hasCheckedJob">
+              <div style="font-size: 0.95rem;margin-top:0.1rem;font-family: opposans,serif">帮改简历</div>
+          </a-radio-button>
+        </div>
       </div>
       <!--      下方：职位卡片们-->
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
@@ -88,7 +94,7 @@
 <script setup>
 import '@/assets/global.css'
 import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { MenuOutlined, DeploymentUnitOutlined, RedoOutlined } from '@ant-design/icons-vue'
 import CitySelector from '@/components/Tools/MainPage/CitySelector.vue'
 import CVSelector from '@/components/Tools/MainPage/CVSelector.vue'
@@ -104,6 +110,7 @@ import { postFilteredCards, postRefreshedCards } from '@/api/functions'
 // 对接前的模拟数据
 import { fakeJobList } from '@/components/Tools/js/fakeData'
 import RecommendSelector from '@/components/Tools/MainPage/RecommendSelector.vue'
+import router from '@/router'
 const jobList = ref(fakeJobList)
 
 // checkjobtype 推荐职位或全部职位
@@ -190,6 +197,17 @@ const handleCompanySizeUpdate = (value) => {
   fetchFilteredData()
   console.log('MainPage:company size updated:' + value)
 }
+// checkbox选择
+const hasCheckedJob = computed(() => {
+  return jobList.value.some(job => job.checked)
+})
+const handleModify = () => {
+  if (hasCheckedJob.value) {
+    const selectedJobIds = jobList.value.filter(job => job.checked).map(job => job.id)
+    // 查询跳转
+    router.push({ name: 'cvmodify', query: { jobIds: selectedJobIds, cv: currentCV.value } })
+  }
+}
 // 卡片选择（不是卡片的选框选择）
 const selectedCardIndex = ref(0)
 const selectCard = (index) => {
@@ -245,6 +263,14 @@ const fetchFilteredData = async () => {
 }
 :deep(.ant-radio-button-wrapper-checked){
   color: var(--themeColor);
+}
+:deep(.ant-radio-button-wrapper-disabled){
+  color:var(--greyFontColor05) !important;
+  background: rgba(255, 255, 255, 0) !important;
+}
+:deep(.ant-radio-button-wrapper-disabled:hover){
+  color:var(--greyFontColor05) !important;
+  background: rgba(255, 255, 255, 0) !important;
 }
 :deep(.ant-input){
   border-radius: 0.8rem;

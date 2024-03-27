@@ -16,7 +16,7 @@
       <div style="font-size: 0.9rem;">%</div>
       <a-button @click="handleChangeKGVisibleClick" style="margin-left: auto;font-size: 1.5rem;margin-bottom: 1.1rem"
          type="text" class="text-button-style"><DeploymentUnitOutlined /></a-button>
-      <a-button type="text" class="text-button-style" >生成详细报告</a-button>
+      <a-button type="text" class="text-button-style" @click="handleModify">生成详细报告</a-button>
     </div>
     <div v-if="isKGVisible" class="CV-KG">
       hi
@@ -27,6 +27,7 @@
 <script setup>
 import { ref } from 'vue'
 import { DeploymentUnitOutlined } from '@ant-design/icons-vue'
+import router from '@/router'
 // 简历的得分和完整度
 const cv = ref({
   score: '70',
@@ -37,6 +38,11 @@ const isKGVisible = ref(false)
 const handleChangeKGVisibleClick = () => {
   isKGVisible.value = !isKGVisible.value
   console.log('CV：展开知识图谱状态改变：' + isKGVisible.value)
+}
+// 跳转去获取详细报告
+const handleModify = () => {
+  // TODO:vital获取当前简历
+  router.push({ name: 'cvmodify', query: { jobIds: null, cv: null } })
 }
 </script>
 

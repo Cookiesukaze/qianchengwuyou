@@ -11,8 +11,11 @@
           <a-radio-button value="全部职位">全部职位</a-radio-button>
         </a-radio-group>
         <!--        cvselector 选择简历-->
-        <CVSelector :modelValue="currentCV" @update:CV="handleCVUpdate" style="margin-right: auto"
+        <CVSelector v-model:currentCV="currentCV" @update:CV="handleCVUpdate"
         ></CVSelector>
+        <!--        recommendselector 选择推荐方式-->
+        <RecommendSelector v-model:currentRecommend="currentRecommend" @update:recommend="handleRecommendUpdate" style="margin-right: auto"
+        ></RecommendSelector>
         <!--        视图选择-->
         <a-radio-group v-model:value="currentView" class="frame-style" style="margin-left: auto">
           <a-radio-button value="详细"><MenuOutlined style="margin-top:0.7rem"/></a-radio-button>
@@ -76,7 +79,6 @@
         <div style="margin-left:2rem;margin-top:1rem;">
           <JobCardDetail :job="jobList[selectedCardIndex]" ></JobCardDetail>
         </div>
-
       </div>
     </div>
   </div>
@@ -100,6 +102,7 @@ import CompanySizeSelector from '@/components/Tools/MainPage/CompanySizeSelector
 import { postFilteredCards, postRefreshedCards } from '@/api/functions'
 // 对接前的模拟数据
 import { fakeJobList } from '@/components/Tools/js/fakeData'
+import RecommendSelector from '@/components/Tools/MainPage/RecommendSelector.vue'
 const jobList = ref(fakeJobList)
 
 // checkjobtype 推荐职位或全部职位
@@ -110,11 +113,18 @@ const handleCheckJobTypeUpdate = (value) => {
   console.log('MainPage:checkJobType updated:' + value)
 }
 // cvselector 选择简历
-const currentCV = ref([])
+const currentCV = ref('我的简历1')
 const handleCVUpdate = (value) => {
   currentCV.value = value
   fetchFilteredData()
   console.log('MainPage:CV updated:' + value)
+}
+// recommendselector 选择推荐方式
+const currentRecommend = ref('签程推荐')
+const handleRecommendUpdate = (value) => {
+  currentRecommend.value = value
+  fetchFilteredData()
+  console.log('MainPage:recommend updated:' + value)
 }
 // 选择视图
 const currentView = ref('详细')
@@ -198,7 +208,8 @@ const fetchFilteredData = async () => {
       searchJobType: currentSearchJobType.value,
       workExperience: currentWorkExperience.value,
       education: currentEducation.value,
-      companySize: currentCompanySize.value
+      companySize: currentCompanySize.value,
+      recommend: currentRecommend.value
     }
     const response = await postFilteredCards(data)
     // 处理响应数据

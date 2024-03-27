@@ -3,7 +3,7 @@
     <a-select
       ref="select1"
       class="CVSelector"
-      v-model:value="currentCVSelector"
+      v-model:value="currentCV"
       style="width: 8rem; "
       :options="CVSelectorItems"
       @change="handleChangeCV"
@@ -12,9 +12,12 @@
 </template>
 
 <script setup>
-import { defineEmits, ref, watch } from 'vue'
-
-const currentCVSelector = ref('我的简历1')
+import { defineEmits, ref, watch, defineProps } from 'vue'
+// 父组件传值
+const props = defineProps({
+  currentCV: String
+})
+const currentCV = ref(props.currentCV)
 const CVSelectorItems = ref([
   {
     value: '我的简历1',
@@ -27,7 +30,7 @@ const CVSelectorItems = ref([
 ])
 const emit = defineEmits(['update:CV'])
 // 监听所选城市的变化
-watch(currentCVSelector, (newValue) => {
+watch(currentCV, (newValue) => {
   emit('update:CV', newValue)
 })
 const handleChangeCV = value => {

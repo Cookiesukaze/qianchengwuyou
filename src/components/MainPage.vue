@@ -62,19 +62,19 @@
       <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
         <!--        左边：卡片-->
         <div class="card-list" style="display: flex;flex-direction: column;margin-left:4rem;margin-top:1rem;max-height: 60vh;overflow: scroll;overscroll-behavior: contain;">
-          <div v-for="(x, index) in [1, 2, 3, 4, 5, 6]" :key="x">
+          <div v-for="job in jobList" :key="job.id">
             <JobCard
-              :class="{ 'selected-card': index === selectedCardIndex }"
+              :job="job"
+              :class="{ 'selected-card': job.id === selectedCardIndex }"
               style="margin-bottom: 1.3rem;"
-              @click="selectCard(index)"
+              @click="selectCard(job.id)"
               @cardSelected="handleSelectedCard"
             ></JobCard>
           </div>
         </div>
-
         <!--        右边：详细内容-->
         <div style="margin-left:2rem;margin-top:1rem;">
-          <JobCardDetail></JobCardDetail>
+          <JobCardDetail :job="jobList[selectedCardIndex]" ></JobCardDetail>
         </div>
 
       </div>
@@ -98,6 +98,9 @@ import JobCardDetail from '@/components/Tools/MainPage/JobCardDetail.vue'
 import CompanySizeSelector from '@/components/Tools/MainPage/CompanySizeSelector.vue'
 // 对接
 import { postFilteredCards, postRefreshedCards } from '@/api/functions'
+// 对接前的模拟数据
+import { fakeJobList } from '@/components/Tools/js/fakeData'
+const jobList = ref(fakeJobList)
 
 // checkjobtype 推荐职位或全部职位
 const currentCheckJobType = ref('推荐职位')

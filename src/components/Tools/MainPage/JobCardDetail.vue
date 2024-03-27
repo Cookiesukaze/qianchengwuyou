@@ -53,34 +53,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { defineProps, toRefs } from 'vue'
 import '../css/scrollBar.css'
 import '@/assets/global.css'
 import { HeartOutlined, SendOutlined } from '@ant-design/icons-vue'
-
-const job = ref({
-  workTime: '3天/周 3个月',
-  tags: ['JavaScript', 'Vue.js', 'HTML/CSS'],
-  title: '前端开发工程师',
-  salary: '20-40k',
-  company: '签程无忧电子科技公司',
-  location: '上海市',
-  experience: '3-5 年',
-  education: '本科及以上',
-  matchScore: '92分',
-  description: '招聘对象：2025年可拿毕业证国内本硕学生+2024年9月-2025年9月可拿毕业证海外本硕留学生（实习时长最低2个月，最长可任选从2024年6月延续到拿毕业证）\n' +
-    '任职要求：1、计算机、软件、通信、数学、自动化等相关专业优先；\n' +
-    '2、热爱研发，基础扎实，熟练掌握但不限Java/go/C++/C/Python等编程语言中的一种或数种，有良好的编程习惯；\n' +
-    '3、认可签程无忧文化，具备独立工作能力、善于沟通，热衷新技术；\n' +
-    '4、优选条件：\n' +
-    '（1）熟悉TCP/IP协议及互联网常见应用和协议的原理；\n' +
-    '（2）不满足课堂所学，在校期间积极参加校内外软件编程大赛；\n' +
-    '\n' +
-    '岗位福利：免费夜宵、班车，周二运动日，研究所多样兴趣社团，工作之余碰撞同好~\n',
-  hrAvatar: 'https://via.placeholder.com/64',
-  hrName: '李明',
-  hrPosition: 'HR Manager'
+const props = defineProps({
+  job: {
+    type: Object,
+    required: true
+  }
 })
+const { job } = toRefs(props)
+
 </script>
 
 <style scoped >

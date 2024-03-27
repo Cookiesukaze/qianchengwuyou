@@ -21,18 +21,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { defineProps, ref, toRefs } from 'vue'
 import '@/assets/global.css'
-
-const job = ref({
-  title: '前端开发工程师',
-  location: '上海市',
-  salary: '20-40k',
-  tags: ['JavaScript', 'Vue.js', 'HTML/CSS'],
-  company: '签程无忧电子科技公司',
-  companyLogo: 'https://via.placeholder.com/32',
-  matchScore: '92'
+const props = defineProps({
+  job: {
+    type: Object,
+    required: true
+  }
 })
+const { job } = toRefs(props)
 
 const checked = ref(false)
 

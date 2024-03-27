@@ -36,6 +36,7 @@ import SeekerNavBar from '@/components/NavBar/SeekerNavBar.vue'
 import UserCard from '@/components/Tools/UserPage/UserCard.vue'
 import { computed, ref } from 'vue'
 import UserPageJobCard from '@/components/Tools/UserPage/UserPageJobCard.vue'
+import { fakeJobList } from './Tools/js/fakeData'
 
 // bar
 const currentType = ref('已投递')
@@ -44,64 +45,8 @@ const handleTypeUpdate = (value) => {
   console.log('UserPage:currentType updated:' + value)
 }
 // card
-const jobList = ref([
-  {
-    id: 1,
-    title: '前端开发工程师 - A公司',
-    location: '上海市',
-    salary: '20-30k',
-    tags: ['JavaScript', 'Vue.js', 'HTML/CSS'],
-    company: 'A电子科技公司',
-    hrName: '王女士',
-    hrPosition: 'HR Manager',
-    companyLogo: 'https://via.placeholder.com/32',
-    matchScore: '85',
-    lastActiveTime: '2024年3月27日',
-    state: '已投递'
-  },
-  {
-    id: 2,
-    title: '全栈开发工程师 - B公司',
-    location: '北京市',
-    salary: '25-35k',
-    tags: ['JavaScript', 'React.js', 'Node.js'],
-    company: 'B互联网公司',
-    hrName: '李先生',
-    hrPosition: 'HR Manager',
-    companyLogo: 'https://via.placeholder.com/32',
-    matchScore: '88',
-    lastActiveTime: '2024年3月27日',
-    state: '被拒绝'
-  },
-  {
-    id: 3,
-    title: '数据分析师 - C金融集团',
-    location: '广州省',
-    salary: '18-25k',
-    tags: ['SQL', 'Python', '数据分析'],
-    company: 'C金融集团',
-    hrName: '李先生',
-    hrPosition: 'HR Manager',
-    companyLogo: 'https://via.placeholder.com/32',
-    matchScore: '78',
-    lastActiveTime: '2024年3月27日',
-    state: '签约成功'
-  },
-  {
-    id: 4,
-    title: 'UI/UX 设计师 - D设计公司',
-    location: '北京市',
-    salary: '15-22k',
-    tags: ['Sketch', 'Adobe XD', '用户研究'],
-    company: 'D设计公司',
-    hrName: '李先生',
-    hrPosition: 'HR Manager',
-    companyLogo: 'https://via.placeholder.com/32',
-    matchScore: '90',
-    lastActiveTime: '2024年3月27日',
-    state: '喜欢'
-  }
-])
+const jobList = ref(fakeJobList)
+
 const filteredJobList = computed(() => {
   if (currentType.value === '设置') {
     return []

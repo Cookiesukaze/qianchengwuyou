@@ -6,6 +6,7 @@
         <div class="user-card-avatar-content">
           <img :src="userCardItem.avatar" class="user-avatar" alt="Avatar" />
         </div>
+<!--        用户信息-->
         <div class="user-card-info">
           <div class="user-card-info-right">
             <div class="user-card-name">{{ userCardItem.name }}</div>

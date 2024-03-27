@@ -15,29 +15,45 @@
     </div>
     <div class="job-footer">
       <a-avatar size="small" :src="job.companyLogo" style="margin-right: 0.3rem;"/>
-      <span class="company-name">{{ job.company }}&nbsp;&nbsp;</span>
-      <span class="company-name">{{ job.location }}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-      <span class="company-name">{{ job.hrName }}&nbsp;·&nbsp;</span>
-      <span class="job-location">{{ job.hrPosition }}</span>
+      <div>
+        <span class="left-grey-info">{{ job.company }}&nbsp;&nbsp;</span>
+        <span class="left-grey-info">{{ job.location }}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+        <span class="left-grey-info">{{ job.hrName }}&nbsp;·&nbsp;</span>
+        <span class="right-grey-info">{{ job.hrPosition }}</span>
+      </div>
       <div style="margin-left: auto">
-        <span class="job-location" style="margin-right: 1rem">{{ job.lastActiveTime }}</span>
-        <span class="job-location">{{ job.state }}的岗位</span>
+        <span class="right-grey-info" style="margin-right: 1rem">{{ job.lastActiveTime }}</span>
+        <span class="right-grey-info">{{ job.state }}的岗位</span>
+        <a-button class="withdraw-button-style" v-if="job.state === '已投递'" type="text"
+                  size="small" @click.stop="confirmWithdraw" style="margin-left: 8px;">
+          撤回</a-button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, getCurrentInstance, toRefs } from 'vue'
 import '@/assets/global.css'
+import { Modal } from 'ant-design-vue'
 
-defineProps({
+const props = defineProps({
   job: {
     type: Object,
     required: true
   }
 })
-
+const { emit } = getCurrentInstance()
+const { job } = toRefs(props)
+const confirmWithdraw = () => { // 撤回弹窗
+  Modal.confirm({
+    title: '确认撤回简历？',
+    cancelText: '取消',
+    onOk () {
+      emit('withdrawJob', job.value)
+    }
+  })
+}
 </script>
 
 <style scoped>
@@ -105,13 +121,13 @@ defineProps({
   margin-top:1rem;
 }
 
-.company-name {
+.left-grey-info {
 //color: var(--greyFontColor);
   color: var(--greyFontColor125);
   font-size: 0.75rem;
   margin-top:0.3rem;
 }
-.job-location {
+.right-grey-info {
 //color: var(--greyFontColor);
   color: var(--greyFontColor125);
   font-size: 0.75rem;
@@ -136,5 +152,18 @@ defineProps({
   margin-left: 0.2rem;
   font-size: 1.15rem;
   margin-right: 0.2rem;
+}
+.withdraw-button-style{
+  border:none;
+  color: var(--themeColor);
+  background: none;
+  padding:0.01rem 0.2rem;
+}
+:deep(.ant-btn.ant-btn-sm){
+  font-size: 0.75rem;
+}
+.withdraw-button-style:hover{
+  color: var(--themeColor);
+  background: var(--themeColor02);
 }
 </style>

@@ -11,13 +11,14 @@
           <a-radio-button value="已投递" style="margin-top: 0.4rem;margin-left: 2rem">已投递</a-radio-button>
           <a-radio-button value="被拒绝" style="margin-left: 1rem">被拒绝</a-radio-button>
           <a-radio-button value="签约成功" style="margin-left: 1rem">签约成功</a-radio-button>
-          <a-radio-button value="喜欢岗位" style="margin-left: 1rem">喜欢岗位</a-radio-button>
+          <a-radio-button value="喜欢" style="margin-left: 1rem">喜欢岗位</a-radio-button>
           <a-radio-button value="设置" style="margin-left: 1rem">设置</a-radio-button>
         </a-radio-group>
         <div style="margin-top:2rem" class="card-container">
-          <div v-for="job in filteredJobList" :key="job.title">
+          <div v-for="job in filteredJobList" :key="job.id">
             <UserPageJobCard
               :job="job"
+              @withdrawJob="handleWithdrawJob"
               style="margin-bottom: 1.3rem;"
             ></UserPageJobCard>
           </div>
@@ -44,6 +45,7 @@ const handleTypeUpdate = (value) => {
 // card
 const jobList = ref([
   {
+    id: 1,
     title: '前端开发工程师 - A公司',
     location: '上海·黄浦区',
     salary: '20-30k',
@@ -57,6 +59,7 @@ const jobList = ref([
     state: '已投递'
   },
   {
+    id: 2,
     title: '全栈开发工程师 - B公司',
     location: '北京·朝阳区',
     salary: '25-35k',
@@ -70,6 +73,7 @@ const jobList = ref([
     state: '被拒绝'
   },
   {
+    id: 3,
     title: '数据分析师 - C金融集团',
     location: '广州·天河区',
     salary: '18-25k',
@@ -83,6 +87,7 @@ const jobList = ref([
     state: '签约成功'
   },
   {
+    id: 4,
     title: 'UI/UX 设计师 - D设计公司',
     location: '深圳·南山区',
     salary: '15-22k',
@@ -93,7 +98,7 @@ const jobList = ref([
     companyLogo: 'https://via.placeholder.com/32',
     matchScore: '90',
     lastActiveTime: '2024年3月27日',
-    state: '喜欢岗位'
+    state: '喜欢'
   }
 ])
 const filteredJobList = computed(() => {
@@ -102,6 +107,10 @@ const filteredJobList = computed(() => {
   }
   return jobList.value.filter(job => job.state === currentType.value)
 })
+const handleWithdrawJob = (jobToWithdraw) => {
+  jobList.value = jobList.value.filter(job => job !== jobToWithdraw)
+  console.log('UserPage:withdraw submit')
+}
 </script>
 
 <style scoped>

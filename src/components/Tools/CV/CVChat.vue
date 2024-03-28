@@ -20,7 +20,7 @@
         @keyup.enter="sendNewMessage"
       />
       <a-button type="primary" shape="circle" @click="sendNewMessage">
-        <SendOutlined />
+        <SendOutlined style="font-size: 1.15rem;margin-left: 0.15rem;margin-top:0.15rem"/>
       </a-button>
     </div>
   </div>

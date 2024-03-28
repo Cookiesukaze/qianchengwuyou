@@ -4,7 +4,7 @@
     <SeekerNavBar></SeekerNavBar>
     <div style="margin-top:3.5rem">
       <!--      第一栏-->
-      <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem">
+      <div style="display: flex;flex-direction: row;margin-left:7rem;margin-top:4rem;width: 83vw">
         <!--        checkjobtype 推荐职位或全部职位-->
         <a-radio-group v-model:value="currentCheckJobType" @update:modelValue="handleCheckJobTypeUpdate" class="frame-style" >
           <a-radio-button value="推荐职位" style="margin-top: 0.3rem">推荐职位</a-radio-button>
@@ -31,7 +31,7 @@
         <!--        </div>-->
       </div>
       <!--      第二栏（搜索框）-->
-      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
+      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem;width: 82vw">
         <a-input
           v-model:value="currentSearch"
           @input="handleSearchUpdate($event.target.value)"
@@ -40,7 +40,7 @@
         />
       </div>
       <!--      第三栏（更多的筛选，有的写起来很繁琐先摆个样子）-->
-      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem">
+      <div style="display: flex;flex-direction: row;margin-left:8rem;margin-top:1rem;width: 82vw">
         <!--        1.城市选择器，缺不限-->
         <div style="width: 12.5rem"><CitySelector
           v-model:city="currentCity" @update:city="handleCityUpdate"
@@ -68,15 +68,15 @@
         </div>
       </div>
       <!--      下方：职位卡片们-->
-      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;">
+      <div style="display: flex;flex-direction: row;margin-left:4rem;margin-top:0.5rem;width: 90vw">
         <!--        左边：卡片-->
-        <div class="card-list" style="display: flex;flex-direction: column;margin-left:2rem;margin-top:1rem;max-height: 60vh;overflow: scroll;overscroll-behavior: contain;">
+        <div class="card-list" style="display: flex;flex-direction: column;margin-left:2rem;margin-top:1rem;max-height: 60vh;overflow-y: scroll;overscroll-behavior: contain;">
           <div v-for="job in jobList" :key="job.id" class="job-card-wrapper">
             <a-checkbox v-model:checked="job.checked" class="job-checkbox"></a-checkbox>
             <JobCard
               :job="job"
               :class="{ 'selected-card': job.id === selectedCardIndex }"
-              style="margin-bottom: 1.3rem;"
+              style="margin-bottom: 1.3rem;width: 26vw"
               @click="selectCard(job.id)"
               @cardSelected="handleSelectedCard"
             ></JobCard>
@@ -84,7 +84,7 @@
         </div>
         <!--        右边：详细内容-->
         <div style="margin-left:2rem;margin-top:1rem;">
-          <JobCardDetail :job="jobList[selectedCardIndex]" ></JobCardDetail>
+          <JobCardDetail :job="jobList[selectedCardIndex]" style="width: 54vw"></JobCardDetail>
         </div>
       </div>
     </div>
